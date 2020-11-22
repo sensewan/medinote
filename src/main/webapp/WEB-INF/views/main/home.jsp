@@ -17,6 +17,13 @@
 		width: 400px;
 		height: 300px;
 	}
+	.scale:hover {
+		transform: scale(1.1);
+	  -webkit-transform: scale(1.1);
+	  -moz-transform: scale(1.1);
+	  -ms-transform: scale(1.1);
+	  -o-transform: scale(1.1);
+	}
 </style>
 </head>
 <body>
@@ -25,7 +32,12 @@
 		<div class="content">
 			<div class="content_side"></div>
 			<div class="content_center">
-				<img src="img/body.jpg" width="600px">
+				<img src="img/body.jpg" alt="Body" usemap="#bodymap" width="600px">
+				<map name="bodymap">
+					<area shape="circle" coords="300,70,44" alt="head" href="#">
+					<area shape="circle" coords="400,330,44" alt="hand" href="#">
+				</map>
+				<input type="button" value="임시버튼" onclick="pop()"/>
 				<form class="pop">
 					<table class="symp_table">
 						<tr>
@@ -45,7 +57,7 @@
 						</tr>
 						<tr style="text-align: right;">
 							<td>
-								<input type="button" value="더보기" onclick="pop()"/>
+								<input type="button" value="더보기" onclick="exe()"/>
 							</td>
 						</tr>
 					</table>
@@ -56,6 +68,10 @@
 	</div>
 	<script>
 		function pop(){
+			
+		}
+		
+		function exe(){
 			
 		}
 	</script>
