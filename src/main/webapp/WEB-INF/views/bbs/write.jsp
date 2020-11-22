@@ -11,56 +11,52 @@
 <link rel="stylesheet" href="css/summernote-lite.min.css"/>
 
 
+<style type="text/css">
+.nav-link {
+	font-size: 20px;
+	margin-left: 20px;
+}
+
+.nav-link {
+	font-size: 20px;
+	margin-left: 20px;
+}
+
+#wrap {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+</style>
 </head>
 
 <body>
 	<div id="wrap">
 
 		<jsp:include page="../header.jsp" />
-		<br /> <br />
-		<h3>community</h3>
-		<br />
-		
-		<h3 style="margin-left: 10%;">글쓰기</h3>
-		<hr>
 
-		<article>
-			<form action="ex1_write.jsp" method="post" name="frm">
-				<table style="margin-left: 10%">
-					<tbody>
-						<tr>
-							<td><label for="title">제목:</label></td>
-							<td><input type="text" id="title" name="title" /></td>
-						</tr>
-						<tr>
-							<td><label for="content">내용:</label></td>
-							<td><textarea rows="12" cols="50" id="content" name="content"></textarea></td>
-						</tr>
-						
-						<tr>
-							<td colspan="2">
-								<div class="form-group">
-									<select class="custom-select">
-										<option selected="">증상</option>
-										<option value="1">어깨 통증</option>
-										<option value="2">왼쪽 아랫배 통증</option>
-										<option value="3">오른쪽 머리 두통</option>
-									</select>
-								</div>
-							</td>
-
-						</tr>
-						
-						<tr>
-							<td colspan="2" style="text-align: right;">
-								<button type="submit" class="btn btn-primary" onclick="">등록</button>
-								<button type="submit" class="btn btn-primary" onclick="">취소</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
-		</article>
+	    <h3 style="margin-left: 10%; margin-top: 20px;">글쓰기</h3>
+	    <hr>
+	    <form style="width: 80%; margin: auto;">
+	        <div style="margin-left: 20px;">
+	            <input type="text" name="" placeholder="제목" style="width: 70%; margin-bottom: 7px;"><br/>
+	            <textarea rows="12" cols="83" id="content" name="content" style="margin-top: 10px;"></textarea>
+	        </div>
+	        
+	        <div style="margin-left: 20px;">
+	            <select class="custom-select" style="width: 70%; margin-top: 7px;">
+	                <option selected="">증상</option>
+	                <option value="1">어깨 통증</option>
+	                <option value="2">왼쪽 아랫배 통증</option>
+	                <option value="3">오른쪽 머리 두통</option>
+	            </select>
+	        </div>
+	        
+	        <div style="margin-left: 61%; padding: 5px;" >
+	            <button type="submit" class="btn btn-primary" onclick="">등록</button>
+	            <button type="submit" class="btn btn-primary" onclick="">취소</button>
+	        </div>
+	    </form>
 
 	</div>
 
