@@ -12,9 +12,9 @@
 </style>
 </head>
 <body>
-	<button type="button" class="btn btn-primary" onclick="myPage()">최근 검색 내역</button>
-	<button type="button" class="btn btn-primary" onclick="infoEdit()">내 정보 수정</button>
-	<button type="button" class="btn btn-primary" onclick="">내 메디노트</button>
+	<button type="button" class="btn btn-primary" onclick="myPage()">최근 검색 내역</button><br/>
+	<button type="button" class="btn btn-primary" onclick="infoEdit()">내 정보 수정</button><br/>
+	<button type="button" class="btn btn-primary" onclick="">내 메디노트</button><br/>
 	<button type="button" class="btn btn-primary" onclick="myComm()">내가 작성한 글</button>
 <script>
 	function myPage(){

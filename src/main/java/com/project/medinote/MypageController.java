@@ -8,6 +8,7 @@ public class MypageController {
 	
 	@RequestMapping("/myPage")
 	public String myPage() {
+		System.out.println("3333");
 		return "myPage/myPage";
 	}
 	@RequestMapping("/infoEdit")
