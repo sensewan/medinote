@@ -69,10 +69,10 @@ public class LoginDAO {
 		map.put("u_nm", u_nm);
 		map.put("phone", phone);
 
-		System.out.println("u_nm : " + u_nm + "phone : " + phone);
+		//System.out.println("u_nm : " + u_nm + "phone : " + phone);
 		result = sst.selectOne("login.findId", map);
 
-		System.out.println("result : " + result);
+		//System.out.println("result : " + result);
 
 		return result;
 
@@ -87,14 +87,14 @@ public class LoginDAO {
 		map.put("u_nm", u_nm);
 		map.put("phone", phone);
 
-		System.out.println("u_id : " + u_id + "u_nm : " + u_nm + "phone : " + phone);
+		//System.out.println("u_id : " + u_id + "u_nm : " + u_nm + "phone : " + phone);
 		int cnt = sst.selectOne("login.findPw", map);
 
 		if(cnt > 0) {
 			result = true;
 		}
 		
-		System.out.println("result : " + result);
+		//System.out.println("result : " + result);
 
 		return result;
 
@@ -108,13 +108,13 @@ public class LoginDAO {
 		map.put("u_id", u_id);
 		map.put("u_pw", u_pw);
 
-		System.out.println("u_id : " + u_id + "u_pw : " + u_pw);
+		//System.out.println("u_id : " + u_id + "u_pw : " + u_pw);
 		int cnt = sst.update("login.changePW", map);
 		if (cnt > 0) {
 			result = true;
 		}
 
-		System.out.println("result : " + result);
+		//System.out.println("result : " + result);
 
 		return result;
 

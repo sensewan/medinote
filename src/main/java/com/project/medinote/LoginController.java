@@ -43,7 +43,7 @@ public class LoginController {
 		
 		String method = request.getMethod().toUpperCase();
 		if(method.equalsIgnoreCase("POST")) {
-			System.out.println("vo : " + vo.toString());
+			//System.out.println("vo : " + vo.toString());
 			loginDAO.login(vo);
 			
 		}else {
@@ -68,7 +68,7 @@ public class LoginController {
 	}
 	
 	//로그인 페이지로 이동
-	@RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)	
+	@RequestMapping(value= {"/login"}, method=RequestMethod.GET)	
 	public String login() {
 		return "login/login";
 	}
@@ -132,7 +132,7 @@ public class LoginController {
 	public Map<String, Object> ChangePw(String u_id, String u_pw) {
 		Map<String, Object> map = new HashMap<String, Object>();
 	
-		System.out.println("u_id : " + u_id + ", u_pw : " + u_pw);
+		//System.out.println("u_id : " + u_id + ", u_pw : " + u_pw);
 		
 		boolean result = loginDAO.changePw(u_id, u_pw);
 		
