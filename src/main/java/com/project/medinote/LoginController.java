@@ -70,6 +70,7 @@ public class LoginController {
 	//로그인 페이지로 이동
 	@RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)	
 	public String login() {
+		System.out.println("3333");
 		return "login/login";
 	}
 	
