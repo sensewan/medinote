@@ -20,4 +20,8 @@ public class BbsController {
 	public String view() {
 		return "bbs/view";
 	}
+	@RequestMapping("/test")
+	public String test() {
+		return "bbs/test";
+	}
 }

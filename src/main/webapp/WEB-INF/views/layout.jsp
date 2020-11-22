@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" 
 href="/css/layout.css"/>
+</head>
 <body>
 	<div class="wrap">
 		<%@include file="header.jsp" %>

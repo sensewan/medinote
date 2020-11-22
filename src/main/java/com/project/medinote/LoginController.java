@@ -166,7 +166,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/layout", method=RequestMethod.GET)	
 	public String layout() {
-		return "login/layout";
+		return "layout";
 	}
 	@RequestMapping(value="/layout2", method=RequestMethod.GET)	
 	public String layout2() {
