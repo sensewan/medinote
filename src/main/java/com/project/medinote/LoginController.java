@@ -161,6 +161,10 @@ public class LoginController {
 	public String layout() {
 		return "layout";
 	}
+	@RequestMapping(value="/layout2", method=RequestMethod.GET)	
+	public String layout2() {
+		return "layout2";
+	}
 
 
 	
