@@ -12,10 +12,7 @@ href="/css/layout.css"/>
 	<%@include file="header.jsp" %>
 	<div class="content_wrap">
 		<div class="content">
-			<div class="content_side" >
-			</div>
-			<div class="content_center">
-			</div>
+
 		</div>
 	</div>
 
