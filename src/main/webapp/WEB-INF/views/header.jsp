@@ -4,6 +4,7 @@
 <div class="header_wrap" id="myHeader">
 
 	<div class="header">
+    
 		<a href="/"><h1>logo</h1></a>
 
 		<ul class="menu">
@@ -16,6 +17,7 @@
 			<li><a href="/login">login</a></li>
 			<li><a href="#">logout</a></li>
 		</ul>
+
 
 	</div>
 </div>
