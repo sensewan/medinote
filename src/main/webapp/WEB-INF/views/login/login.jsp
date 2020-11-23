@@ -64,7 +64,7 @@ input#s_id{
 <body>
 
      <div class="div_logo">
-			<a href="/home"><img alt="" src="logo/logo2.png" width="500px"></a>
+			<a href="/"><img alt="" src="logo/logo_login.png" width="500px"></a>
 		</div>
 	
 	<div class="div_line"></div>
