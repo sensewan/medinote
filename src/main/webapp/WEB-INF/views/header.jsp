@@ -9,11 +9,11 @@
 <body>
 	<div class="header">
 		<div class="header_logo header_side">
-			<img alt="" src="logo/logo2.png" width="160px">
+			<a href="/home"><img alt="" src="logo/logo2.png" width="160px"></a>
 		</div>
 		<div class="header_menu">
 			<ul>
-				<li><a href="#">Home</a></li>
+				<li><a href="home">Home</a></li>
 				<li><a href="#">About us</a></li>
 				<li><a href="bbs">Community</a></li>
 				<li><a href="#">My page</a></li>
