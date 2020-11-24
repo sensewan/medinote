@@ -9,11 +9,12 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 <style type="text/css">
 .find_wrap{
-	width: 50%;
+	width: 60%;
 	/* position: absolute; */
 	left: 20%;
 	top : 20%;
 	margin: 0 auto;
+	padding-top: 5%;
 }
 
 .login_card_out {
@@ -157,7 +158,7 @@ input.btn.btn-primary.find_btn2 {
 						</tr>
 						<tr>
 							<td colspan="2" class="find_td_btn_right">
-								<input type="button" value="완료" class="btn btn-primary find_btn" onclick="javascript:location.href='/login'" />
+								<input type="button"  value="완료" id="btnIdSuccess" class="btn btn-primary find_btn"  />
 							</td>
 						</tr>
 					</table>
@@ -308,7 +309,7 @@ input.btn.btn-primary.find_btn2 {
 			}).done(function(data){
 				var res = data.findId;
 				if(res != null && res.trim().length > 0){
-					alert("아이디를 찾았습니다. : " + res);
+					//alert("아이디를 찾았습니다. : " + res);
 				    $( '#f_id_find' ).css("display", "none" );
 				    $( '#f_id_result' ).css("display", "flex" );
 				    $( '#lbId').text( res );
@@ -320,6 +321,19 @@ input.btn.btn-primary.find_btn2 {
 			});
 
 		});
+	
+/**********************************************************************/
+ 	//아이디 찾기 완료 버튼 클릭 이벤트
+ 	$("#btnIdSuccess").on("click", function(event) {
+		 $( '#lbId').text( '' );
+		 $( '#f_id_result' ).css("display", "none" );
+		 $("#id_name").val('');
+		 $("#id_phone1").val('');
+		 $("#id_phone2").val('');
+		 $("#id_phone3").val('');
+		 $( '#f_id_find' ).css("display", "flex" );
+
+ 	});
 		
 /**********************************************************************/
 		//비밀번호 찾기 버튼 클릭 이벤트
@@ -383,7 +397,7 @@ input.btn.btn-primary.find_btn2 {
 			}).done(function(data){
 				var res = data.findPw;
 				if(res){
-					alert("비밀번호 변경해봐요. : " + res);
+					//alert("비밀번호 변경해봐요. : " + res);
 				    $( '#f_pw_find' ).css("display", "none" );
 				    $( '#f_pw_result' ).css("display", "flex" );
 				    //console.log(pw_id);
@@ -433,6 +447,15 @@ input.btn.btn-primary.find_btn2 {
 				$("#pw_new").addClass('is-invalid');
 				isPwChgChk = false; return;
 			}
+			
+			//비밀번호 영문자 포함
+			 var chk_num = pw_new.search(/[0-9]/g);
+		  	 var chk_eng = pw_new.search(/[a-z]/ig);
+		  	if(chk_num < 0 || chk_eng < 0){
+		  		alert('비밀번호는 숫자와 영문자를 혼용하여야 합니다.');
+		  		isPwChgChk = false; return;
+			}
+			
 			
 			//새로운 비밀번호와 비밀번호 확인 동일 확인
 			if(pw_new.trim() != pw_new_chk.trim()){

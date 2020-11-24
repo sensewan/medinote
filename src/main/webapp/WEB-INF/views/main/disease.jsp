@@ -22,6 +22,7 @@
 		<%@include file="../header.jsp" %>
 		<div class="content_wrap">
 			<div class="content">
+			<div>
 				<table class="disTab">
 					<tr>
 						<td>번호</td>
@@ -39,6 +40,7 @@
 						<td>큰병원</td>
 					</tr>
 				</table>
+			</div>
 			</div>
 		</div>
 	</div>
