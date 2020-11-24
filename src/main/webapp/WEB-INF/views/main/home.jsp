@@ -32,10 +32,9 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@include file="../header.jsp" %>
-		<div class="content">
-			<div class="content_side"></div>
-			<div class="content_center">
+		<jsp:include page="../header.jsp"/>
+		<div class="content_wrap">
+			<div class="content">
 				<img src="img/body.jpg" alt="Body" usemap="#bodymap" width="600px">
 				<map name="bodymap">
 					<area shape="circle" coords="300,70,44" alt="head" href="#">
