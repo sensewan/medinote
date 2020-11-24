@@ -82,7 +82,7 @@ input.btn.btn-primary.find_btn2 {
 <body>
 	<div class="find_wrap">
 		<div style="text-align: center">
-			<a href="/home"><img alt="" src="logo/logo2.png" width="500px"></a>
+			<a href="/"><img alt="" src="logo/logo_login.png" width="500px"></a>
 		</div>
 		<div class="card border-primary mb-3 login_card_out">
 			

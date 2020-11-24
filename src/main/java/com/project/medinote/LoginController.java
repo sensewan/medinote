@@ -141,14 +141,7 @@ public class LoginController {
 		
 		return map;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping(value="/login2", method=RequestMethod.GET)	
 	public String Login2() {
 		return "login/login2";
@@ -170,25 +163,10 @@ public class LoginController {
 	}
 	@RequestMapping(value="/layout2", method=RequestMethod.GET)	
 	public String layout2() {
-		return "login/layout2";
+		return "layout2";
 	}
-	@RequestMapping(value="/layout3", method=RequestMethod.GET)	
-	public String layout3() {
-		return "login/layout3";
-	}
-	@RequestMapping(value="/layout4", method=RequestMethod.GET)	
-	public String layout4() {
-		return "login/layout4";
-	}
-	@RequestMapping(value="/layout5", method=RequestMethod.GET)	
-	public String layout5() {
-		return "login/layout5";
-	}
-	
-	@RequestMapping(value="/layout6", method=RequestMethod.GET)	
-	public String layout6() {
-		return "login/layout6";
-	}
+
+
 	
 	
 	
