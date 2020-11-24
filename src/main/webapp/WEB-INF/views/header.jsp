@@ -8,7 +8,7 @@
 		<a href="/"><h1>logo</h1></a>
 
 		<ul class="menu">
-			<li><a href="#">Home</a></li>
+			<li><a href="/">Home</a></li>
 			<li><a href="#">About us</a></li>
 			<li><a href="#">Community</a></li>
 			<li><a href="#">My page</a></li>
