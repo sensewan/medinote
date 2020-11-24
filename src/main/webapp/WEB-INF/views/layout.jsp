@@ -13,8 +13,10 @@ href="/css/layout.css"/>
 	<div class="content_wrap">
 		<div class="content">
 			<div class="content_side" >
+				<h1>Side</h1>
 			</div>
 			<div class="content_center">
+				<h1>Center</h1>
 			</div>
 		</div>
 	</div>
