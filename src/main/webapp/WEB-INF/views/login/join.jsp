@@ -261,6 +261,9 @@ href="/css/bootstrap.min.css"/>
 		var res = true;
 		var u_pw = document.getElementById("u_pw");
 		var f_valid_pw = document.getElementById("f_valid_pw");
+		
+		  var chk_num = u_pw.value.search(/[0-9]/g);
+		  var chk_eng = u_pw.value.search(/[a-z]/ig);
 
 		//비밀번호 유효성 검사
 		if (u_pw.value.trim().length == 0) {
@@ -268,16 +271,24 @@ href="/css/bootstrap.min.css"/>
 			u_pw.className = "form-control is-invalid";
 			res = false;
 			return res;
-		} else {
+		}else if(u_pw.value.trim().length < 5 || u_pw.value.trim().length > 15 ){
+			f_valid_pw.innerHTML = "아이디는 5자 이상 15자 이하입니다.";
+			u_pw.className = "form-control is-invalid";
+			res = false;
+			return res;
+		}  
+		else if(chk_num < 0 || chk_eng < 0){
+			f_valid_pw.innerHTML = "비밀번호는 숫자와 영문자를 혼용하여야 합니다.";
+			u_pw.className = "form-control is-invalid";
+			res = false;
+			return res;
+		}else {
 			f_valid_pw.innerHTML = "";
 			u_pw.className = "form-control ";
 		}
 		
 		//비밀번호 길이 검사
-		if(u_pw.value.trim().length < 5 || u_pw.value.trim().length > 15 ){
-			f_valid_pw.innerHTML = "아이디는 5자 이상 15자 이하입니다.";
-			u_pw.className = "form-control is-invalid";
-		}
+		
 		
 		
 		return res;
@@ -290,29 +301,28 @@ href="/css/bootstrap.min.css"/>
 		var f_valid_chk_pw = document.getElementById("f_valid_chk_pw");
 
 		//비밀번호 확인 유효성 검사
-		if (chk_pw.value.trim().length == 0) {
+	if (chk_pw.value.trim().length == 0) {
 			f_valid_chk_pw.innerHTML = "비밀번호를 입력하세요";
 			chk_pw.className = "form-control is-invalid";
-			return false;
+			res = false;
+			return res;
+		} else if (chk_pw.value.trim().length < 5
+				|| chk_pw.value.trim().length > 10) { //비밀번호 확인 길이 검사
+			f_valid_chk_pw.innerHTML = "비밀번호는 5자 이상 15자 이하입니다.";
+			chk_pw.className = "form-control is-invalid";
+			res = false;
+			return res;
+		} else if (u_pw.value != chk_pw.value) {
+			f_valid_chk_pw.innerHTML = "비밀번호가 동일하지 않습니다.";
+			chk_pw.className = "form-control is-invalid";
+			res = false;
+			return res;
 		} else {
 			f_valid_chk_pw.innerHTML = "";
 			chk_pw.className = "form-control ";
 		}
-		
-		//비밀번호 확인 길이 검사
-		if(chk_pw.value.trim().length < 5 || chk_pw.value.trim().length > 10 ){
-			f_valid_chk_pw.innerHTML = "비밀번호는 5자 이상 15자 이하입니다.";
-			chk_pw.className = "form-control is-invalid";
-			return false;
-		}
-		
-		if(u_pw.value != chk_pw.value){
-			f_valid_chk_pw.innerHTML = "비밀번호가 동일하지 않습니다.";
-			chk_pw.className = "form-control is-invalid";
-		}
-		
-		
-		
+
+
 		return true;
 	}
 
@@ -326,11 +336,12 @@ href="/css/bootstrap.min.css"/>
 			f_valid_nm.innerHTML = "이름을 입력하세요";
 			u_nm.className = "form-control is-invalid";
 			res = false;
+			return res;
 		} else {
 			f_valid_nm.innerHTML = "";
 			u_nm.className = "form-control";
 		}
-		
+
 		return res;
 
 	}
@@ -346,6 +357,7 @@ href="/css/bootstrap.min.css"/>
 			f_valid_nk.innerHTML = "닉네임을 입력하세요";
 			u_nk.className = "form-control is-invalid";
 			res = false;
+			return res;
 		} else {
 			f_valid_nk.innerHTML = "";
 			u_nk.className = "form-control";
@@ -359,13 +371,13 @@ href="/css/bootstrap.min.css"/>
 		var birth1 = document.getElementById("birth1");
 
 		//생일 유효성 검사
-		if (birth1.value.trim().length > 0) {
+		if (birth1.value.trim().length > 0 && birth1.value.trim().length == 4) {
 			birth1.className = "form-control";
 			res = true;
 		} else {
 			birth1.className = "form-control is-invalid";
 		}
-		
+
 		return res;
 
 	}
@@ -380,9 +392,9 @@ href="/css/bootstrap.min.css"/>
 			res = true;
 		} else {
 			birth3.className = "form-control is-invalid";
-			
+
 		}
-		
+
 		return res;
 	}
 
@@ -397,7 +409,7 @@ href="/css/bootstrap.min.css"/>
 			res = true;
 		} else {
 			phone2.className = "form-control is-invalid";
-			
+
 		}
 		return res;
 	}
@@ -412,40 +424,66 @@ href="/css/bootstrap.min.css"/>
 		} else {
 			phone3.className = "form-control is-invalid";
 		}
-		
+
 		return res;
 
 	}
 
-
 	function join(frm) {
 
-		alert(v_idChk)
 		var res = true;
 		if (!valid_id() || !valid_pw() || !valid_chk_pw() || !valid_nm()
 				|| !valid_nk()) {
 			res = false;
-		}else if (!valid_birth1() || !valid_birth3() || !valid_phone2()
+		} else if (!valid_birth1() || !valid_birth3() || !valid_phone2()
 				|| !valid_phone3()) {
 			res = false;
-		}else if(!v_idChk){
+		} else if (!v_idChk) {
 			f_valid_id.innerHTML = "중복된 아이디 입니다.";
 			u_id.className = "form-control is-invalid";
 			res = false;
 		}
 
 		if (res) {
-			frm.submit();
+			//frm.submit();
+
+			var s_id = $("#u_id").val();
+			var s_pw = $("#u_pw").val();
+			var s_nm = $("#u_nm").val();
+			var s_nk = $("#u_nk").val();
+
+			var s_phone = [];
+			s_phone.push($("#phone1").val());
+			s_phone.push($("#phone2").val());
+			s_phone.push($("#phone3").val());
+
+			var s_birth = [];
+			s_birth.push($("#birth1").val());
+			s_birth.push($("#birth2").val());
+			s_birth.push($("#birth3").val());
+
+			$.ajax(
+					{
+						url : "join",
+						type : "post",
+						data : "u_id=" + s_id + "&u_pw=" + s_pw + "&u_nm="
+								+ s_nm + "&u_nk=" + s_nk + "&arrPhone="
+								+ s_phone + "&arrBirth=" + s_birth,
+						dataType : "json",
+						error : function(request, status, error) {
+							alert("code = " + request.status + " message = "
+									+ request.responseText + " error = "
+									+ error); // 실패 시 처리
+						}
+					}).done(function(data) {
+				if (data.result) {
+					alert('가입이 완료되었습니다.');
+					location.href = "/login";
+				}
+			});
+
 		}
-		
-
 	}
-	
-	
-	
-
-	
-	
 </script>
 </body>
 </html>

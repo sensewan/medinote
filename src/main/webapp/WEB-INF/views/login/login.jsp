@@ -58,7 +58,6 @@ input#s_id{
 	margin-bottom: 10px;
 }
 
-
 </style>
 	</head>
 <body>
@@ -82,12 +81,12 @@ input#s_id{
 						<tr>
 							<td class="staticEmail"><label class="">ID</label>
 							</td>
-							<td><input type="text" id="u_id"
+							<td><input type="text" id="u_id" maxlength="10"
 								class="form-control" /></td>
 						</tr>
 						<tr>
 							<td class="staticEmail"><label>PW</label></td>
-							<td><input type="text" id="u_pw"
+							<td><input type="password" id="u_pw" maxlength="15"
 								class="form-control" /></td>
 						</tr>
 						<tr>
@@ -105,8 +104,7 @@ input#s_id{
 
 			</div>
 		</div>
-
-	</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	
 <script>
