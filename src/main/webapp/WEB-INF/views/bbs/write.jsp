@@ -16,6 +16,7 @@
     <style type="text/css">
   	
   	.haha{
+  		position:relative;
 		z-index: 10;
 	}  
 
@@ -28,8 +29,8 @@
 
 
 	<%@include file="../header.jsp" %>
-	<div class="content_wrap1" style="margin-top: 10%">
-		<div class="content1">
+	<div class="content_wrap">
+		<div class="content">
 		
 		    <h3 style="padding-top: 10px;">글쓰기3</h3>
 		    <hr>
