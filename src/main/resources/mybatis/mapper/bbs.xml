@@ -45,7 +45,7 @@
 	
 	<!-- 보기 기능 (resultMap으로 하지 않으면 댓글을 받아오지 못함) -->
 	<select id="getBbs" resultMap="map1" parameterType="String">
-		select * from BBS_TB where IDX = #{IDX}
+		select * from BBS_TB where IDX = #{idx}
 	</select>
 	
 	
@@ -78,7 +78,7 @@
 	<!-- 조회수 증가하기 -->
 	
 	<update id="update_hit" parameterType="String">
-		update BBS_TB set HIT = HIT + 1 where IDX = #{IDX}
+		update BBS_TB set HIT = HIT + 1 where IDX = #{idx}
 	</update>
 
 	

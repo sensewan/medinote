@@ -57,6 +57,7 @@ public class LoginDAO {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("u_id", u_id);
 		map.put("u_pw", encryption(u_pw));
+		//map.put("u_pw", u_pw);
 
 		int cnt = sst.selectOne("login.loginChk", map);
 

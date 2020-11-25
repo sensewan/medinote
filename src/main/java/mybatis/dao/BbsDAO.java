@@ -58,9 +58,9 @@ public class BbsDAO {
 		}
 
 		// 글 클릭했을 때 보기 기능
-		public BbsVO getBbs(String b_idx) {
+		public BbsVO getBbs(String idx) {
 			
-			BbsVO vo = sst.selectOne("bbs.getBbs", b_idx);
+			BbsVO vo = sst.selectOne("bbs.getBbs", idx);
 			
 			return vo;
 		}
@@ -70,7 +70,6 @@ public class BbsDAO {
 		public boolean editBbs(BbsVO vo) {
 			
 			boolean value = false;
-			
 			
 			int cnt = sst.update("bbs.edit", vo);
 			
@@ -95,8 +94,8 @@ public class BbsDAO {
 		
 		
 		// 조회수 증가하기
-		public boolean updateHit(String b_idx) {
-			int cnt = sst.update("bbs.update_hit", b_idx);
+		public boolean updateHit(String idx) {
+			int cnt = sst.update("bbs.update_hit", idx);
 			
 			if (cnt > 0) {
 				return true;

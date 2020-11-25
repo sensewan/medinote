@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="css/summernote-lite.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    
+    <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
     <style type="text/css">
-
-        #wrap {
-            width: 100%;
-            height: 100%;
-            margin: auto;
-        }
+  	
+  	.haha{
+		z-index: 10;
+	}  
 
     </style>
 
@@ -26,37 +26,42 @@
 
 <body>
 
-<div class="wrap">
-		<%@include file="../header.jsp" %>
-		<div class="content">
-			<div class="content_side"></div>
-			<div class="content_center">
-			
-			
-			    <h3 style="margin-left: 10%; margin-top: 20px;">글쓰기</h3>
-			    <hr>
-			    <form style="width: 80%; margin: auto;">
-			        <div style="margin-left: 20px;">
-			            <input type="text" name="" placeholder="제목" style="width: 70%;"><br/>
-			            <textarea rows="12" cols="83" id="content" name="content" placeholder="내용" style="margin-top: 10px;"></textarea>
+
+	<%@include file="../header.jsp" %>
+	<div class="content_wrap1" style="margin-top: 10%">
+		<div class="content1">
+		
+		    <h3 style="padding-top: 10px;">글쓰기3</h3>
+		    <hr>
+		    <div class="haha">
+		    
+			    <form action="write_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
+			        <div style="margin-left: 17%; z-index: 9;">
+			            <input type="text" name="title" placeholder="제목" style="width: 81%; margin-right: 20%; margin-bottom: 5px;"><br/>
+			            <textarea id="content" name="content" style="margin-top: 10px; "></textarea>
 			        </div>
-			        <div style="margin-left: 20px;">
-			            <select class="custom-select" style="width: 70%;">
-			                <option selected="">증상</option>
+			        
+			        <div style="margin-left: 17%;">
+			            <select class="custom-select" id="st1" name="st0" style="width: 81%; margin-right: 20%; margin-top: 5px;">
+			                <option value="">증상</option>
 			                <option value="1">어깨 통증</option>
 			                <option value="2">왼쪽 아랫배 통증</option>
 			                <option value="3">오른쪽 머리 두통</option>
 			            </select>
+			            <input type="text" name="srch_tag" id="srch_tag">
 			        </div>
-			        <div style="margin-left: 51%; padding: 5px;" >
-			            <button type="submit" class="btn btn-primary" onclick="">등록</button>
+			        
+			        <div style="margin-left: 59%; padding: 5px;" >
+			        	<input type="button" class="btn btn-primary" value="등록" onclick="sendData()"/>
 			            <button type="submit" class="btn btn-primary" onclick="">취소</button>
 			        </div>
 			    </form>
-			
-			</div>
+		    </div>
+		
+		
 		</div>
-</div>
+	</div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -66,34 +71,99 @@
 
 
 <script>
-    // ┌>섬머노트 적용
-    $(function() {
-        // id가 content인 태그에 edit 적용<┐  ┌>옵션 넣어주면 된다.
-        $('#content').summernote({
-            // ┌> 화면 예시..
-            placeholder:"적당히 쓰거라",
-            height : 300,
-            maxHeight : 600, //최대크기지정
-            minHeight : 200,
-            tabSize : 10,
-            width : 800,
-            focus : true,
-            lang : "ko-KR",
-
-            // ┌>어떤 사건에 의해서 자동으로 호출되는 함수임 (이미지가 들어올때 수행되게 만들기)
-            callbacks : {
-                //┌> 게시판 내용에 이미지가 추가될 때마다 수행됨 (이미지를 여러개 첨부할 수 있으므로 배열로 인식)
-                onImageUpload : function(files, editor) {
-                    // ┌> 배열이므로 for문으로 보내기
-                    for (var i = 0; i < files.length; i++) {
-                        sendFile(files[i], editor);
-                    }
-                }
-            }
-        });
-        //┌> lineHeight (줄간격) 을 적용할면 이렇게 한 번 더 적어줘야함(왜그런지는 몰라) 
-        $('#content').summernote("lineHeight", 0.7);
-    });
+	
+	function sendData(){
+/* 			alert(document.forms[0].elements.length);
+	 		for(var i=0 ; i<document.forms[0].elements.length-210 ; i++){
+			if(document.forms[0].elements[i].value == ""){
+				alert(document.forms[0].elements[i].name+"를 입력하세요");
+				document.forms[0].elements[i].focus();
+				return;//수행 중단
+			} */
+			
+			//alert(document.forms[0].title.value.trim().length)
+ 			 
+			if(document.forms[0].title.value == ""){
+				alert("제목을 입력해주세요");
+				document.forms[0].title.focus();
+				return;
+			}
+			if (document.forms[0].content.value == "") {
+				alert("내용을 입력해주세요");
+				document.forms[0].content.focus();
+				return;
+			}
+			
+		
+	 
+	    //             ↱셀렉트박스 아이디 적고 + option:selected 적으면 value값을 가지고 올 수 있다.
+	 	var tag1 = $("#st1 option:selected").val();  // .val()을 해야 value 값을 갖고 옴(단 .toString()을해야 함?) .text를 하면 선택된 텍스트 값을 갖고
+	 	$("#srch_tag").val(tag1);
+	 	
+		if (document.forms[0].srch_tag.value == "") {
+			alert("증상선택하시오");
+			return;
+		} 
+		//document.forms[0].submit();
+	}
+	
+		
+	$(function () {
+		console.log("SSSSS");
+		$("#content").summernote({
+			placeholder:"내용 입력하세요",
+			height:300,
+			maxHeight:600,  //최대크기지정
+			minHeight:200,
+			tabSize:10,
+			width: 807,
+			lang:"ko-KR",
+			
+			callbacks: {
+				onImageUpload: function (files, editor) {
+					console.log('yyyyyyy');
+					for (var i = 0; i < files.length; i++) {
+						sendFile(files[i], editor);
+					}
+				}
+			}
+		});
+	});
+	
+	function sendFile(file, editor) {
+		var frm = new FormData();
+		
+		frm.append("file", file)
+		
+		// ┌>비동기식 통신하기!!
+		$.ajax({
+			url:"write_summer",
+			type:"post",
+			data: frm,
+			// ┌> contentType, processData를 지정해 줘야 일반적인 문자열을 보내는 것이 아닌 -> 파일을 보내는 것이라는 것을 알려줄 수 있다.
+			contentType: false,
+			processData: false,
+			dataType:"json",
+			
+		}).done(function(res) { //성공시 (이미지 주소를 content에 넣어주기)
+			console.log(res.img_url);
+		     //┌> jQuery로 img 태그 만듦
+			var image = $("<img>").attr("src", res.img_url);  // <-img태그 생성됨
+		                           //└>속성 부여
+		     //┌>html id가 content인 내용안에 넣어주기 
+		    //$("#content").summernote("insertNode", image[0]);
+		                               //└>(insertNode를 적으면<textarea rows="12" cols="50" id="content" name="content">!!insertNode!!열로 들어감</textarea>)
+		    
+		    
+		    //                            ┌>img 태그를 알아서 만들어서 넣어줌
+			$("#content").summernote("editor.insertImage", res.img_url);
+			$("#file_name").val(res.f_name);
+		}).fail(function(err) { //실패시
+			console.log(err);
+		});
+	} 
+	
+	
 
 </script>
 

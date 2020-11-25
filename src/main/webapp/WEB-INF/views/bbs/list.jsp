@@ -20,7 +20,7 @@
             width: 100%;
             margin-left: auto;
             margin-right: auto;
-            background-color: rgba( 255, 255, 255, 1 );
+            /* background-color: rgba( 255, 255, 255, 1 ); */
         }
 
         tfoot .pagination {
@@ -38,7 +38,7 @@
 		<div class="content">	
 			<div style="position:relative; z-index: 4; ">
 					
-				<div id="search" style="margin-bottom: 10px;">
+				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
 		            <form>
 		                <select name="tag" style="height: 30px;">
 		                    <option value="1">제목</option>
@@ -49,7 +49,7 @@
 		            </form>
 		        </div>
 		
-		        <div>
+		        <div style="padding: 0 5px 0 5px;">
 		            <table class="table table-hover" id="table1">
 		                <thead>
 		                    <tr class="table-primary">
@@ -91,8 +91,8 @@
 			            <tfoot>
 			                <tr>
 			
-			                    <td colspan="3">
-			                        <ul class="pagination" style="margin-left: 65%;">
+			                    <td colspan="5">
+			                        <ul class="pagination" style="margin-left: 45%;">
 			                            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
 			                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
 			                            <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -103,7 +103,7 @@
 			                        </ul>
 			                    </td>
 			                    <td style="text-align: right;">
-			                        <button type="button" class="btn btn-primary btn-sm">글쓰기</button>
+			                        <button type="button" class="btn btn-primary btn-sm" id="write_btn">글쓰기</button>
 			                    </td>
 			                </tr>
 			
@@ -116,6 +116,35 @@
 
 		</div>
 	</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+$(function () {
+
+	$("#write_btn").bind("click", function () {
+
+		$.ajax({
+			url: "write",
+			dataType:"JSON"
+			
+		}).done(function(data) {
+			//console.log(data.chk);
+		 	if (data.chk == "0") {
+				alert("로그인 하셔야 합니다.");
+				location.href="login";
+			}else if (data.chk =="1") {
+				location.href=data.url;
+			}
+		
+		});
+		
+	});
+});
+
+</script>
+
 
 </body>
 </html>
