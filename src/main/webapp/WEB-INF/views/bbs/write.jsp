@@ -15,10 +15,6 @@
 
     <style type="text/css">
   	
-  	.haha{
-  		position:relative;
-		z-index: 10;
-	}  
 
     </style>
 
@@ -34,7 +30,7 @@
 		
 		    <h3 style="padding-top: 10px;">글쓰기3</h3>
 		    <hr>
-		    <div class="haha">
+		    <div style="position: relative; z-index: 10;">
 		    
 			    <form action="write_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
 			        <div style="margin-left: 17%; z-index: 9;">
