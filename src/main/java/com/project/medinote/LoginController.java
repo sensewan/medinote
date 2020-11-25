@@ -138,6 +138,14 @@ public class LoginController {
 	}
 
 	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)	
+	public String logout() {
+		
+		//로그아웃 시 세션 삭제
+		session.removeAttribute("loginId");
+		return "main/home";
+	}
+	
 	@RequestMapping(value="/find", method=RequestMethod.GET)	
 	public String Find() {
 		return "login/find";
