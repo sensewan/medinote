@@ -12,17 +12,16 @@
 <title>community 게시판</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-
+	<link type="text/css" rel="stylesheet" href="css/layout.css"/>
+	
     <style type="text/css">
-
 
         #table1 {
             width: 100%;
             margin-left: auto;
             margin-right: auto;
-
+            background-color: rgba( 255, 255, 255, 1 );
         }
-
 
         tfoot .pagination {
             width: 300px;
@@ -34,13 +33,12 @@
 </head>
 <body>
 
-	<div class="wrap">
-		<%@include file="../header.jsp" %>
-		<div class="content">
-			<div class="content_side"></div>
-			<div class="content_center">
-			
-				<div id="search" style="width: 80%; margin: auto; margin-bottom: 10px;">
+	<%@include file="../header.jsp" %>
+	<div class="content_wrap">
+		<div class="content">	
+			<div style="position:relative; z-index: 4; ">
+					
+				<div id="search" style="margin-bottom: 10px;">
 		            <form>
 		                <select name="tag" style="height: 30px;">
 		                    <option value="1">제목</option>
@@ -51,7 +49,7 @@
 		            </form>
 		        </div>
 		
-		        <div style="border: 1px solid black; width: 80%; margin: auto;">
+		        <div>
 		            <table class="table table-hover" id="table1">
 		                <thead>
 		                    <tr class="table-primary">
@@ -113,7 +111,9 @@
 			        </table>
 		        
 				</div>
-			</div>
+				
+			</div> <!-- zindex적용해보기 -->
+
 		</div>
 	</div>
 

@@ -86,26 +86,26 @@ ul, a, ol, li{
 
 
 .content_wrap{
-	background-image: url(../img/background.jpg); 
+	background-image: url(../img/background.jpg);
 	height: 800px; 
 	background-repeat: no-repeat;
 	background-size: 100%;
 
-	opacity: 0.5; 
+	background-color: rgba( 255, 255, 255, 0.5 );
 	
 	margin-top: 100px;
 	padding-top: 20px;
 	position: relative;
-    z-index: -9999;
+    z-index:1;
 }
 
 .content{
 	width: 1200px;
 	margin: 0 auto;
-	border: 3px solid red;
 	height: 780px;
-	background-color: #fff;
-	opacity: 0.5;
+	background-color: rgba( 255, 255, 255, 0.5 );
+	position: relative;
+	z-index:2;
 
 	
 }
