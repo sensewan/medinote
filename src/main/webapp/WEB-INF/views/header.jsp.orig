@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<<<<<<< HEAD
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+=======
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> master
 <div class="header_wrap" id="myHeader">
 
 	<div class="header">
@@ -17,11 +21,19 @@
 			<li><a href="#">My page</a></li>
 		</ul>
 		<ul class="login">
+<<<<<<< HEAD
+			<c:if test="${loginId == null }">
+				<li><a href="/login">login</a></li>
+			</c:if>
+			<c:if test="${loginId != null }">
+				<li><a href="#">logout</a></li>
+=======
 			<c:if test="${sessionScope.loginId eq null}">
 				<li><a href="/login">login</a></li>
 			</c:if>
 			<c:if test="${sessionScope.loginId ne null}">
 				<li><a href="/logout">logout</a></li>
+>>>>>>> master
 			</c:if>
 		</ul>
 	</div>
