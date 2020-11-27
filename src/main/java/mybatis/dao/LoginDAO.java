@@ -1,5 +1,8 @@
 package mybatis.dao;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,8 +19,11 @@ public class LoginDAO {
 	SqlSessionTemplate sst;
 	
 	//회원가입
-	public boolean login(MemVO vo) {
+	public boolean join(MemVO vo) {
 		boolean result = false;
+		
+		String e_pw = encryption(vo.getU_pw());
+		vo.setU_pw(e_pw);
 		
 	 	int cnt = sst.insert("login.join", vo);
 	 
@@ -50,7 +56,7 @@ public class LoginDAO {
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("u_id", u_id);
-		map.put("u_pw", u_pw);
+		map.put("u_pw", encryption(u_pw));
 
 		int cnt = sst.selectOne("login.loginChk", map);
 
@@ -118,6 +124,22 @@ public class LoginDAO {
 
 		return result;
 
+	}
+	
+	public String encryption(String u_pw){
+
+		String hex = "";
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(u_pw.getBytes());
+			hex = String.format("%064x", new BigInteger(1, md.digest()));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return hex;
 	}
 
 }

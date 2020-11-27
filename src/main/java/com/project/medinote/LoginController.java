@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,31 +31,25 @@ public class LoginController {
 	HttpSession session;
 	
 	
-
-	@RequestMapping(value="/find3", method=RequestMethod.GET)	
-	public String Find3() {
-		return "login/find3";
-	}
-	
-	@RequestMapping(value = { "/join"})	
-	public ModelAndView join(MemVO vo) {
-		ModelAndView mv = new ModelAndView();
-		
-		
-		String method = request.getMethod().toUpperCase();
-		if(method.equalsIgnoreCase("POST")) {
-			//System.out.println("vo : " + vo.toString());
-			loginDAO.login(vo);
-			
-		}else {
-			
-		}
-		mv.setViewName("login/join");
-
-		return mv;
+	//회원가입 페이지로 이동
+	@RequestMapping(value = "/join", method = RequestMethod.GET)	
+	public String join(MemVO vo) {
+		return "login/join"; 
 		
 	}
 	
+	//회원가입 이벤트
+	@RequestMapping(value="/join", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> join_ok(MemVO vo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("vo : " + vo.toString());
+		boolean result = loginDAO.join(vo);
+		map.put("result", result);
+		return map;
+	}
+	
+	//아이디 중복확인 이벤트
 	@RequestMapping(value="/idChk", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object>idChk(String u_id){
@@ -142,21 +137,20 @@ public class LoginController {
 		return map;
 	}
 
-	@RequestMapping(value="/login2", method=RequestMethod.GET)	
-	public String Login2() {
-		return "login/login2";
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)	
+	public String logout() {
+		
+		//로그아웃 시 세션 삭제
+		session.removeAttribute("loginId");
+		return "main/home";
 	}
 	
 	@RequestMapping(value="/find", method=RequestMethod.GET)	
 	public String Find() {
 		return "login/find";
 	}
-	
-	@RequestMapping(value="/find2", method=RequestMethod.GET)	
-	public String Find2() {
-		return "login/find2";
-	}
-	
+
 	@RequestMapping(value="/layout", method=RequestMethod.GET)	
 	public String layout() {
 		return "layout";
@@ -167,8 +161,5 @@ public class LoginController {
 	}
 
 
-	
-	
-	
 
 }

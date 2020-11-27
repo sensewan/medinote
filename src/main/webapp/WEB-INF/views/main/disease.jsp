@@ -20,9 +20,9 @@
 <body>
 	<div class="wrap">
 		<%@include file="../header.jsp" %>
-		<div class="content">
-			<div class="content_side"></div>
-			<div class="content_center">
+		<div class="content_wrap">
+			<div class="content">
+			<div>
 				<table class="disTab">
 					<tr>
 						<td>번호</td>
@@ -40,6 +40,7 @@
 						<td><a href="#">큰병원</a></td>
 					</tr>
 				</table>
+			</div>
 			</div>
 		</div>
 	</div>
