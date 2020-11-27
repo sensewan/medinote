@@ -32,12 +32,12 @@
 					<tr>
 						<td>1</td>
 						<td>아파</td>
-						<td>병원</td>
+						<td><a href="#">진료과</a></td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>더아파</td>
-						<td>큰병원</td>
+						<td><a href="#">큰병원</a></td>
 					</tr>
 				</table>
 			</div>
