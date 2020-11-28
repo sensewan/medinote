@@ -6,16 +6,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BbsVO {
 
-	private String idx,
-					title,
-					content,
-					srch_tag,
-					writer,
+	private String idx,          // 고유번호
+					title,       // 게시글 제목
+					content,     // 내용
+					srch_tag,    // 증상선택한 태그
+					writer,      // 작성자
 					del_fl,      // 0:등록,  1:삭제
-					ip,
-					create_dt,
-					update_dt,
-					file_name,   // 파일첨부했을 경우 파일이름
+					ip,          // 사용자ip
+					create_dt,   // 등록일자
+					update_dt,   // 수정일자
+					file_name,   // 파일첨부했을 경우 파일이름(따로 파일첨부 안하므로 필요없을 듯)
 					hit,         // 조회수
 					bname;       //게시판 이름
 	

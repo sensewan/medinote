@@ -104,5 +104,33 @@ public class BbsDAO {
 			}
 		}
 		
+		
+		// 검색기능
+		public BbsVO[] search(String t, String v) {
+			Map<String, String> map = new HashMap<String, String>();
+
+			map.put("searchType", t);
+			map.put("searchValue", v);
+			
+			
+			List<BbsVO> list = sst.selectList("bbs.search", map); 
+			
+			//받은 list를 배열로 전환하기
+			BbsVO[] ar = null;
+			
+			if(list != null && list.size() > 0) {
+				ar = new BbsVO[list.size()];
+				
+				list.toArray(ar);
+			}
+
+			return ar;
+		}
+		
+		
 
 }
+
+
+
+

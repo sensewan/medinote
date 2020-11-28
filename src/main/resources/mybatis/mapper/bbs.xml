@@ -39,8 +39,8 @@
 	
 		<!-- 원글 vo로 이용해서 저장 하기 -->
 	<insert id="add" parameterType="mybatis.vo.BbsVO">
-		insert into BBS_TB(IDX, TITLE, CONTENT, SRCH_TAG, WRITER, DEL_FL, IP, CREATE_DT, UPDATE_DT)
-		values(B_SQ.nextval, #{TITLE}, #{CONTENT}, #{SRCH_TAG}, #{WRITER}, 0, IP, SYSDATE, SYSDATE)
+		insert into BBS_TB(IDX, TITLE, CONTENT, SRCH_TAG, WRITER, DEL_FL, IP, CREATE_DT, UPDATE_DT, HIT)
+		values(B_SQ.nextval, #{title}, #{content}, #{srch_tag}, #{writer}, 0, #{ip}, SYSDATE, SYSDATE, 0)
 	</insert>
 	
 	<!-- 보기 기능 (resultMap으로 하지 않으면 댓글을 받아오지 못함) -->
@@ -76,11 +76,31 @@
 	
 	
 	<!-- 조회수 증가하기 -->
-	
 	<update id="update_hit" parameterType="String">
 		update BBS_TB set HIT = HIT + 1 where IDX = #{idx}
 	</update>
 
+
+	<!-- 검색기능 -->
+	
+	<!-- 검색을 위한 select (동적쿼리 사용) -->
+	<select id = "search" resultType="mybatis.vo.BbsVO" parameterType="java.util.Map">
+		select * from BBS_TB
+		<if test= "searchType != null and searchValue != null">
+			<trim prefix="where" prefixOverrides="">
+				<choose>
+					<when test="searchType==1">
+						TITLE like '%'||#{searchValue}||'%'
+					</when>
+					<when test="searchType==2">
+						CONTENT like '%'||#{searchValue}||'%'
+					</when>
+				</choose>
+			</trim>
+		</if>
+	</select>
+	
+	
 	
 	
 </mapper>

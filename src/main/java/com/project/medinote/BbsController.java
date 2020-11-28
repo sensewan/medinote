@@ -30,8 +30,8 @@ public class BbsController {
 	@Autowired
 	private BbsDAO b_dao;
 	
-	private int blockList = 10;  // 한페이지에 보여질 게시물 수
-	private int blockPage = 5;   // 한블록당 보여질 페이지 번호
+	private int blockList = 2;  // 한페이지에 보여질 게시물 수
+	private int blockPage = 3;   // 한블록당 보여질 페이지 번호
 	
 	@Autowired
 	private  HttpSession session;  // 조회수 올리는 거 방지도 가능
@@ -59,7 +59,7 @@ public class BbsController {
 		
 		// ↱현재 페이지 값인 cPage 파라미터 값이 넘어오지 않을 경우 무조건 1페이지임
 		int c_page = 1;		
-		if (cPage != null) {
+		if (cPage != null && cPage.trim().length() > 0 ) {
 			c_page = Integer.parseInt(cPage);
 		}
 		
@@ -137,20 +137,19 @@ public class BbsController {
 		
 		// ↱ ip 저장하기
 		vo.setIp(request.getRemoteAddr());
-		vo.setWriter(mvo.getM_name());
+		vo.setWriter(mvo.getU_nm());
 		
-		b_dao.add2(vo);
+		b_dao.add(vo);
 		
 		
-		// ↱ 저장하고 bname에 맞는 Controller로 가서 리스트페이지로 간다.
-		mv.setViewName("redirect:/bbs?bname="+vo.getBname());  // reDirect로 가는 이유는 게시판 글 저장하고 새로운 글 목록을 보여주기 위함.
+		mv.setViewName("redirect:/bbs");  // reDirect로 가는 이유는 게시판 글 저장하고 새로운 글 목록을 보여주기 위함.
 		
 		return mv;	
 	}
 	
 	
-	@RequestMapping(value = "/write_summer", method = RequestMethod.POST)          // ↱ new File() 때문에 하는것임 (io이용이므로 예외처리 해야함)
-	@ResponseBody
+	@RequestMapping(value = "/write_summer", method = RequestMethod.POST)          
+	@ResponseBody												// ↱ new File() 때문에 하는것임 (io이용이므로 예외처리 해야함)
 	public Map<String, String> writeSummer(MultipartFile file) throws Exception {
 								// ↳ ★★wirte.jsp에서 전달되는 폼의 값들 -> (bname, subject, content, file) 을
 						        // 멤버변수로 가지고 있는 ★★BbsVO★★로 모두 받는다.(스프링이라 자동으로 들어감) 
@@ -181,7 +180,7 @@ public class BbsController {
 			//                                             ↳ uploadPath를 적을경우 /resources/upload 로 들어가게 된다.
 			//                                               현재 servlet-context에서 resources를(맵핑) 지워 놓았기에 resources가 들어가면 안된다.
 			
-			map.put("f_name", f_name);
+			//map.put("f_name", f_name); // 파일네임 필요없으므로 주석처리
 			
 		}
 
@@ -250,6 +249,27 @@ public class BbsController {
 		session.setAttribute("bvo", vo);
 		
 		return mv;
+	}
+	
+	
+	
+	
+	@RequestMapping("/bbsSearch")
+	public ModelAndView search(String searchType, String searchValue) {
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("서치타입 벨류확인-> "+searchType+"/"+ searchValue);
+		
+		// ↱게시판 목록을 배열로 얻어내기
+		BbsVO[] ar = b_dao.search(searchType, searchValue);
+		
+		mv.addObject("ar", ar);
+		
+
+		mv.setViewName("bbs/search");			
+
+		return mv;
+		
 	}
 	
 	

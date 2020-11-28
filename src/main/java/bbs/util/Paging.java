@@ -33,17 +33,6 @@ public class Paging {
 		isPrePage = isNextPage = false;  // 이렇게 써도 되긴함...
 		
 		
-		// ↱입력된 총 게시물의 수를 통해-> 총 페이지 수를 구하기.
-//		if(rowTotal%blockList !=0 ) {
-//			totalPage = rowTotal/blockList + 1;			
-//		}else {
-//			totalPage = rowTotal/blockList;			
-//		}
-//		
-//		totalPage = rowTotal/blockList;
-//		if(rowTotal%blockList != 0)
-//			totalPage++;
-		
 		//                     ↱ 무조건 올림기능 (ceil은 double이 들어가야 하므로 double로 바꿔줘야함)
 		totalPage = (int)Math.ceil((double)rowTotal/blockList);
 		
@@ -77,19 +66,19 @@ public class Paging {
 		}
 		
 		
-		
 		// ↱ 이제 현재페이지 값도 알고, 시작페이지와 끝페이지 값을 알았으니
 		// ⎥  페이징 기법에 사용할 HTML코드를 작성하여 StringBuffer에 저장하자!
-		sb = new StringBuffer("<ol class=\'paging\'>");
+		sb = new StringBuffer("<ul class=\'pagination\' style=\'margin-left: 45%;\'>");
 		
 		if (isPrePage) { //이전기능 활성화 상태임 (즉 페이지블럭을 이전 페이지 블럭으로 이동가능한 상태)
-			sb.append("<li><a href='bbs?cPage=");
+			sb.append("<li class=\'page-item\'>");
+			sb.append("<a class=\'page-link\' href='bbs?cPage=");
 			// ↱만약 페이지가 6인 경우 6-5를 한거임
 			sb.append(startPage - blockPage);
-			sb.append("'>&lt; </a></li>");
+			sb.append("'>&laquo; </a></li>");
 			
 		}else { // 이전기능 비활성화 상태임 (즉 startPage가 1인 경우임 a태그 없음)
-			sb.append("<li class ='disable'> &lt; </li>");
+			sb.append("<li class ='page-item disabled'><a class='page-link' href='#'> &laquo; </a></li>");
 			
 		}
 		
@@ -97,36 +86,36 @@ public class Paging {
 		for(int i= startPage; i<=endPage; i++) {
 			// i의 값이 현재페이지(nowPage)와 같을 때를 구별하여 css클래스를 적용하기!
 			if(i == nowPage) {
-				sb.append("<li class='now'>");
+				sb.append("<li class='page-item disabled'><a class='page-link' href=javascript:;'>"); //css를 입히기 위해 비활성된 a태그 넣어줌
 				sb.append(i);
 				sb.append("</li>");
 			}else {
-				sb.append("<li><a href='bbs?cPage=");
+				sb.append("<li class='page-item'><a class='page-link' href='bbs?cPage=");
 				sb.append(i);
-				sb.append("'>");  
+				sb.append("'>");
 				sb.append(i);  //위에 i는 표시가 안되므로 다시 한번적어줘야 함
 				sb.append("</a></li>");
 			}
 		}// for문끝
 		
-		//System.out.println("-------이전기능 활성 비활성 관련 및 페이지for문 -----------");
-		//System.out.println(sb.toString());
+//		System.out.println("-------이전기능 활성 비활성 관련 및 페이지for문 -----------");
+//		System.out.println(sb.toString());
 		
 		// ↱ 다음기능 가능여부 확인 (페이지 블록이 전체가 바뀌는 경우임)
 		if (isNextPage) { //다음기능 활성화
-			sb.append("<li><a href='Controller?cPage=");
+			sb.append("<li class='page-item'><a class='page-link' href='bbs?cPage=");
 			// ↱만약 페이지가 6인 경우 6+5를 한거임
 			sb.append(startPage + blockPage);
-			sb.append("'> &gt; </a></li>");
+			sb.append("'>&raquo; </a></li>");
 			
 		}else { // 다음기능 비활성화 (즉 startPage가 1인 경우임 a태그 없음)
-			sb.append("<li class ='disable'> &gt; </li>");
+			sb.append("<li class ='page-item disabled'><a class='page-link' href='#'> &raquo; </a></li>");
 			
 		}
-		sb.append("</ol>");
+		sb.append("</ul>");
 		
-		//System.out.println("--------다음기능 활성 비활성 관련----------");
-		//System.out.println(sb.toString());
+//		System.out.println("--------다음기능 활성 비활성 관련----------");
+//		System.out.println(sb.toString());
 		
 	}
 

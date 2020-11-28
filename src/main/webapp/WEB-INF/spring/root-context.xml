@@ -8,8 +8,8 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	
 	<context:annotation-config/>
+	
 	<!-- jdbc.properties파일을 로드한다. -->
 	<context:property-placeholder location="classpath:mybatis/prop/db.properties"/>
 	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">	

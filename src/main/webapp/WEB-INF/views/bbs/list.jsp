@@ -37,15 +37,17 @@
 	<div class="content_wrap">
 		<div class="content">	
 			<div style="position:relative; z-index: 4; ">
+			<p style="border: 2px solid blue;">(${mvo.u_nm })고갱님 환영합니다. (필독!~ ()괄호안이 비어 있을 경우 글쓰기 안됨)</p>
 					
 				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
-		            <form>
-		                <select name="tag" style="height: 30px;">
+		            <form action="bbsSearch" method="post">
+		            	<input type="hidden" name="cPage" value="${param.cPage }"> <!-- 이거 만든 이유는 서치한 페이지에서 목록을 눌렀을 때 현재 페이지로 돌아가기 위해서임 -->
+		                <select id="searchType" name="searchType" style="height: 30px;">
 		                    <option value="1">제목</option>
 		                    <option value="2">내용</option>
 		                </select>
-		                <input type="text" placeholder="검색 내용 입력하시오" />
-		                <input type="button" value="검색"/>
+		                <input type="text" id="searchValue" name="searchValue" placeholder="검색 내용 입력하시오" />
+		                <input type="button" value="검색" onclick="search(this.form)"/>
 		            </form>
 		        </div>
 		
@@ -90,7 +92,7 @@
 	
 			            <tfoot>
 			                <tr>
-			
+			<!-- 
 			                    <td colspan="5">
 			                        <ul class="pagination" style="margin-left: 45%;">
 			                            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
@@ -101,6 +103,10 @@
 			                            <li class="page-item"><a class="page-link" href="#">5</a></li>
 			                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
 			                        </ul>
+			                    </td>
+			                     -->
+			                    <td colspan="5">
+			                    	${p_code }
 			                    </td>
 			                    <td style="text-align: right;">
 			                        <button type="button" class="btn btn-primary btn-sm" id="write_btn">글쓰기</button>
@@ -142,6 +148,21 @@ $(function () {
 		
 	});
 });
+
+
+function search(f){
+	var vvv = f.searchValue;
+//아무것도 없는경우<┐          ┌>공백을 입력했을 경우
+	if(!vvv.value || vvv.value.trim().length == 0){
+		alert("머하니 검색할 단어를 넣어야지!~");
+		
+		vvv.value="";
+		vvv.focus();
+		
+		return;
+	}
+	f.submit();
+}
 
 </script>
 
