@@ -8,14 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.LoginDAO;
-import mybatis.dao.MemDAO;
 import mybatis.vo.MemVO;
 
 @Controller
@@ -74,6 +71,7 @@ public class LoginController {
 	public Map<String, Object> loginChk(String u_id, String u_pw) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+
 		//ID,PW 비교
 		boolean result = loginDAO.loginChk(u_id, u_pw);
 		
@@ -82,6 +80,10 @@ public class LoginController {
 		
 		//로그인 성공 여부(boolean) 반환
 		map.put("loginChk", result);
+		
+		// 승완 추가
+		MemVO mvo = loginDAO.login1(u_id, u_pw);
+		session.setAttribute("mvo", mvo);
 		
 		return map;
 	}

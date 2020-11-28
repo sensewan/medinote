@@ -67,6 +67,18 @@ public class LoginDAO {
 		return result;
 	}
 	
+	// 승완추가: 로그인정보얻기
+	public MemVO login1(String u_id, String u_pw) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_id", u_id);
+		map.put("u_pw", encryption(u_pw));
+		
+		MemVO vo = sst.selectOne("login.login1", map);
+		
+		return vo;
+	}
+	
 	// 아이디 찾기
 	public String findId(String u_nm, String phone) {
 		String result = "";

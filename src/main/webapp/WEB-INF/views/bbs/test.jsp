@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet" 
-href="/css/layout.css"/>
+<link type="text/css" rel="stylesheet" href="css/layout.css"/>
 <style type="text/css">
 
 	#c_btn1{

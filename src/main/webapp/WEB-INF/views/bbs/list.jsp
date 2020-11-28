@@ -1,36 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>community 게시판</title>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="css/layout.css"/>
+	
     <style type="text/css">
-        .nav-link {
-            font-size: 20px;
-            margin-left: 20px;
-        }
-
-        .nav-link {
-            font-size: 20px;
-            margin-left: 20px;
-        }
-
-        #wrap {
-            width: 100%;
-            height: 100%;
-            margin: auto;
-        }
 
         #table1 {
             width: 100%;
             margin-left: auto;
             margin-right: auto;
-
+            /* background-color: rgba( 255, 255, 255, 1 ); */
         }
-
 
         tfoot .pagination {
             width: 300px;
@@ -42,85 +33,139 @@
 </head>
 <body>
 
-    <div id="wrap" >
-		<jsp:include page="../header.jsp" />
+	<%@include file="../header.jsp" %>
+	<div class="content_wrap">
+		<div class="content">	
+			<div style="position:relative; z-index: 4; ">
+			<p style="border: 2px solid blue;">(${mvo.u_nm })고갱님 환영합니다. (필독!~ ()괄호안이 비어 있을 경우 글쓰기 안됨)</p>
+					
+				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
+		            <form action="bbsSearch" method="post">
+		            	<input type="hidden" name="cPage" value="${param.cPage }"> <!-- 이거 만든 이유는 서치한 페이지에서 목록을 눌렀을 때 현재 페이지로 돌아가기 위해서임 -->
+		                <select id="searchType" name="searchType" style="height: 30px;">
+		                    <option value="1">제목</option>
+		                    <option value="2">내용</option>
+		                </select>
+		                <input type="text" id="searchValue" name="searchValue" placeholder="검색 내용 입력하시오" />
+		                <input type="button" value="검색" onclick="search(this.form)"/>
+		            </form>
+		        </div>
+		
+		        <div style="padding: 0 5px 0 5px;">
+		            <table class="table table-hover" id="table1">
+		                <thead>
+		                    <tr class="table-primary">
+		                        <th scope="col">번호</th>
+		                        <th scope="col">제목</th>
+		                        <th scope="col">글쓴이</th>
+		                        <th scope="col">증상</th>
+		                        <th scope="col">등록일</th>
+		                        <th scope="col">조회수</th>
+		                    </tr>
+		                </thead>
+		                
+		                
+		                <tbody>
+		                <c:if test="${ar != null }">
+		                	<c:forEach var ="aa" items="${requestScope.ar }" varStatus="st">
+		                    <tr class="table-active">
+		                        <th scope="row">${rowTotal - st.index -(blockList*(nowPage - 1)) }</th>
+		                        <td>
+											   <!-- ↱나중에 뒤로가기 or 목록 눌렀을 때 클릭하기 전 페이지로 돌아가기 위해 필요-->
+									<a href="view?cPage=${nowPage }&idx=${aa.idx}"> ${aa.title }</a></td>
+						                                 <!-- ↳ 클릭한 게시물을 보여주기 위해 필요 -->
+		                        <td>${aa.writer }</td>
+		                        <td>${aa.srch_tag }</td>
+		                        
+		                        <td>
+									<c:if test="${aa.create_dt ne null }">
+										${fn:substring(aa.create_dt, 0, 10) }
+									</c:if>
+								</td>
+								<td>${aa.hit }</td>
+		                    </tr>
+		                	</c:forEach>
+		                </c:if>
 
-        <div id="search" style="width: 80%; margin: auto; margin-top:10px; margin-bottom: 10px; ">
-            <form>
-                <select name="tag" style="height: 30px;">
-                    <option value="1">제목</option>
-                    <option value="2">내용</option>
-                </select>
-                <input type="text" placeholder="검색 내용 입력하시오." />
-                <input type="button" value="검색"/>
-            </form>
-        </div>
+		    
+		                </tbody>
+	
+			            <tfoot>
+			                <tr>
+			<!-- 
+			                    <td colspan="5">
+			                        <ul class="pagination" style="margin-left: 45%;">
+			                            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+			                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+			                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+			                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+			                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+			                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+			                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+			                        </ul>
+			                    </td>
+			                     -->
+			                    <td colspan="5">
+			                    	${p_code }
+			                    </td>
+			                    <td style="text-align: right;">
+			                        <button type="button" class="btn btn-primary btn-sm" id="write_btn">글쓰기</button>
+			                    </td>
+			                </tr>
+			
+			            </tfoot>
+			        </table>
+		        
+				</div>
+				
+			</div> <!-- zindex적용해보기 -->
 
-		<div style="width: 80%; margin: auto;" >
-            <table class="table table-hover" id="table1">
-                <thead>
-                    <tr class="table-primary">
-                        <th scope="col">번호</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">글쓴이</th>
-                        <th scope="col">증상</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-active">
-                        <th scope="row">1</th>
-                        <td>어깨 아플때 운동 추천 좀요 [3]</td>
-                        <td>헬린이</td>
-                        <td>어깨 통증</td>
-                    </tr>
-    
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>복통 심한날은?!~[1]</td>
-                        <td>마루치</td>
-                        <td>왼쪽 아랫배 통증, 오른쪽 아랫배 통증</td>
-                    </tr>
-    
-                    <tr class="table-active">
-                        <th scope="row">3</th>
-                        <td>마음이 아파요[0]</td>
-                        <td>중2</td>
-                        <td>눈 통증</td>
-                    </tr>
-    
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>근육통은 좋은가요~?[99]</td>
-                        <td>김종국</td>
-                        <td>왼쪽 허벅지 통증</td>
-                    </tr>
-    
-                </tbody>
-	
-	            <tfoot>
-	                <tr>
-	
-	                    <td colspan="3">
-	                        <ul class="pagination" style="margin-left: 65%;">
-	                            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-	                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-	                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-	                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-	                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-	                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-	                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-	                        </ul>
-	                    </td>
-	                    <td style="text-align: right;">
-	                        <button type="button" class="btn btn-primary btn-sm">글쓰기</button>
-	                    </td>
-	                </tr>
-	
-	
-	            </tfoot>
-        	</table>
 		</div>
 	</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+$(function () {
+
+	$("#write_btn").bind("click", function () {
+
+		$.ajax({
+			url: "write",
+			dataType:"JSON"
+			
+		}).done(function(data) {
+			//console.log(data.chk);
+		 	if (data.chk == "0") {
+				alert("로그인 하셔야 합니다.");
+				location.href="login";
+			}else if (data.chk =="1") {
+				location.href=data.url;
+			}
+		
+		});
+		
+	});
+});
+
+
+function search(f){
+	var vvv = f.searchValue;
+//아무것도 없는경우<┐          ┌>공백을 입력했을 경우
+	if(!vvv.value || vvv.value.trim().length == 0){
+		alert("머하니 검색할 단어를 넣어야지!~");
+		
+		vvv.value="";
+		vvv.focus();
+		
+		return;
+	}
+	f.submit();
+}
+
+</script>
+
 
 </body>
 </html>

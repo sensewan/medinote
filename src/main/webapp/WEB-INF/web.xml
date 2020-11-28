@@ -44,5 +44,17 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> 
+	
+	<servlet>
+	  <description></description>
+	  <display-name>FileDownload</display-name>
+	  <servlet-name>FileDownload</servlet-name>
+	  <servlet-class>spring.util.FileDownload</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	  <servlet-name>FileDownload</servlet-name>
+	  <url-pattern>/FileDownload</url-pattern> <!-- 웹에서 파일 다운로드 할 때 필요한 주소임 즉.view.jsp에서 location.href="FileDownload" 이렇게 사용 -->
+	</servlet-mapping>
 
 </web-app>

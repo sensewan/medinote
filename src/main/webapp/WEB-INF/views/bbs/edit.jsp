@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bbs write</title>
+    <title>edit</title>
     <link rel="stylesheet" href="css/summernote-lite.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
@@ -28,14 +28,17 @@
 	<div class="content_wrap">
 		<div class="content">
 		
-		    <h3 style="padding-top: 10px;">글쓰기</h3>
+		    <h3 style="padding-top: 10px;">수정</h3>
 		    <hr>
 		    <div>
 		    
-			    <form action="write_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
+			    <form action="edit_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
+			    	<input type="hidden" name="idx" value="${bvo.idx }"> <!-- 글 수정완료 했을 때 해당하는 글의 상세보기로 돌아가기 위해 필요 -->
+			    	<input type="hidden" name="cPage" value="${param.cPage }"> 
+			    	
 			        <div style="margin-left: 17%;  z-index: 9; ">
-			            <input type="text" name="title" placeholder="제목" style="width: 81%; margin-right: 20%; margin-bottom: 5px;"><br/>
-			            <textarea id="content" name="content" style="margin-top: 10px; "></textarea>
+			            <input type="text" name="title" style="width: 81%; margin-right: 20%; margin-bottom: 5px;" value="${bvo.title }"><br/>
+			            <textarea id="content" name="content" style="margin-top: 10px; ">${bvo.content }</textarea>
 			        </div>
 			        
 			        <div style="margin-left: 17%;">
@@ -56,8 +59,8 @@
 			        </div>
 					
 			        <div style="margin-left: 59%; padding: 5px;" >
-			        	<input type="button" class="btn btn-primary" value="등록" onclick="sendData()"/>
-			            <button type="submit" class="btn btn-primary" onclick="">취소</button>
+			        	<input type="button" class="btn btn-primary" value="완료" onclick="sendData()"/>
+			        	<input type="button" class="btn btn-primary" value="취소" onclick="goBack()"/>
 			        </div>
 			    </form>
 		    </div>
@@ -105,15 +108,6 @@
 	});
 	
 	function sendData(){
-/* 			alert(document.forms[0].elements.length); // 길이가 왜 212가 나와???
-	 		for(var i=0 ; i<document.forms[0].elements.length-210 ; i++){
-			if(document.forms[0].elements[i].value == ""){
-				alert(document.forms[0].elements[i].name+"를 입력하세요");
-				document.forms[0].elements[i].focus();
-				return;//수행 중단
-			} */
-			
-			//alert(document.forms[0].title.value.trim().length)
  			 
 			if(document.forms[0].title.value == ""){
 				alert("제목을 입력해주세요");
@@ -141,7 +135,7 @@
 	$(function () {
 		console.log("SSSSS");
 		$("#content").summernote({
-			placeholder:"내용 입력하세요",
+			placeholder:"내용을 입력하세요.",
 			height:300,
 			maxHeight:600,  //최대크기지정
 			minHeight:200,
@@ -186,13 +180,16 @@
 		    
 		    
 		    //                            ┌>img 태그를 알아서 만들어서 넣어줌
-			$("#content").summernote("editor.insertImage", res.img_url+"style='width:auto; height:300px;'");
+			$("#content").summernote("editor.insertImage", res.img_url);
 			// $("#file_name").val(res.f_name); //파일네임 필요없으므로 주석처리
 		}).fail(function(err) { //실패시
 			console.log(err);
 		});
 	} 
 	
+	function goBack() {
+		location.href="view?cPage=${param.cPage}&idx=${sessionScope.bvo.idx}";
+	}
 	
 
 </script>
