@@ -51,12 +51,12 @@
 			
 		        <h3 style="">글 상세 보기</h3>
 		
-		        <div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 800px; margin: auto; margin-bottom: 5px; text-align: left;">
+		        <div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 800px; margin: auto; margin-bottom: 5px; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
 		            ${vo.title }
 		        </div>
 		
 		        <div class="thumbnail" style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 
-		        800px; height: 400px; margin: auto; margin-bottom: 5px; text-align: left;">
+		        800px; height: 400px; margin: auto; margin-bottom: 5px; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
 		        	
 		        	${vo.content }
 		        	
@@ -79,7 +79,7 @@
 		
 		        <p style="width: 800px; margin: auto;">댓글목록</p>
 		        
-		        <c:if test="${vo.c_list.size() > 1 }">
+		        <c:if test="${!empty vo.c_list.size() }">
 		        	<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
 		        		<c:set var="wr" value="${vo.writer }" />
 		        		<c:set var="wr2" value="${cvo.writer }" />
@@ -108,7 +108,7 @@
 	
 		        </c:if>
 		        
-		        <c:if test="${vo.c_list.size() < 1  }">
+		        <c:if test="${empty vo.c_list}">
 		        	<div style="width: 800px; margin: auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left;">
 		        		무플상태
 		        	</div>
