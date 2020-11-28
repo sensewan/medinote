@@ -9,7 +9,7 @@
 		<id column="idx" property="idx"/>  <!-- column은 전달되어 오는 값이고 property는 넘어온것을 BbsVO의 멤버 변수 b_idx에 저장하는것 -->
 		<!-- result column=""은 중복상관 없이 무조건 저장하는 경우에만 쓰임 -->
 		
-		<!-- 그리고 BbsVO의 c_list에다가 저장해 놓을것임 -> select id="commList"를 호출하는데 b_idx값을 가지고가 호출함 그리고 그 결과값을 CommVO형태로 c_lst에 넣음 -->
+		<!-- 그리고 BbsVO의 c_list에다가 저장해 놓을것임 -> select id="commList"를 호출하는데 idx값을 가지고가 호출함 그리고 그 결과값을 CommVO형태로 c_lst에 넣음 -->
 		<collection property="c_list" select="commList" column="idx" ofType="mybatis.vo.CommVO"></collection>
 	</resultMap>
 

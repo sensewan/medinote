@@ -78,14 +78,43 @@
 		        </div>
 		
 		        <p style="width: 800px; margin: auto;">댓글목록</p>
-		        <div style="width: 800px; margin: auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left;">
-		            1.댓글임
-		        </div>
-		        <div style="width: 800px; margin: auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left;">
-		            2.글 작성자의 댓글임<br/>
-		            <input id = "c_btn1" type="button" value="수정">
-		            <input id = "c_btn2" type="button" value="삭제">
-		        </div>
+		        
+		        <c:if test="${vo.c_list.size() > 1 }">
+		        	<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
+		        		<c:set var="wr" value="${vo.writer }" />
+		        		<c:set var="wr2" value="${cvo.writer }" />
+		        			<c:if test="${wr ne wr2 }">
+						        <div style="width: 800px; margin: 5px auto 5px auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
+									번호: ${st.index+1}&nbsp;
+									이름: ${cvo.writer } &nbsp;&nbsp;
+									날짜: ${cvo.create_dt }<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용: ${cvo.content }
+					    	    </div>
+		        			</c:if>
+		        			<c:if test="${wr eq wr2 }">
+						        <div style="width: 800px; margin: auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
+						            글 작성자의 댓글임<br/>
+						            번호: ${st.index+1}&nbsp;
+									이름: ${cvo.writer } &nbsp;&nbsp;
+									날짜: ${cvo.create_dt }<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용: ${cvo.content }
+						            
+						            <input id = "c_btn1" type="button" value="수정">
+						            <input id = "c_btn2" type="button" value="삭제">
+						        </div>
+		        			</c:if>
+		        		
+					</c:forEach>
+	
+		        </c:if>
+		        
+		        <c:if test="${vo.c_list.size() < 1  }">
+		        	<div style="width: 800px; margin: auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left;">
+		        		무플상태
+		        	</div>
+		        </c:if>
+		        
+		        
 			</form>
 			
 		</div>

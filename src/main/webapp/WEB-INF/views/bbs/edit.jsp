@@ -33,8 +33,8 @@
 		    <div>
 		    
 			    <form action="edit_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
-			    	<input type="text" name="idx" value="${bvo.idx }"> <!-- 글 수정완료 했을 때 해당하는 글의 상세보기로 돌아가기 위해 필요 -->
-			    	<input type="text" name="cPage" value="${param.cPage }"> 
+			    	<input type="hidden" name="idx" value="${bvo.idx }"> <!-- 글 수정완료 했을 때 해당하는 글의 상세보기로 돌아가기 위해 필요 -->
+			    	<input type="hidden" name="cPage" value="${param.cPage }"> 
 			    	
 			        <div style="margin-left: 17%;  z-index: 9; ">
 			            <input type="text" name="title" style="width: 81%; margin-right: 20%; margin-bottom: 5px;" value="${bvo.title }"><br/>
