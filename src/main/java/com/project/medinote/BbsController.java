@@ -273,6 +273,59 @@ public class BbsController {
 	}
 	
 	
+	@RequestMapping("/edit")
+	public ModelAndView edit(BbsVO vo) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("bbs/edit");
+		return mv;
+	}
+	
+	
+	@RequestMapping("/edit_ok")
+	public ModelAndView editOK(BbsVO vo) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		MemVO mvo2 = (MemVO) session.getAttribute("mvo");
+		
+		vo.setIp(request.getRemoteAddr());
+		vo.setWriter(mvo2.getU_nm());
+		
+		//System.out.println("idx확인->"+vo.getIdx());
+		
+		boolean res = b_dao.editBbs(vo);
+		
+		if (res) {
+			mv.setViewName("redirect:/view?idx="+vo.getIdx()+"&cPage="+vo.getcPage());
+		}else {
+			mv.setViewName("bbs");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("/dell")
+	@ResponseBody
+	public Map<String, String> dell(BbsVO vo){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int cnt = b_dao.delBbs(vo.getIdx());
+		
+		if (cnt > 0) {
+			map.put("res", "삭제성공");
+			map.put("url", "bbs");
+		}else {
+			map.put("res", "삭제실패");
+		}
+		
+		return map;
+	}
+	
+	
+	
 	@RequestMapping("/test")
 	public String test() {
 		return "bbs/test";

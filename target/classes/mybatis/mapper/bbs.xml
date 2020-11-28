@@ -51,27 +51,14 @@
 	
 	<!-- 원글 수정1 -->
 	<update id="edit" parameterType="mybatis.vo.BbsVO">
-		update BBS_TB set TITLE=#{TITLE}, CONTENT=#{CONTENT}
-<!-- 		<if test="file_name !=null">
-			,file_name = #{file_name}
-		</if> -->
-		where IDX = #{IDX}
-	</update>
-	
-	<!-- 원글 수정 2-->
-	<update id="edit2" parameterType="java.util.Map">
-		update BBS_TB set TITLE=#{TITLE}, CONTENT=#{CONTENT}
-<!-- 		<if test="fname !=null">
-			,file_name = #{fname}
-		</if> -->
-		where IDX = #{IDX}
+		update BBS_TB set TITLE=#{title}, CONTENT=#{content} ,SRCH_TAG=#{srch_tag}, UPDATE_DT=SYSDATE where IDX = #{idx}
 	</update>
 	
 	
 	
 	<!-- 원글 DEL_FL 변경으로 삭제된것처럼 하기 -->
 	<update id="del" parameterType="String">
-		update BBS_TB set DEL_FL = 1 where IDX = #{IDX}
+		update BBS_TB set DEL_FL = 1 where IDX = #{idx}
 	</update>
 	
 	

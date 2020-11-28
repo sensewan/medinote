@@ -21,7 +21,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect("login");  //로그인 화면으로 이동
 			return false;
 		}
-		
 		// ↱ if문 안거치고 여기 온거면 로그인 된 상태이므로 true 반환해주면 된다.
 		return true;
 	}

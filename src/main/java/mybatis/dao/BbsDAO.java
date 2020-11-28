@@ -83,9 +83,9 @@ public class BbsDAO {
 		
 		
 		// 글 삭제하기(status 변경))
-		public int delBbs(String b_idx) {
+		public int delBbs(String idx) {
 			
-			int cnt = sst.update("bbs.del", b_idx);
+			int cnt = sst.update("bbs.del", idx);
 			
 			return cnt;
 			

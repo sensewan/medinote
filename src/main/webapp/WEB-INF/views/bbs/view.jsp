@@ -13,12 +13,26 @@
     <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
     <style type="text/css">
-
-        #c_btn1{
-            margin-left: 88%;
-        }
-
-    </style>
+		#c_btn1 {
+			margin-left: 88%;
+		}
+		
+		.thumbnail {
+			position: relative;
+			padding-top: 100%; /* 1:1 ratio */
+			overflow: auto;
+		}
+		
+		img {
+			position: relative;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			max-width: 80%;
+			height: auto;
+		}
+</style>
 
 </head>
 
@@ -41,8 +55,11 @@
 		            ${vo.title }
 		        </div>
 		
-		        <div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 800px; height: 400px; margin: auto; margin-bottom: 5px; text-align: left;">
-		            ${vo.content }
+		        <div class="thumbnail" style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 
+		        800px; height: 400px; margin: auto; margin-bottom: 5px; text-align: left;">
+		        	
+		        	${vo.content }
+		        	
 		        </div>
 		
 		        <div style="border: 1px solid black; background-color:rgb(220, 220, 219); border-radius: 5px; padding: 10px; width: 800px; height: 40px; margin: auto; text-align: left;">
@@ -80,6 +97,30 @@
 	    // ↱ ViewController에서 받은 인자 사용가능 -> 왜냐면 기본적으로 포워드로 이동한 것이므로 가능함
 		location.href="bbs?cPage=${param.cPage}";
 	}
+	
+	function editBbs() {
+		
+		document.frm.action ="edit";   // cf. sendRedirect임
+
+		document.frm.submit();
+		
+	}
+	
+	function delBbs() {
+		var idx = ${vo.idx};
+		
+		$.ajax({
+			url: "dell",
+			type: "get",
+			data: "idx="+encodeURIComponent(idx),
+			dataType: "JSON"
+		}).done(function(data) {
+			alert(data.res);
+			location.href=data.url+"?cPage=${param.cPage}";
+		});
+		
+	}
+	
 
 </script>
 
