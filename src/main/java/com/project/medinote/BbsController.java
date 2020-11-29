@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import bbs.util.Paging;
 import mybatis.dao.BbsDAO;
 import mybatis.vo.BbsVO;
+import mybatis.vo.CommVO;
 import mybatis.vo.MemVO;
 import spring.util.FileUploadUtil;
 
@@ -137,7 +138,7 @@ public class BbsController {
 		
 		// ↱ ip 저장하기
 		vo.setIp(request.getRemoteAddr());
-		vo.setWriter(mvo.getU_nm());
+		vo.setWriter(mvo.getU_nk());
 		
 		b_dao.add(vo);
 		
@@ -258,7 +259,7 @@ public class BbsController {
 	public ModelAndView search(String searchType, String searchValue) {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("서치타입 벨류확인-> "+searchType+"/"+ searchValue);
+		//System.out.println("서치타입 벨류확인-> "+searchType+"/"+ searchValue);
 		
 		// ↱게시판 목록을 배열로 얻어내기
 		BbsVO[] ar = b_dao.search(searchType, searchValue);
@@ -319,6 +320,25 @@ public class BbsController {
 			map.put("url", "bbs");
 		}else {
 			map.put("res", "삭제실패");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/comm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> comm(CommVO vo){
+		Map<String, String> map = new HashMap<String, String>();
+		
+		vo.setIp(request.getRemoteAddr());
+		
+//		System.out.println("댓글 폼 확인-> "+vo.getWriter()+" / "+vo.getContent()+" / "+ vo.getP_no());
+		int cnt = b_dao.addComm(vo);
+		
+		if (cnt > 0) {
+			map.put("res", "0");
+		}else {
+			map.put("res", "댓글 등록실패!~");
 		}
 		
 		return map;

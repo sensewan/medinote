@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mybatis.vo.BbsVO;
+import mybatis.vo.CommVO;
 
 @Component
 public class BbsDAO {
@@ -125,6 +126,16 @@ public class BbsDAO {
 			}
 
 			return ar;
+		}
+		
+		
+		// 댓글 등록
+		public int addComm(CommVO vo) {
+			
+			int cnt = sst.insert("bbs.addComm", vo);
+			
+			
+			return cnt;
 		}
 		
 		
