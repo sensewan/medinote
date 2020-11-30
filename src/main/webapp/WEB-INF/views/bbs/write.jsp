@@ -14,6 +14,10 @@
     <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
     <style type="text/css">
+    img {
+    	width: auto;
+    	height: 300px;
+	}
   	
 
     </style>
@@ -186,7 +190,7 @@
 		    
 		    
 		    //                            ┌>img 태그를 알아서 만들어서 넣어줌
-			$("#content").summernote("editor.insertImage", res.img_url+"style='width:auto; height:300px;'");
+			$("#content").summernote("editor.insertImage", res.img_url);
 			// $("#file_name").val(res.f_name); //파일네임 필요없으므로 주석처리
 		}).fail(function(err) { //실패시
 			console.log(err);
