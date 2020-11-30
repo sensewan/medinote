@@ -100,6 +100,12 @@
 	</update>
 	
 	
+	<!-- 댓글 수정 -->
+	<update id="editComm" parameterType="mybatis.vo.CommVO">
+		update COMMENT_TB set CONTENT=#{content}, UPDATE_DT=sysdate where IDX = #{idx}
+	</update>
+	
+	
 </mapper>
 
 

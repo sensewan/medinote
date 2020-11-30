@@ -147,6 +147,16 @@ public class BbsDAO {
 		}
 		
 		
+		
+		// 댓글 수정
+		public int editCmt(CommVO vo) {
+			
+			int cnt = sst.update("bbs.editComm", vo);
+			
+			return cnt;
+		}
+		
+		
 
 }
 

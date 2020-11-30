@@ -48,7 +48,8 @@ public class BbsController {
 	private String uploadPath = "/resources/upload";
 	
 	
-
+	// --------------- 게시판 이동 및 게시글 보여주기 ------------------
+	
 	@RequestMapping("/bbs")
 	public ModelAndView bbs(String cPage) {
 		
@@ -83,6 +84,8 @@ public class BbsController {
 		return mv;
 	}
 	
+	
+	// --------------- 글작성 ---------------
 	
 	@RequestMapping("/write")
 	@ResponseBody
@@ -189,6 +192,9 @@ public class BbsController {
 	}
 	
 	
+	
+	
+	// --------------- 상세보기 ---------------
 
 	@RequestMapping("/view")
 	public ModelAndView view(String cPage, String idx) {
@@ -255,6 +261,8 @@ public class BbsController {
 	
 	
 	
+	// --------------- 게시글 검색기능 ---------------
+	
 	@RequestMapping("/bbsSearch")
 	public ModelAndView search(String searchType, String searchValue) {
 		ModelAndView mv = new ModelAndView();
@@ -273,6 +281,9 @@ public class BbsController {
 		
 	}
 	
+	
+	
+	// --------------- 게시글 수정 ---------------
 	
 	@RequestMapping("/edit")
 	public ModelAndView edit(BbsVO vo) {
@@ -307,6 +318,10 @@ public class BbsController {
 		return mv;
 	}
 	
+	
+	
+	// --------------- 게시글 삭제 ---------------
+	
 	@RequestMapping("/dell")
 	@ResponseBody
 	public Map<String, String> dell(BbsVO vo){
@@ -324,6 +339,9 @@ public class BbsController {
 		
 		return map;
 	}
+	
+	
+	// --------------- 댓글 작성 ---------------
 	
 	@RequestMapping(value = "/comm", method = RequestMethod.POST)
 	@ResponseBody
@@ -344,6 +362,10 @@ public class BbsController {
 		return map;
 	}
 	
+	
+	
+	// --------------- 댓글 삭제 ---------------
+	
 	@RequestMapping("/dellComm")
 	@ResponseBody
 	public Map<String, String> dellComm(CommVO vo){
@@ -356,6 +378,29 @@ public class BbsController {
 			map.put("res", "0");
 		}else {
 			map.put("res", "삭제실패");
+		}
+		
+		return map;
+		
+	}
+	
+	
+	
+	
+	// --------------- 댓글 수정 ---------------
+	
+	@RequestMapping(value = "/editComm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> editComm(CommVO vo){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int cnt = b_dao.editCmt(vo);
+		
+		if (cnt > 0) {
+			map.put("res", "0");
+		}else {
+			map.put("res", "댓글수정실패");
 		}
 		
 		return map;
