@@ -37,7 +37,7 @@
 	<div class="content_wrap">
 		<div class="content">	
 			<div style="position:relative; z-index: 4; ">
-			<p style="border: 2px solid blue;">(${mvo.u_nm })고갱님 환영합니다. (필독!~ ()괄호안이 비어 있을 경우 글쓰기 안됨)</p>
+			<p style="border: 2px solid blue;">(${mvo.u_nk })고갱님 환영합니다. (어떠한 이유로 ()괄호안이 비어 있을 경우 글쓰기 안됨) (이박스는 삭제예정)</p>
 					
 				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
 		            <form action="bbsSearch" method="post">

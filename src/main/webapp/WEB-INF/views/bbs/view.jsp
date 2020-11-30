@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -31,6 +35,13 @@
 			bottom: 0;
 			max-width: 80%;
 			height: auto;
+		}
+		
+		td,th {
+			border: 1px solid black;
+			border-left: hidden;
+			border-right: hidden;
+			
 		}
 </style>
 
@@ -71,40 +82,70 @@
 		            <input type="button" class="btn btn-primary" value="목록" onclick="goBack()"/>
 		        </div>
 		
+			</form>
+			
+			
 		        <div style="width: 800px; margin: auto;">
 		            comment<br/>
-		            <input type="text" placeholder="댓글 입력하시오" style="width: 800px;">
-		            <button type="submit" class="btn btn-primary" onclick="" style="margin: 3px 0 3px 93%;">등록</button>
+		            <form name="comm_write" id="comm_write">
+		            	<input type="hidden" name="p_no" value="${vo.idx }">
+		            	<input type="hidden" name="writer" value="${sessionScope.mvo.u_nk }">
+		            	
+		            	<!-- <input type="text" name="content" id="content" placeholder="댓글 입력하시오" style="width: 800px;" > -->
+		            	<textarea rows="2" cols="96" name="content" id="content" placeholder="댓글을 입력하세요"></textarea>
+		            	<input type="button" id="writeComm" class="btn btn-primary" style="margin: 3px 0 3px 93%;" value="등록">
+		            </form>
 		        </div>
 		
 		        <p style="width: 800px; margin: auto;">댓글목록</p>
 		        
-		        <c:if test="${!empty vo.c_list.size() }">
-		        	<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
-		        		<c:set var="wr" value="${vo.writer }" />
-		        		<c:set var="wr2" value="${cvo.writer }" />
-		        			<c:if test="${wr ne wr2 }">
-						        <div style="width: 800px; margin: 5px auto 5px auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
-									번호: ${st.index+1}&nbsp;
-									이름: ${cvo.writer } &nbsp;&nbsp;
-									날짜: ${cvo.create_dt }<br/>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용: ${cvo.content }
-					    	    </div>
-		        			</c:if>
-		        			<c:if test="${wr eq wr2 }">
-						        <div style="width: 800px; margin: auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
-						            글 작성자의 댓글임<br/>
-						            번호: ${st.index+1}&nbsp;
-									이름: ${cvo.writer } &nbsp;&nbsp;
-									날짜: ${cvo.create_dt }<br/>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용: ${cvo.content }
-						            
-						            <input id = "c_btn1" type="button" value="수정">
-						            <input id = "c_btn2" type="button" value="삭제">
-						        </div>
-		        			</c:if>
-		        		
-					</c:forEach>
+		        <c:if test="${!empty vo.c_list }">
+        			<table style="margin: auto; width: 66%;">
+        				<tbody>
+				        	<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
+				        		<c:set var="wr" value="${sessionScope.mvo.u_nk }" /> <!-- cf.vo.writer하면 작성글의 작성자 닉네임 -->
+				        		<c:set var="wr2" value="${cvo.writer }" /> <!-- 댓글 작성자의 닉네임 -->
+				        		<c:set var="commIdx" value="${cvo.idx }"/>
+				        					<tr>
+				        						<th>${st.index+1}</th>
+				        						<td>이름: ${cvo.writer }</td>
+				        						<td>날짜: ${fn:substring(cvo.create_dt, 0, 19) }</td>
+				        					</tr>
+				        					<tr style="border-top:hidden;">
+				        						<td colspan="3" style="text-align: left;"><p style="position: absolute; z-index: 1;">내용:</p> 
+				        							<textarea id="aa" name="${commIdx }" disabled="disabled" rows="2" cols="90" style="opacity: 0.7; margin-left: 5%; position: relative; z-index: 2;">${cvo.content }</textarea>
+				        						</td>
+				        					</tr>
+				        					<c:if test="${wr eq wr2 }">
+					        					<tr style="border-top:hidden;">
+					        						<td colspan="3">
+					        							<input name="${commIdx }" type="hidden" onclick="editOK(${commIdx})" value="저장">
+					        							<input name="${commIdx }" type="hidden" onclick="exitComm(${commIdx})" value="취소">
+														<input id = "c_btn1" name="c1_btn${commIdx }" type="button" onclick="editComm(${commIdx})" value="수정">
+											            <input id = "c_btn2" name="c2_btn${commIdx }" type="button" onclick="delComm(${commIdx})" value="삭제">
+											                                                                                         <!-- ↳ 현재 댓글 칸의 idx 값을 넘겨 준다!! -->
+					        						</td>
+					        					</tr>
+											</c:if>
+				        			<%-- 
+				        			<div style="z-index: 1; width: 800px; margin: 5px auto 5px auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
+										번호: ${st.index+1}&nbsp;
+										이름: ${cvo.writer }
+										날짜: ${fn:substring(cvo.create_dt, 0, 19) }<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용: 
+										<textarea rows="2" cols="90" style="opacity: 0.7">${cvo.content }</textarea>
+										<c:if test="${wr eq wr2 }">
+											<div style="">
+												<input id = "c_btn1" type="button" value="수정">
+									            <input id = "c_btn2" type="button" onclick="delComm(${commIdx})" value="삭제">
+									                                                               <!-- ↳ 현재 댓글 칸의 idx 값을 넘겨 준다!! -->
+											</div>
+										</c:if>
+						    	    </div>
+						    	     --%>
+							</c:forEach>
+        				</tbody>
+	       			</table>
 	
 		        </c:if>
 		        
@@ -115,7 +156,6 @@
 		        </c:if>
 		        
 		        
-			</form>
 			
 		</div>
 	</div>
@@ -148,6 +188,94 @@
 			location.href=data.url+"?cPage=${param.cPage}";
 		});
 		
+	}
+
+	
+	$(function () {
+		
+		$("#writeComm").bind("click", function() {
+			if(document.comm_write.content.value == ""){
+				alert("댓글 내용을 입력해주세요");
+				document.comm_write.content.focus();
+				return;
+			}
+			
+			var commform = $("#comm_write").serialize(); // id가 comm_write인 form의 요소들의 값을 넣어 준다.
+			
+			$.ajax({
+				url: "comm",
+				type: "post",
+				data: commform,
+				dataType: "JSON",
+			}).done(function(data) {
+				if (data.res == 0) {
+					location.reload();
+				}else {
+					alert(data.res);
+				}
+			});
+		});
+		
+	});
+	
+	function delComm(c_idx) {
+		var idx = c_idx;
+		
+		$.ajax({
+			url: "dellComm",
+			type: "get",
+			data: "idx="+encodeURIComponent(idx),
+			dataType: "JSON"
+		}).done(function(data) {
+			if(data.res == 0){
+				location.reload();
+			}else {
+				alert(data.res);
+			}
+		});
+	}
+	
+	function editComm(c_idx) {
+		var idx= c_idx;
+		
+		$("textarea[name="+idx+"]").removeAttr("disabled");
+		$("textarea[name="+idx+"]").focus();
+		$("input[name="+idx+"]").attr("type", "button");
+		
+		$("input[name="+"c1_btn"+idx+"]").attr("type", "hidden");
+		$("input[name="+"c2_btn"+idx+"]").attr("type", "hidden");
+	}
+	
+	function exitComm(c_idx) {
+		var idx= c_idx;
+		
+		$("textarea[name="+idx+"]").attr("disabled", "disabled");
+		$("textarea[name="+idx+"]").focus();
+		$("input[name="+idx+"]").attr("type", "hidden");
+		
+		$("input[name="+"c1_btn"+idx+"]").attr("type", "button");
+		$("input[name="+"c2_btn"+idx+"]").attr("type", "button");
+	}
+	
+	function editOK(c_idx) {
+		var idx = c_idx;
+		var content = $("textarea[name="+idx+"]").val();
+		
+		var allData = {"idx":idx, "content":content};
+		
+		$.ajax({
+			url: "editComm",
+			type: "post",
+			data: allData,
+			dataType: "JSON"
+			
+		}).done(function(data) {
+			if (data.res == 0) {
+				location.reload();
+			}else {
+				alert(data.res);
+			}
+		});
 	}
 	
 

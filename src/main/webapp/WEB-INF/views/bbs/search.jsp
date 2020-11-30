@@ -39,7 +39,7 @@
 			<div style="position:relative; z-index: 4; ">
 					
 		
-		        <div style="padding: 0 5px 0 5px;">
+		        <div style="padding: 7px 5px 0 5px;">
 		            <table class="table table-hover" id="table1">
 		                <thead>
 		                    <tr class="table-primary">

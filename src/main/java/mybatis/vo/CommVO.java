@@ -2,10 +2,10 @@ package mybatis.vo;
 
 public class CommVO {
 	
-	private String idx,
-					p_no,    // 원글의 번호 (FK)
-					writer,
-					content,
+	private String idx,       // 댓글 고유 번호
+					p_no,     // 원글의 번호 (FK)
+					writer,   // 댓글작성자의 닉네임
+					content,  // 댓글 내용
 					del_fl,   // 0:등록,  1:삭제
 					ip,
 					create_dt,

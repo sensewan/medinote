@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import bbs.util.Paging;
 import mybatis.dao.BbsDAO;
 import mybatis.vo.BbsVO;
+import mybatis.vo.CommVO;
 import mybatis.vo.MemVO;
 import spring.util.FileUploadUtil;
 
@@ -47,7 +48,8 @@ public class BbsController {
 	private String uploadPath = "/resources/upload";
 	
 	
-
+	// --------------- 게시판 이동 및 게시글 보여주기 ------------------
+	
 	@RequestMapping("/bbs")
 	public ModelAndView bbs(String cPage) {
 		
@@ -82,6 +84,8 @@ public class BbsController {
 		return mv;
 	}
 	
+	
+	// --------------- 글작성 ---------------
 	
 	@RequestMapping("/write")
 	@ResponseBody
@@ -137,7 +141,7 @@ public class BbsController {
 		
 		// ↱ ip 저장하기
 		vo.setIp(request.getRemoteAddr());
-		vo.setWriter(mvo.getU_nm());
+		vo.setWriter(mvo.getU_nk());
 		
 		b_dao.add(vo);
 		
@@ -188,6 +192,9 @@ public class BbsController {
 	}
 	
 	
+	
+	
+	// --------------- 상세보기 ---------------
 
 	@RequestMapping("/view")
 	public ModelAndView view(String cPage, String idx) {
@@ -254,11 +261,13 @@ public class BbsController {
 	
 	
 	
+	// --------------- 게시글 검색기능 ---------------
+	
 	@RequestMapping("/bbsSearch")
 	public ModelAndView search(String searchType, String searchValue) {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("서치타입 벨류확인-> "+searchType+"/"+ searchValue);
+		//System.out.println("서치타입 벨류확인-> "+searchType+"/"+ searchValue);
 		
 		// ↱게시판 목록을 배열로 얻어내기
 		BbsVO[] ar = b_dao.search(searchType, searchValue);
@@ -272,6 +281,9 @@ public class BbsController {
 		
 	}
 	
+	
+	
+	// --------------- 게시글 수정 ---------------
 	
 	@RequestMapping("/edit")
 	public ModelAndView edit(BbsVO vo) {
@@ -306,6 +318,10 @@ public class BbsController {
 		return mv;
 	}
 	
+	
+	
+	// --------------- 게시글 삭제 ---------------
+	
 	@RequestMapping("/dell")
 	@ResponseBody
 	public Map<String, String> dell(BbsVO vo){
@@ -322,6 +338,73 @@ public class BbsController {
 		}
 		
 		return map;
+	}
+	
+	
+	// --------------- 댓글 작성 ---------------
+	
+	@RequestMapping(value = "/comm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> comm(CommVO vo){
+		Map<String, String> map = new HashMap<String, String>();
+		
+		vo.setIp(request.getRemoteAddr());
+		
+//		System.out.println("댓글 폼 확인-> "+vo.getWriter()+" / "+vo.getContent()+" / "+ vo.getP_no());
+		int cnt = b_dao.addComm(vo);
+		
+		if (cnt > 0) {
+			map.put("res", "0");
+		}else {
+			map.put("res", "댓글 등록실패!~");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	// --------------- 댓글 삭제 ---------------
+	
+	@RequestMapping("/dellComm")
+	@ResponseBody
+	public Map<String, String> dellComm(CommVO vo){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int cnt = b_dao.dellComm(vo.getIdx());
+		
+		if (cnt > 0) {
+			map.put("res", "0");
+		}else {
+			map.put("res", "삭제실패");
+		}
+		
+		return map;
+		
+	}
+	
+	
+	
+	
+	// --------------- 댓글 수정 ---------------
+	
+	@RequestMapping(value = "/editComm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> editComm(CommVO vo){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int cnt = b_dao.editCmt(vo);
+		
+		if (cnt > 0) {
+			map.put("res", "0");
+		}else {
+			map.put("res", "댓글수정실패");
+		}
+		
+		return map;
+		
 	}
 	
 	
