@@ -344,6 +344,24 @@ public class BbsController {
 		return map;
 	}
 	
+	@RequestMapping("/dellComm")
+	@ResponseBody
+	public Map<String, String> dellComm(CommVO vo){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int cnt = b_dao.dellComm(vo.getIdx());
+		
+		if (cnt > 0) {
+			map.put("res", "0");
+		}else {
+			map.put("res", "삭제실패");
+		}
+		
+		return map;
+		
+	}
+	
 	
 	
 	@RequestMapping("/test")

@@ -134,7 +134,15 @@ public class BbsDAO {
 			
 			int cnt = sst.insert("bbs.addComm", vo);
 			
+			return cnt;
+		}
+		
+		
+		// 댓글 삭제(status 변경)
+		public int dellComm(String idx) {
 			
+			int cnt = sst.update("bbs.delComm", idx);
+						
 			return cnt;
 		}
 		

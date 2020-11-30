@@ -92,11 +92,11 @@
 		
 		        <p style="width: 800px; margin: auto;">댓글목록</p>
 		        
-		        
 		        <c:if test="${!empty vo.c_list }">
 		        	<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
-		        		<c:set var="wr" value="${sessionScope.mvo.u_nk }" /> <!-- vo.writer하면 작성글의 작성자 닉네임 -->
+		        		<c:set var="wr" value="${sessionScope.mvo.u_nk }" /> <!-- cf.vo.writer하면 작성글의 작성자 닉네임 -->
 		        		<c:set var="wr2" value="${cvo.writer }" /> <!-- 댓글 작성자의 닉네임 -->
+		        		<c:set var="commIdx" value="${cvo.idx }"/>
 		        			<div style="z-index: 1; width: 800px; margin: 5px auto 5px auto; border: 1px solid darkgrey; border-radius: 5px; width: 800px; height: auto; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
 								번호: ${st.index+1}&nbsp;
 								이름: ${cvo.writer } &nbsp;&nbsp;
@@ -105,7 +105,8 @@
 								<c:if test="${wr eq wr2 }">
 									<div style="">
 										<input id = "c_btn1" type="button" value="수정">
-							            <input id = "c_btn2" type="button" value="삭제">
+							            <input id = "c_btn2" type="button" onclick="delComm(${commIdx})" value="삭제">
+							                                                               <!-- ↳ 현재 댓글 칸의 idx 값을 넘겨 준다!! -->
 									</div>
 								</c:if>
 				    	    </div>
@@ -173,11 +174,28 @@
 					alert(data.res);
 				}
 			});
-			
 		});
 		
+	});
+	
+	function delComm(c_idx) {
+		var idx = c_idx;
 		
-	});	
+		$.ajax({
+			url: "dellComm",
+			type: "get",
+			data: "idx="+encodeURIComponent(idx),
+			dataType: "JSON"
+		}).done(function(data) {
+			if(data.res == 0){
+				location.reload();
+			}else {
+				alert(data.res);
+			}
+		});
+	}
+	
+	
 
 </script>
 
