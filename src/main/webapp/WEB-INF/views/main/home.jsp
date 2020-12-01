@@ -35,7 +35,7 @@
 		<jsp:include page="../header.jsp"/>
 		<div class="content_wrap">
 			<div class="content">
-				<img src="img/body.jpg" alt="Body" usemap="#bodymap" width="600px">
+				<img src="img/body.png" alt="Body" usemap="#bodymap" width="600px">
 				<map name="bodymap">
 					<area shape="circle" coords="300,70,44" alt="head" href="#">
 					<area shape="circle" coords="400,330,44" alt="hand" href="#">
@@ -47,7 +47,7 @@
 						<table class="symp_table">
 							<tr>
 								<td>
-									<a href="" onclick="popClose()">X</a>
+									신체명 <a href="" onclick="popClose()">X</a>
 								</td>
 							</tr>
 							<tr>
