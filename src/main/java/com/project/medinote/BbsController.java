@@ -31,7 +31,7 @@ public class BbsController {
 	@Autowired
 	private BbsDAO b_dao;
 	
-	private int blockList = 2;  // 한페이지에 보여질 게시물 수
+	private int blockList = 4;  // 한페이지에 보여질 게시물 수
 	private int blockPage = 3;   // 한블록당 보여질 페이지 번호
 	
 	@Autowired
@@ -142,7 +142,7 @@ public class BbsController {
 		
 		// ↱ ip 저장하기
 		vo.setIp(request.getRemoteAddr());
-		vo.setWriter(mvo.getU_nk());
+		vo.setWriter(mvo.getU_id());
 		
 		b_dao.add(vo);
 		

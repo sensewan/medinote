@@ -89,7 +89,7 @@
 		            comment<br/>
 		            <form name="comm_write" id="comm_write">
 		            	<input type="hidden" name="p_no" value="${vo.idx }">
-		            	<input type="hidden" name="writer" value="${sessionScope.mvo.u_nk }">
+		            	<input type="hidden" name="writer" value="${sessionScope.mvo.u_id }">
 		            	
 		            	<!-- <input type="text" name="content" id="content" placeholder="댓글 입력하시오" style="width: 800px;" > -->
 		            	<textarea rows="2" cols="96" name="content" id="content" placeholder="댓글을 입력하세요"></textarea>
@@ -103,12 +103,12 @@
         			<table style="margin: auto; width: 66%;">
         				<tbody>
 				        	<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
-				        		<c:set var="wr" value="${sessionScope.mvo.u_nk }" /> <!-- cf.vo.writer하면 작성글의 작성자 닉네임 -->
-				        		<c:set var="wr2" value="${cvo.writer }" /> <!-- 댓글 작성자의 닉네임 -->
+				        		<c:set var="wr" value="${sessionScope.mvo.u_id }" /> <!-- cf.vo.writer하면 작성글의 작성자 닉네임 -->
+				        		<c:set var="wr2" value="${cvo.writer }" /> <!-- 댓글 작성자의 id랑 비교됨 (writer에 id가 들어가 있으므로) -->
 				        		<c:set var="commIdx" value="${cvo.idx }"/>
 				        					<tr>
 				        						<th>${st.index+1}</th>
-				        						<td>이름: ${cvo.writer }</td>
+				        						<td>이름: ${cvo.u_nk }</td>
 				        						<td>날짜: ${fn:substring(cvo.create_dt, 0, 19) }</td>
 				        					</tr>
 				        					<tr style="border-top:hidden;">
