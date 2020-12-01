@@ -176,17 +176,22 @@
 	}
 	
 	function delBbs() {
+		var cf = confirm("글을 삭제하시겠습니까?");
+		
 		var idx = ${vo.idx};
 		
-		$.ajax({
-			url: "dell",
-			type: "get",
-			data: "idx="+encodeURIComponent(idx),
-			dataType: "JSON"
-		}).done(function(data) {
-			alert(data.res);
-			location.href=data.url+"?cPage=${param.cPage}";
-		});
+		if (cf) {
+			$.ajax({
+				url: "dell",
+				type: "get",
+				data: "idx="+encodeURIComponent(idx),
+				dataType: "JSON"
+			}).done(function(data) {
+				alert(data.res);
+				location.href=data.url+"?cPage=${param.cPage}";
+			});
+		}
+		
 		
 	}
 
@@ -219,20 +224,24 @@
 	});
 	
 	function delComm(c_idx) {
+		var cf = confirm("댓글을 삭제하시겠습니까?");
+		
 		var idx = c_idx;
 		
-		$.ajax({
-			url: "dellComm",
-			type: "get",
-			data: "idx="+encodeURIComponent(idx),
-			dataType: "JSON"
-		}).done(function(data) {
-			if(data.res == 0){
-				location.reload();
-			}else {
-				alert(data.res);
-			}
-		});
+		if (cf) {
+			$.ajax({
+				url: "dellComm",
+				type: "get",
+				data: "idx="+encodeURIComponent(idx),
+				dataType: "JSON"
+			}).done(function(data) {
+				if(data.res == 0){
+					location.reload();
+				}else {
+					alert(data.res);
+				}
+			});
+		}
 	}
 	
 	function editComm(c_idx) {
