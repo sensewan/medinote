@@ -74,7 +74,7 @@
 											   <!-- ↱나중에 뒤로가기 or 목록 눌렀을 때 클릭하기 전 페이지로 돌아가기 위해 필요-->
 									<a href="view?cPage=${nowPage }&idx=${aa.idx}"> ${aa.title }</a></td>
 						                                 <!-- ↳ 클릭한 게시물을 보여주기 위해 필요 -->
-		                        <td>${aa.writer }</td>
+		                        <td>${aa.u_nk }</td>   <!-- aa.writer에서 변경함 (현재 writer에 id가 들어가 있으므로) -->
 		                        <td>${aa.srch_tag }</td>
 		                        
 		                        <td>

@@ -2,14 +2,26 @@ package mybatis.vo;
 
 public class CommVO {
 	
-	private String idx,       // 댓글 고유 번호
-					p_no,     // 원글의 번호 (FK)
-					writer,   // 댓글작성자의 닉네임
-					content,  // 댓글 내용
-					del_fl,   // 0:등록,  1:삭제
+	private String idx,         // 댓글 고유 번호
+					p_no,       // 원글의 번호 (FK)
+					writer,     // 댓글작성자의 닉네임
+					content,    // 댓글 내용
+					del_fl,     // 0:등록,  1:삭제
 					ip,
 					create_dt,
-					update_dt;
+					update_dt,
+					u_nk;        // 조인한닉네임 사용하기 위해 만듦
+	
+	
+	
+
+	public String getU_nk() {
+		return u_nk;
+	}
+
+	public void setU_nk(String u_nk) {
+		this.u_nk = u_nk;
+	}
 
 	public String getIdx() {
 		return idx;
