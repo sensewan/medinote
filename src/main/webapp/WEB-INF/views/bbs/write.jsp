@@ -61,11 +61,10 @@
 					
 			        <div style="margin-left: 59%; padding: 5px;" >
 			        	<input type="button" class="btn btn-primary" value="등록" onclick="sendData()"/>
-			            <button type="submit" class="btn btn-primary" onclick="">취소</button>
+			        	<input type="button" class="btn btn-primary" value="취소" onclick="goBack()"/>
 			        </div>
 			    </form>
 		    </div>
-		
 		
 		</div>
 	</div>
@@ -196,6 +195,10 @@
 			console.log(err);
 		});
 	} 
+	
+	function goBack() {
+		location.href="bbs?cPage=${param.cPage}";
+	}
 	
 	
 
