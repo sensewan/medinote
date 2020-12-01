@@ -111,12 +111,13 @@ public class BbsController {
 	
 	
 	@RequestMapping("/writeForm")
-	public ModelAndView writeForm(String bname) {
+	public ModelAndView writeForm(String cPage) {
 		ModelAndView mv = new ModelAndView();
 		
 		String u_id = (String)session.getAttribute("loginId");
 		
 		if (u_id.trim().length() > 0 & u_id != null) {
+			mv.addObject("cPage", cPage);
 			mv.setViewName("bbs/write");
 		}else {
 			mv.setViewName("login");

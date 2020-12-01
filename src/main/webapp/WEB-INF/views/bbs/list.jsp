@@ -41,7 +41,7 @@
 					
 				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
 		            <form action="bbsSearch" method="post">
-		            	<input type="hidden" name="cPage" value="${param.cPage }"> <!-- 이거 만든 이유는 서치한 페이지에서 목록을 눌렀을 때 현재 페이지로 돌아가기 위해서임 -->
+		            	<input type="hidden" id="cPage" name="cPage" value="${param.cPage }"> <!-- 이거 만든 이유는 서치한 페이지에서 목록을 눌렀을 때 현재 페이지로 돌아가기 위해서임 -->
 		                <select id="searchType" name="searchType" style="height: 30px;">
 		                    <option value="1">제목</option>
 		                    <option value="2">내용</option>
@@ -130,7 +130,8 @@
 $(function () {
 
 	$("#write_btn").bind("click", function () {
-
+		var cPage = $("#cPage").val();
+		
 		$.ajax({
 			url: "write",
 			dataType:"JSON"
@@ -141,7 +142,7 @@ $(function () {
 				alert("로그인 하셔야 합니다.");
 				location.href="login";
 			}else if (data.chk =="1") {
-				location.href=data.url;
+				location.href=data.url+"?cPage="+cPage;
 			}
 		
 		});
