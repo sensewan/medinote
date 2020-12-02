@@ -40,7 +40,7 @@ public class LoginController {
 	@ResponseBody
 	public Map<String, Object> join_ok(MemVO vo){
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("vo : " + vo.toString());
+		//System.out.println("vo : " + vo.toString());
 		boolean result = loginDAO.join(vo);
 		map.put("result", result);
 		return map;
@@ -55,6 +55,19 @@ public class LoginController {
 		boolean result = loginDAO.idChk(u_id);
 
 		map.put("idChk", result);
+		
+		return map;
+	}
+	
+	//닉네임 중복확인 이벤트
+	@RequestMapping(value="/nkChk", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object>nkChk(String u_nk){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean result = loginDAO.nkChk(u_nk);
+		
+		map.put("nkChk", result);
 		
 		return map;
 	}
