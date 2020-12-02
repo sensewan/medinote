@@ -50,6 +50,21 @@ public class LoginDAO {
 
 	}
 	
+	//닉네임 중복 확인
+	public boolean nkChk(String u_nk) {
+		
+		boolean result = false;
+		
+		int cnt = sst.selectOne("login.nkChk",  u_nk);
+		
+		if (cnt > 0) {
+			result = true;
+		}
+		
+		return result;
+		
+	}
+	
 	// ID, PW 비교
 	public boolean loginChk(String u_id, String u_pw) {
 		boolean result = false;

@@ -16,6 +16,11 @@
   	SELECT count(*) FROM USER_TB WHERE U_ID = #{u_id}
   </select>
   
+  <!-- 닉네임 중복 확인 -->
+  <select id="nkChk" parameterType="String" resultType="int">
+  	SELECT count(*) FROM USER_TB WHERE U_NK = #{u_nk}
+  </select>
+  
   <!-- 로그인 : 아이디 비밀번호 비교 -->
   <select id="loginChk" parameterType="java.util.Map" resultType="int">
   	SELECT count(*) FROM USER_TB WHERE U_ID = #{u_id} AND U_PW = #{u_pw}
