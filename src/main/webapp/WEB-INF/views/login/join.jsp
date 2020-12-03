@@ -124,7 +124,7 @@ href="/css/bootstrap.min.css"/>
 						</tr>
 						<tr>
 							<td class="join_td_right"><label>닉네임</label></td>
-							<td colspan="3"><input type="text" id="u_nk" name="u_nk" onkeyup="valid_nk()"
+							<td colspan="3"><input type="text" id="u_nk" name="u_nk" 
 								class="form-control" /></td>
 						</tr>
 						<tr>
@@ -185,7 +185,7 @@ href="/css/bootstrap.min.css"/>
 
 	var v_idChk = false;
 	$(document).ready(function() {
-		//한글입력 안되게 처리
+		//아이디 유효성 검사
 		$("input[name=u_id]").keyup(function(event) {
 	
 			if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
@@ -219,6 +219,44 @@ href="/css/bootstrap.min.css"/>
 					f_valid_id.innerHTML = "";
 					u_id.className = "form-control is-valid";
 					v_idChk = true;
+				} 
+	
+			});
+	
+		});
+	
+	});
+	var v_nkChk = false;
+	$(document).ready(function() {
+		//아이디 유효성 검사
+		$("input[name=u_nk]").keyup(function(event) {
+	
+			var res = valid_nk();
+			if(!res) return;
+	
+			var nk = $("#u_nk").val();
+			
+			$.ajax({
+				url:"nkChk",
+				type:"post",
+				data:"u_nk="+nk,
+				dataType:"json",
+				error:function(request,status,error){
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			    }
+			}).done(function(data){
+				var f_valid_nk = document.getElementById("f_valid_nk");
+				var u_nk = document.getElementById("u_nk");
+				
+				console.log(data.nkChk);
+			 if(data.nkChk){
+					f_valid_nk.innerHTML = "중복된 닉네임 입니다.";
+					u_nk.className = "form-control is-invalid";
+					v_nkChk = false;
+				}else{
+					f_valid_nk.innerHTML = "";
+					u_nk.className = "form-control is-valid";
+					v_nkChk = true;
 				} 
 	
 			});
@@ -287,9 +325,7 @@ href="/css/bootstrap.min.css"/>
 			u_pw.className = "form-control ";
 		}
 		
-		//비밀번호 길이 검사
-		
-		
+
 		
 		return res;
 	}
@@ -341,6 +377,7 @@ href="/css/bootstrap.min.css"/>
 			f_valid_nm.innerHTML = "";
 			u_nm.className = "form-control";
 		}
+		
 
 		return res;
 
@@ -353,15 +390,13 @@ href="/css/bootstrap.min.css"/>
 		var f_valid_nk = document.getElementById("f_valid_nk");
 
 		//닉네임 유효성 검사
-		if (u_nk.value.trim().length == 0) {
+		if (!(u_nk.value.trim().length > 0)) {
 			f_valid_nk.innerHTML = "닉네임을 입력하세요";
 			u_nk.className = "form-control is-invalid";
 			res = false;
 			return res;
-		} else {
-			f_valid_nk.innerHTML = "";
-			u_nk.className = "form-control";
 		}
+
 		return res;
 	}
 
@@ -428,7 +463,6 @@ href="/css/bootstrap.min.css"/>
 		return res;
 
 	}
-
 	function join(frm) {
 
 		var res = true;
@@ -441,6 +475,10 @@ href="/css/bootstrap.min.css"/>
 		} else if (!v_idChk) {
 			f_valid_id.innerHTML = "중복된 아이디 입니다.";
 			u_id.className = "form-control is-invalid";
+			res = false;
+		}else if(!v_nkChk){
+			f_valid_nk.innerHTML = "중복된 닉네임 입니다.";
+			u_nk.className = "form-control is-invalid";
 			res = false;
 		}
 

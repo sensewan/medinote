@@ -17,7 +17,8 @@ public class BbsVO {
 					update_dt,   // 수정일자
 					file_name,   // 파일첨부했을 경우 파일이름(따로 파일첨부 안하므로 필요없을 듯)
 					hit,         // 조회수
-					bname;       //게시판 이름
+					bname,       // 게시판 이름
+					u_nk;        // 조인한 닉네임을 사용하기 위해 추가함
 	
 	
 	private MultipartFile file;
@@ -30,6 +31,16 @@ public class BbsVO {
 	
 	
 	
+	
+	
+
+	public String getU_nk() {
+		return u_nk;
+	}
+
+	public void setU_nk(String u_nk) {
+		this.u_nk = u_nk;
+	}
 
 	public String getIdx() {
 		return idx;

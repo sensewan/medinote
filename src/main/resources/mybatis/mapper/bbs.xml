@@ -16,8 +16,9 @@
 
 	<!-- 특정 원글의 기본키를 조건으로 하여 -> 해당 댓글들을 조회하는 기능 (cf.order by IDX를 해야 순차적으로 출력됨) -->
 	<select id="commList" parameterType="String" resultType="mybatis.vo.CommVO">
-		select * from COMMENT_TB
-		where P_NO = #{idx} and DEL_FL = 0 order by IDX
+		<!-- select * from COMMENT_TB
+		where P_NO = #{idx} and DEL_FL = 0 order by IDX -->
+		select * from (select * from COMMENT_TB where P_NO = #{idx} and DEL_FL = 0 order by IDX) LEFT JOIN USER_TB b on writer = b.U_ID
 	</select>
 
 
@@ -25,7 +26,8 @@
 	<select id="list" parameterType="java.util.Map" resultMap="map1">  <!-- 결과를 -> map1인 resultMap에다가 보냈다가 갖고옴 -->
 		select * from (
 			select rownum r_num, a.* from (
-				select * from BBS_TB where DEL_FL = 0 order by IDX desc) a) 
+				select * from BBS_TB where DEL_FL = 0 order by IDX desc) a)
+					LEFT JOIN USER_TB b on writer = b.U_ID
 				where r_num between #{begin} and #{end}
 	</select>
 	
