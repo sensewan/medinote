@@ -41,7 +41,7 @@
 					
 				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
 		            <form action="bbsSearch" method="post">
-		            	<input type="hidden" name="cPage" value="${param.cPage }"> <!-- 이거 만든 이유는 서치한 페이지에서 목록을 눌렀을 때 현재 페이지로 돌아가기 위해서임 -->
+		            	<input type="hidden" id="cPage" name="cPage" value="${param.cPage }"> <!-- 이거 만든 이유는 서치한 페이지에서 목록을 눌렀을 때 현재 페이지로 돌아가기 위해서임 -->
 		                <select id="searchType" name="searchType" style="height: 30px;">
 		                    <option value="1">제목</option>
 		                    <option value="2">내용</option>
@@ -74,7 +74,7 @@
 											   <!-- ↱나중에 뒤로가기 or 목록 눌렀을 때 클릭하기 전 페이지로 돌아가기 위해 필요-->
 									<a href="view?cPage=${nowPage }&idx=${aa.idx}"> ${aa.title }</a></td>
 						                                 <!-- ↳ 클릭한 게시물을 보여주기 위해 필요 -->
-		                        <td>${aa.writer }</td>
+		                        <td>${aa.u_nk }</td>   <!-- aa.writer에서 변경함 (현재 writer에 id가 들어가 있으므로) -->
 		                        <td>${aa.srch_tag }</td>
 		                        
 		                        <td>
@@ -130,7 +130,8 @@
 $(function () {
 
 	$("#write_btn").bind("click", function () {
-
+		var cPage = $("#cPage").val();
+		
 		$.ajax({
 			url: "write",
 			dataType:"JSON"
@@ -141,7 +142,7 @@ $(function () {
 				alert("로그인 하셔야 합니다.");
 				location.href="login";
 			}else if (data.chk =="1") {
-				location.href=data.url;
+				location.href=data.url+"?cPage="+cPage;
 			}
 		
 		});
