@@ -178,6 +178,10 @@
 	
 	.btnModal{
 		cursor : pointer;
+		-webkit-cursor: pointer;
+	  	-moz-cursor: pointer;
+	  	-ms-cursor: pointer;
+	  	-o-cursor: pointer;
 	}
 	    
 </style>
