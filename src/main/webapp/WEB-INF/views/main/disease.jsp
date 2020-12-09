@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="/css/layout.css"/>
 <style>
+
 	.disTab{
 		border:1px solid black;
 		margin: 50px auto;
@@ -14,6 +17,12 @@
 		height: 550px;
 	}
 	
+	#table1 {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            /* background-color: rgba( 255, 255, 255, 1 ); */
+        }
 
 </style>
 </head>
@@ -23,12 +32,14 @@
 		<div class="content_wrap">
 			<div class="content">
 			<div>
-				<table class="disTab">
-					<tr>
-						<td>번호</td>
-						<td>병명</td>
-						<td>진료과</td>
+				<table class="table table-hover" id="table1">
+				<thead>
+					<tr class="table-primary">
+						<th scope="col">번호</th>
+						<th scope="col">병명</th>
+						<th scope="col">진료과</th>
 					</tr>
+				</thead>
 					<tr>
 						<td>1</td>
 						<td>아파</td>
