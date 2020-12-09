@@ -185,7 +185,7 @@
 			<div class="content">
 				<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
 				<map name="bodymap">
-					<area shape="rect" alt="전신" title="전신" coords="1,54,165,123" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" itemid="" alt="전신" title="전신" coords="1,54,165,123" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="등" title="등" coords="3,116,165,234" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="엉덩이" title="엉덩이" coords="3,239,165,417" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img4.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="기타" title="기타" coords="2,419,167,542" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img5.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
