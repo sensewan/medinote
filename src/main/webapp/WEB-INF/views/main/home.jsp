@@ -193,6 +193,7 @@
 			<div class="content">
 				<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
 				<map name="bodymap">
+
 					<area shape="rect" id="B000016" class="btnModal" alt="전신" title="전신" coords="1,54,165,123" href="#" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					
 					<area shape="rect" alt="등" title="등" coords="3,116,165,234" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
