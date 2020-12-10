@@ -2,7 +2,9 @@ package mybatis.dao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,9 @@ public class HomeDAO {
 		
 		//System.out.println(b_code);
 		List<HomeVO> list = sst.selectList("home.bodySymptom", slist);
-		System.out.println(list.size());
+		//System.out.println(list.size());
 		
-		return null;
+		
+		return list;
 	}
 }

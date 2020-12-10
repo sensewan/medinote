@@ -1,6 +1,7 @@
 package com.project.medinote;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mybatis.dao.HomeDAO;
+import mybatis.vo.HomeVO;
 
 @Controller
 public class MainController {
@@ -39,10 +41,12 @@ public class MainController {
 	
 	@RequestMapping("/Body_Symptom")
 	@ResponseBody
-	public Map<String, String> bodySymptom(String B_CD){
-		Map<String, String> map = new HashMap<String, String>();
+	public Map<String, Object> bodySymptom(String B_CD){
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		h_dao.bodySymptom(B_CD);
+		List<HomeVO> list = h_dao.bodySymptom(B_CD);
+		map.put("res", list);
+		
 		
 		return map;
 	}

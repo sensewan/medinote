@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MediNote</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="/css/layout.css"/>
@@ -183,6 +183,16 @@
 	  	-ms-cursor: pointer;
 	  	-o-cursor: pointer;
 	}
+	
+	.modal-body{
+		overflow:auto;	
+		height: 300px;
+		width: 690px;
+	}
+	
+	.modal-content{
+		width: 700px;
+	}
 	    
 </style>
 </head>
@@ -193,74 +203,41 @@
 			<div class="content">
 				<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
 				<map name="bodymap">
-
-					<area shape="rect" id="B000016" class="btnModal" alt="전신" title="전신" coords="1,54,165,123" href="#" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					
-					<area shape="rect" alt="등" title="등" coords="3,116,165,234" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" alt="엉덩이" title="엉덩이" coords="3,239,165,417" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img4.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" alt="기타" title="기타" coords="2,419,167,542" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img5.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" alt="머리/얼굴" title="머리/얼굴" coords="167,52,333,111" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img6.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					
-					<area shape="rect" id="B000008,B000020" class="btnModal" alt="목/가슴" title="목/가슴" coords="167,113,332,171" onmouseover="if(document.images) point.src='img/body_img7.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					
-					<area shape="rect" alt="배" title="배" coords="167,175,333,233" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img8.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" alt="골반" title="골반" coords="167,236,334,293" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img9.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" alt="팔/다리" title="팔/다리" coords="168,297,334,502" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img10.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" alt="손/발" title="손/발" coords="169,506,334,543" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img11.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000016,B000019" class="btnModal" alt="전신" title="전신" coords="1,54,165,123" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000006" class="btnModal" alt="등" title="등" coords="3,116,165,234" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000013" class="btnModal" alt="엉덩이" title="엉덩이" coords="3,239,165,417" onmouseover="if(document.images) point.src='img/body_img4.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000003,B000011,B000014" class="btnModal" alt="기타" title="기타" coords="2,419,167,542" onmouseover="if(document.images) point.src='img/body_img5.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000002,B000004,B000007,B000015,B000017" class="btnModal" alt="머리 / 얼굴" title="머리 / 얼굴" coords="167,52,333,111" onmouseover="if(document.images) point.src='img/body_img6.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000008,B000020" class="btnModal" alt="목 / 가슴" title="목 / 가슴" coords="167,113,332,171" onmouseover="if(document.images) point.src='img/body_img7.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000010" class="btnModal" alt="배" title="배" coords="167,175,333,233" onmouseover="if(document.images) point.src='img/body_img8.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000001" class="btnModal" alt="골반" title="골반" coords="167,236,334,293" onmouseover="if(document.images) point.src='img/body_img9.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000005,B000018" class="btnModal" alt="팔 / 다리" title="팔 / 다리" coords="168,297,334,502" onmouseover="if(document.images) point.src='img/body_img10.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					<area shape="rect" id="B000009,B000012" class="btnModal" alt="손 / 발" title="손 / 발" coords="169,506,334,543" onmouseover="if(document.images) point.src='img/body_img11.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 				</map>
-			<div  id="pop">
-				<form>
-					<table class="table table-hover" id="table1">
-					<colgroup>
-					</colgroup>
-					<thead>
-						<tr class="table-primary">
-							<th scope="col" colspan="2">신체명</th>
-							<th scope="col" style="background-color: white"><a href="#" onclick="popClose()">닫기</a></th>
-						</tr>
-					</thead>
-						<tr>
-							<td><input type="checkbox" class="symp"/>증상1</td>
-							<td><input type="checkbox" class="symp"/>증상2</td>
-							<td><input type="checkbox" class="symp"/>증상3</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" class="symp"/>증상4</td>
-							<td><input type="checkbox" class="symp"/>증상5</td>
-							<td><input type="checkbox" class="symp"/>증상6</td>
-						</tr>
-						<tr style="text-align: right;">
-							<td></td>
-							<td></td>
-							<td>
-								<input type="button" value="더보기" onclick="more()"/>
-							</td>
-						</tr>
-					</table>
-				</form>
-			</div>
-			 
 			</div>
 		</div>
 	</div>
-	 
-	 <input type="button" id="btnModal" value="ModalTest">
 	 
 	 <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" >
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
+					<h5 class="modal-title"></h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>Modal body text goes here.</p>
+				<form action="showMore" method="post">
+					<table style="width:100%">
+						<tbody id="content">
+						</tbody>
+					</table>
+				</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary" id="showMore">Show More</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
@@ -331,28 +308,81 @@
 			$(".btnModal").on("click", function(event) {
 				$("#myModal").modal('show');
 				var id = $(this).attr("id");
-				console.log(id);
-				
+				var title = $(this).attr("title");
+				$(".modal-title").empty();
+				$(".modal-title").append(title);
 				$.ajax({
 					url: "Body_Symptom",
 					type: "post",
 					data: "B_CD="+id,
 					dataType: "json"
 				}).done(function(data){
+					var res = data.res;
+					var tag = "";
+					
+					for(var i = 0; i < res.length; i += 3){
+						tag += "<tr>";
+						tag += "<td><input type='checkbox' class='symp' name='symp' value='" + res[i].s_cd;
+						tag += "'/>" + res[i].s_nm + "</td>";
+						if(res[i+1] != null){
+							tag += "<td><input type='checkbox' class='symp' name='symp' value='" + res[i+1].s_cd;
+							tag += "'/>" + res[i+1].s_nm + "</td>";
+						}
+						if(res[i+2] != null){
+							tag += "<td><input type='checkbox' class='symp' name='symp' value='" + res[i+2].s_cd;
+							tag += "'/>" + res[i+2].s_nm + "</td>";
+						}
+						tag += "</tr>";
+					}
+					$("#content").append(tag);
 				});
 			});
 			
-			$('#myModal').on('shown.bs.modal', function (e) {
-				  alert('show');
+			$('#myModal').on('shown.bs.modal', function () {
+				$("#content").empty();
+				$(".modal-title").empty();
 			});
 			
 			$('#myModal').on('hidden.bs.modal', function() {
-				alert('hidden');
 			});
-			
-			
-			
 		});
+	    
+	  
+	    $(".symp").change(function() {
+	    	alert("선택되었습니다."); 
+	    	 $('input:checkbox[name="symp"]').each(function() {
+
+	    	     if( $('input:checkbox[name="symp"]:cheked').length <= 3){ //값 비교
+
+	    	    	 $('input:checkbox[name="symp"]').attr("checked", true);
+
+	    	            if(this.checked){//checked 처리된 항목의 값
+	    	                alert("선택되었습니다."); 
+	    	          	} else {
+	    	          		alert("너무 많은 증상이 선택되었습니다.");
+	    	          	}
+
+
+
+	    	      }
+
+	    	 });
+
+
+
+	    $('input:checkbox[name="symp"]:cheked').length
+	    
+		 	
+	    });
+	    
+	    
+	    $("#showMore").on("click", function(event) {
+	    	$("input:checkbox[name='symp']:checked").each(function(){
+	    		var checkedSymp = $(this).val();
+				console.log(checkedSymp);
+	    	});
+	    });
+		
 	    
 	</script>
 </body>
