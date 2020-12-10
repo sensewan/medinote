@@ -1,5 +1,7 @@
 package mybatis.dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,16 +22,10 @@ public class HomeDAO {
 		//System.out.println(b_cd);
 		String[] bcd = b_cd.split(",");
 		//System.out.println(bcd);
-		for (int i = 0; i < bcd.length; i++) {
-			if(i!=0)
-				sb.append(",");
+		List<String> slist = new ArrayList<String>(Arrays.asList(bcd));
 		
-			sb.append(String.format("'%s'", bcd[i]));
-		}
-		
-		String b_code = sb.toString();
 		//System.out.println(b_code);
-		List<HomeVO> list = sst.selectList("home.bodySymptom", b_code);
+		List<HomeVO> list = sst.selectList("home.bodySymptom", slist);
 		System.out.println(list.size());
 		
 		return null;
