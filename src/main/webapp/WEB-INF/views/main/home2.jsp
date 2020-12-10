@@ -175,14 +175,6 @@
 	  background-color: #1f326a;
 	  color: #fff;
 	}
-	
-	.btnModal{
-		cursor : pointer;
-		-webkit-cursor: pointer;
-	  	-moz-cursor: pointer;
-	  	-ms-cursor: pointer;
-	  	-o-cursor: pointer;
-	}
 	    
 </style>
 </head>
@@ -193,16 +185,12 @@
 			<div class="content">
 				<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
 				<map name="bodymap">
-
-					<area shape="rect" id="B000016" class="btnModal" alt="전신" title="전신" coords="1,54,165,123" href="#" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					
+					<area shape="rect" alt="전신" title="전신" coords="1,54,165,123" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="등" title="등" coords="3,116,165,234" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="엉덩이" title="엉덩이" coords="3,239,165,417" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img4.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="기타" title="기타" coords="2,419,167,542" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img5.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="머리/얼굴" title="머리/얼굴" coords="167,52,333,111" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img6.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					
-					<area shape="rect" id="B000008,B000020" class="btnModal" alt="목/가슴" title="목/가슴" coords="167,113,332,171" onmouseover="if(document.images) point.src='img/body_img7.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					
+					<area shape="rect" alt="목/가슴" title="목/가슴" coords="167,113,332,171" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img7.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="배" title="배" coords="167,175,333,233" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img8.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="골반" title="골반" coords="167,236,334,293" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img9.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
 					<area shape="rect" alt="팔/다리" title="팔/다리" coords="168,297,334,502" href="javascript:pop()" onmouseover="if(document.images) point.src='img/body_img10.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
@@ -240,35 +228,52 @@
 				</form>
 			</div>
 			 
+			<a href="#layer2" class="btn-example">딤처리 팝업레이어 1</a>
+			
+				<div class="dim-layer">
+				    <div class="dimBg"></div>
+				    <div id="layer2" class="pop-layer">
+				        <div class="pop-container">
+				            <div class="pop-conts">
+				                <!--content //-->
+				                <form>
+									<table class="table table-hover" id="table1">
+									<colgroup>
+									</colgroup>
+									<thead>
+										<tr class="table-primary">
+											<th scope="col" colspan="3">신체명</th>
+										</tr>
+									</thead>
+										<tr>
+											<td><input type="checkbox" class="symp"/>증상1</td>
+											<td><input type="checkbox" class="symp"/>증상2</td>
+											<td><input type="checkbox" class="symp"/>증상3</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" class="symp"/>증상4</td>
+											<td><input type="checkbox" class="symp"/>증상5</td>
+											<td><input type="checkbox" class="symp"/>증상6</td>
+										</tr>
+									</table>
+								</form>
+								<div class="btn-r">
+									<%--<input type="button" value="더보기" onclick="more()"/> --%>
+				                    <a href="#" class="btn-layerMore">더보기</a>
+				                    <a href="#" class="btn-layerClose">닫기</a>
+				                </div>
+				                <!--// content-->
+				            </div>
+				        </div>
+				    </div>
+				</div>
 			</div>
 		</div>
 	</div>
-	 
-	 <input type="button" id="btnModal" value="ModalTest">
-	 
-	 <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>Modal body text goes here.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Save changes</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js" ></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<!-- <script type="text/javascript" src="</script'>http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+<script type="text/javascript" src="</script'>http://davidlynch.org/projects/maphilight/jquery.maphilight.min.js"></script>
 	<script>
 		function pop(){
 			var pop = document.getElementById("pop");
@@ -326,34 +331,7 @@
 	        });
 
 	    }
-		<%-- 모달 레이어 팝업 --%>
-	    $(document).ready(function(){
-			$(".btnModal").on("click", function(event) {
-				$("#myModal").modal('show');
-				var id = $(this).attr("id");
-				console.log(id);
-				
-				$.ajax({
-					url: "Body_Symptom",
-					type: "post",
-					data: "B_CD="+id,
-					dataType: "json"
-				}).done(function(data){
-				});
-			});
-			
-			$('#myModal').on('shown.bs.modal', function (e) {
-				  alert('show');
-			});
-			
-			$('#myModal').on('hidden.bs.modal', function() {
-				alert('hidden');
-			});
-			
-			
-			
-		});
-	    
+		
 	</script>
 </body>
 </html>
