@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.HomeDAO;
 import mybatis.vo.HomeVO;
@@ -49,5 +50,22 @@ public class MainController {
 		
 		
 		return map;
+	}
+	
+	@RequestMapping("/showMore")
+	public ModelAndView showMore(HomeVO vo) {
+		ModelAndView mv = new ModelAndView();
+		String s_cd = vo.getS_cd();
+		System.out.println(s_cd);
+		String[] s_cdar = s_cd.split(",");
+		
+		List<HomeVO> dList = h_dao.sympDisease(s_cdar);
+		for(HomeVO vo1 : dList) {
+			System.out.println("질병 : " + vo1.getD_nm() + "/ 진료과 : " + vo1.getM_nm());
+		}
+		
+		mv.addObject("hvo", dList);
+		mv.setViewName("main/disease");
+		return mv;
 	}
 }

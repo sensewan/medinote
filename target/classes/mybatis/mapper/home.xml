@@ -7,7 +7,22 @@
 		select s_cd, s_nm from vw_body_symptom where b_cd in 
 		<foreach collection="list" index='index' item='b_cd' open='(' close=')' separator=','>#{b_cd}</foreach>
 	</select>
-	
+	<select id="sympDisease" parameterType="java.util.Arrays" resultType="mybatis.vo.HomeVO">
+		SELECT D_CD, D_NM, LISTAGG(M_NM, ',') within group (order by M_NM) M_NM
+				FROM(
+					SELECT D_CD, D_NM, M_CD, M_NM FROM VW_DISEASE_MEDI_DEPT WHERE D_CD IN (SELECT D_CD FROM (
+						SELECT
+					    d_cd, LISTAGG(s_cd, ',') within group (order by s_cd) s_cd
+					FROM
+				   		symptom_disease
+				group by d_cd)
+				<trim prefix="where" prefixOverrides="and">
+					<foreach collection="array" index='index' item='s_cd'>
+						AND s_cd LIKE '%'|| #{s_cd} || '%'
+					</foreach>
+				</trim>
+				 )) group by D_CD, D_NM
+	</select>
 	
 </mapper>
 
