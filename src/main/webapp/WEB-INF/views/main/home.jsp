@@ -229,7 +229,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-				<form action="showMore" method="post">
+				<form action="showMore" name="frm" method="post">
 					<table style="width:100%">
 						<tbody id="content">
 						</tbody>
@@ -237,7 +237,7 @@
 				</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="showMore">Show More</button>
+					<button type="button" class="btn btn-primary" id="showMore" onclick="showMore()">Show More</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
@@ -264,45 +264,11 @@
 			location.href="disease"
 		}
 		
-		
-		
-		$('.btn-example').click(function(){
-	        var $href = $(this).attr('href');
-	        layer_popup($href);
-	    });
-	    function layer_popup(el){
-
-	        var $el = $(el);    //레이어의 id를 $el 변수에 저장
-	        var isDim = $el.prev().hasClass('dimBg'); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-	        isDim ? $('.dim-layer').fadeIn() : $el.fadeIn();
-
-	        var $elWidth = ~~($el.outerWidth()),
-	            $elHeight = ~~($el.outerHeight()),
-	            docWidth = $(document).width(),
-	            docHeight = $(document).height();
-
-	        // 화면의 중앙에 레이어를 띄운다.
-	        if ($elHeight < docHeight || $elWidth < docWidth) {
-	            $el.css({
-	                marginTop: -$elHeight /2,
-	                marginLeft: -$elWidth/2
-	            })
-	        } else {
-	            $el.css({top: 0, left: 0});
-	        }
-
-	        $el.find('a.btn-layerClose').click(function(){
-	            isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-	            return false;
-	        });
-
-	        $('.layer .dimBg').click(function(){
-	            $('.dim-layer').fadeOut();
-	            return false;
-	        });
-
+		function showMore(){
+	    	document.frm.submit();
 	    }
+		
+
 		<%-- 모달 레이어 팝업 --%>
 	    $(document).ready(function(){
 			$(".btnModal").on("click", function(event) {
@@ -322,14 +288,14 @@
 					
 					for(var i = 0; i < res.length; i += 3){
 						tag += "<tr>";
-						tag += "<td><input type='checkbox' class='symp' name='symp' value='" + res[i].s_cd;
+						tag += "<td><input type='checkbox' class='symp' name='s_cd' value='" + res[i].s_cd;
 						tag += "'/>" + res[i].s_nm + "</td>";
 						if(res[i+1] != null){
-							tag += "<td><input type='checkbox' class='symp' name='symp' value='" + res[i+1].s_cd;
+							tag += "<td><input type='checkbox' class='symp' name='s_cd' value='" + res[i+1].s_cd;
 							tag += "'/>" + res[i+1].s_nm + "</td>";
 						}
 						if(res[i+2] != null){
-							tag += "<td><input type='checkbox' class='symp' name='symp' value='" + res[i+2].s_cd;
+							tag += "<td><input type='checkbox' class='symp' name='s_cd' value='" + res[i+2].s_cd;
 							tag += "'/>" + res[i+2].s_nm + "</td>";
 						}
 						tag += "</tr>";
@@ -349,49 +315,28 @@
 	    
 	  
 	    $(".symp").change(function() {
-	    	alert("선택되었습니다."); 
-	    	 $('input:checkbox[name="symp"]').each(function() {
+	    	 $('input:checkbox[name="s_cd"]').each(function() {
 
-	    	     if( $('input:checkbox[name="symp"]:cheked').length <= 3){ //값 비교
+	    	     if( $('input:checkbox[name="s_cd"]:cheked').length <= 3){ //값 비교
 
-	    	    	 $('input:checkbox[name="symp"]').attr("checked", true);
+	    	    	 $('input:checkbox[name="s_cd"]').attr("checked", true);
 
 	    	            if(this.checked){//checked 처리된 항목의 값
 	    	                alert("선택되었습니다."); 
 	    	          	} else {
 	    	          		alert("너무 많은 증상이 선택되었습니다.");
 	    	          	}
-
-
-
 	    	      }
-
 	    	 });
 
 
-
-	    $('input:checkbox[name="symp"]:cheked').length
-	    
-		 	
-	    });
-	    
-	    
-	    $("#showMore").on("click", function(event) {
-	    	$("input:checkbox[name='symp']:checked").each(function(){
-	    		var checkedSymp = $(this).val();
-				console.log(checkedSymp);
-	    	});
-	    });
-		
-	    
+		    $("#showMore").on("click", function(event) {
+		    	$("input:checkbox[name='s_cd']:checked").each(function(){
+		    		var checkedSymp = $(this).val();
+					console.log(checkedSymp);
+		    	});
+		    });
+		});
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-

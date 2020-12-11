@@ -33,4 +33,10 @@ public class HomeDAO {
 		
 		return list;
 	}
+	
+	public List<HomeVO> sympDisease(String[] s_cdar){
+		List<HomeVO> list = sst.selectList("home.sympDisease", s_cdar);
+		System.out.println(list.size());
+		return list;
+	}
 }
