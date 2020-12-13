@@ -12,17 +12,17 @@
 	
 	<!-- 최근 검색 내역  리스트 보기 -->
     <select id="recent_srch" parameterType="java.util.Map" resultType="mybatis.vo.MypageVO">
-  		select * from user_srch_tag where u_id = #{u_id} order by srch_tag desc
+  		select * from history_tb where u_id = #{u_id} order by srch_dt desc
     </select>
     
     <!-- 최근 검색 내역 삭제하기 -->
     <delete id="del_srch" parameterType="mybatis.vo.MypageVO">
-    	delete from history_tb where u_id = #{u_id}
+    	delete from history_tb where idx = #{idx} and u_id=#{u_id}
     </delete>
     
     <!-- 최근 검색 내역 총 개수 -->
 	<select id="srchTagTotalCount" parameterType="String" resultType="int" >
-		select count(*) from user_srch_tag where u_id = #{u_id}
+		select count(*) from history_tb where u_id = #{u_id}
 	</select>
   
   	<!-- 비밀번호 확인 -->

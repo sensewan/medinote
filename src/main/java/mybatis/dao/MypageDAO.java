@@ -3,7 +3,6 @@ package mybatis.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,9 +25,13 @@ public class MypageDAO {
 	}
 	
 	//최근 검색 내역 삭제하기
-	public int del_srch(MypageVO vo) {
+	public boolean del_srch(MypageVO vo) {
 	 	int cnt = sst.delete("mypage.del_srch", vo);
-	 	return cnt;
+	 	boolean result = false;
+	 	if(cnt > 0) {
+	 		result = true;
+	 	}
+	 	return result;
 	}
 	
 	//최근 검색 내역 총 개수
@@ -65,10 +68,11 @@ public class MypageDAO {
 	//마이노트
 	
 	//"내"가 커뮤니티에 작성한 글 보기
-	public BbsVO[] mylist(int begin, int end) {
+	public BbsVO[] mylist(int begin, int end, String u_id) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("begin", String.valueOf(begin));
 		map.put("end", String.valueOf(end));
+		map.put("u_id", u_id);
 		
 		List<BbsVO> mylist = sst.selectList("mypage.mylist", map);
 		
@@ -86,7 +90,5 @@ public class MypageDAO {
 		int cnt = sst.selectOne("mypage.myCommTotalCount", u_id);
 		return cnt;
 	}
-
-	
 	
 }
