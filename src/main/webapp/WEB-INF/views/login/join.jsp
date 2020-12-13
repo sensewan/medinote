@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MediNote</title>
 <link type="text/css" rel="stylesheet" 
 href="/css/bootstrap.css"/>
 <link type="text/css" rel="stylesheet" 

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 검색 결과</title>
+<title>MediNote</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/layout.css"/>
