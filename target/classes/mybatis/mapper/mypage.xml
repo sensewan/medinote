@@ -12,21 +12,26 @@
 	
 	<!-- 최근 검색 내역  리스트 보기 -->
     <select id="recent_srch" parameterType="java.util.Map" resultType="mybatis.vo.MypageVO">
-  		select * from user_srch_tag where u_id = #{u_id}
+  		select * from user_srch_tag where u_id = #{u_id} order by srch_tag desc
     </select>
     
-    <!--  최근 검색 내역 삭제하기 -->
+    <!-- 최근 검색 내역 삭제하기 -->
     <delete id="del_srch" parameterType="mybatis.vo.MypageVO">
     	delete from history_tb where u_id = #{u_id}
     </delete>
+    
+    <!-- 최근 검색 내역 총 개수 -->
+	<select id="srchTagTotalCount" parameterType="String" resultType="int" >
+		select count(*) from user_srch_tag where u_id = #{u_id}
+	</select>
   
   	<!-- 비밀번호 확인 -->
-  	<select id="pwChk" parameterType="String" resultType="int">
-  		select count(*) from user_tb where u_pw = #{u_pw}
+  	<select id="pwChk" parameterType="java.util.Map" resultType="int">
+  		select count(*) from user_tb where u_pw = #{u_pw} and u_id = #{u_id}
   	</select>
   
  	<!-- 회원정보 수정 -->
-  	<update id="infoEdit" parameterType="java.util.Map">
+  	<update id="infoEdit" parameterType="mybatis.vo.MemVO">
   		update user_tb set u_pw = #{u_pw}, u_nm = #{u_nm}, birth = #{birth}, phone = #{phone}, save_fl = #{save_fl}
   		where u_id= #{u_id}
   	</update>
@@ -40,6 +45,11 @@
 				select * from BBS_TB where DEL_FL = 0 order by IDX desc) a)
 					LEFT JOIN USER_TB b on writer = b.U_ID
 				where r_num between #{begin} and #{end}, u_id = #{u_id}
+	</select>
+	
+	<!-- 내가 작성한 글의 총 개수 -->
+	<select id="myCommTotalCount" parameterType="String" resultType="int" >
+		select count(*) from bbs_tb where u_id = #{u_id} and del_fl = 0
 	</select>
 	
  </mapper>
