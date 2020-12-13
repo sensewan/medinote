@@ -7,8 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import mybatis.dao.BbsDAO;
+import mybatis.dao.MypageDAO;
+
 @Controller
 public class MypageController {
+	
+	@Autowired
+	private MypageDAO mp_dao;
 	
 	@Autowired
 	private  HttpSession session; 

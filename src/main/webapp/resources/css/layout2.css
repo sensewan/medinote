@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 body, h1,h2,h3{
 	margin: 0;
 	padding: 0;
@@ -11,9 +10,7 @@ ul, a, ol, li{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	
 }
-
 
 .header_wrap{
 	width: 100%;
@@ -22,15 +19,13 @@ ul, a, ol, li{
 	background-color: #64ac7d !important;
 	position: fixed; 
 	top : 0;
-
 }
 
 .header{
 	width: 1200px;
 	margin: 0 auto;
 	text-align: center;
-	padding-top: 20px;
-	
+	padding-top: 20px;	
 }
 
 .header h1 {
@@ -41,13 +36,14 @@ ul, a, ol, li{
 	height: 50px;
 	text-indent: -99999px;
 	/* margin-top: 20px; */
-
 }
+
 .header .menu{
 	float: left;
 	margin-top: -25px;
 	margin-left : 230px;
 }
+
 .header .menu>li{
 	float: left;
 	font-weight: bold;
@@ -56,22 +52,23 @@ ul, a, ol, li{
 }
 
 .header .menu>li a {
-	color: #fff;
-	
+	color: #fff;	
 }
+
 .header .menu>li a:hover {
 	color: #b5ff89;
-	
 }
 
 .header .login{
 	float: right;
 	margin-top: -25px;
 }
+
 .header .login>li{
 	float: left;
 	margin-left: 20px;
 }
+
 .header .login>li a{
 	color: #fff;
 	font-size: small;
@@ -79,25 +76,19 @@ ul, a, ol, li{
 
 .header .login>li a:hover {
 	color: #b5ff89;
-	
 }
-
 
 .content_wrap{
 	background-image: url(../img/background.jpg); 
 	height: 800px; 
 	background-repeat: no-repeat;
 	background-size: 100%;
-
 	opacity: 0.5; 
-	
 	margin-top: 100px;
 	padding-top: 20px;
 	position: relative;
     z-index: -9999;
 }
-
-
 
 .content{
 	width: 1200px;
@@ -106,30 +97,20 @@ ul, a, ol, li{
 	height: 780px;
 	background-color: #fff;
 	opacity: 0.5;
-	
 }
-
 
 .content_center{
 	width: 900px;
-	border: 5px solid blue;
 	height: 770px;
 	background-color: #fff;
 	opacity: 0.5;
 	float: right;
-
 }
+
 .content_side{
 	width: 250px;
-	border: 3px solid red;
 	height: 770px;
 	background-color: #fff;
 	opacity: 0.5;
 	float: left;
 }
-
-
-
-
-
-

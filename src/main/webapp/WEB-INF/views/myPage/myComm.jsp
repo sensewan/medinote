@@ -11,6 +11,11 @@
 <link type="text/css" rel="stylesheet" href="/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<style>
+	.search_content{
+		width : 37%;
+	}
+</style>
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -20,19 +25,20 @@
 				<%@ include file="sideBar.jsp"%>
 			</div>
 			<div class="content_center">
-				<div class="search_box">
-					<select id="" name="" class="">
+				<h3>내가 작성한 글</h3>
+      			<div style="padding: 0 5px 0 5px;">
+					<select class="search_type">
 						<option value="title">제목</option>
-						<option value="content">내용</option>
+						<option value="content">증상</option>
 						<option value="date">작성일</option>
 					</select>
-					<input type="text" id="" name="" placeholder="검색하실 제목/내용/작성일을 입력해주세요"/>
-					<button type="button" class="btn btn-primary" style="height: 28px, margin-bottom: 5px, text-height: 100%">검색</button>
+					<input type="text" class="search_content" name="search_content" placeholder="검색하실 제목/증상/작성일을 입력해주세요."/>
+					<button type="button">검색</button>
 				</div>
 				<div>
 					<table class="table table-hover">
 						<thead>
-					    	<tr>
+					    	<tr class="table-primary">
 					      		<th scope="col">번호</th>
 					      		<th scope="col">제목</th>
 					      		<th scope="col">증상</th>
@@ -40,20 +46,20 @@
 					    	</tr>
 					  	</thead>
 					    <tbody>
-						    <c:if test="">
-								<tr>
+								<tr class="table-active">
 							    	<th scope="row">19</th>
 							      	<td>복통이 심한 날</td>
 							      	<td>왼쪽 아랫배 통증, 오른쪽 아랫배 통증</td>
 							      	<td>2020-10-28</td>
 							    </tr>
-						    </c:if>
+						
 					    </tbody>
 					</table>	
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script>
 	

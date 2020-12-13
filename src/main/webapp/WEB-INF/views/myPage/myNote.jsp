@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet" 
-href="/css/layout.css"/>
+<link type="text/css" rel="stylesheet" href="/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -18,7 +19,7 @@ href="/css/layout.css"/>
 				<%@ include file="sideBar.jsp"%>
 			</div>
 			<div class="content_center">
-				<h1>마이 노트</h1>
+				<h3>마이 노트</h3>
 			</div>
 		</div>
 	</div>
