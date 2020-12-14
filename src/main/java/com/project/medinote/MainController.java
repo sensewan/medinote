@@ -63,8 +63,10 @@ public class MainController {
 		for(HomeVO vo1 : dList) {
 			System.out.println("질병 : " + vo1.getD_nm() + "/ 진료과 : " + vo1.getM_nm());
 		}
+		vo.setIp(request.getRemoteAddr());// ip저장!
 		
 		mv.addObject("hvo", dList);
+		mv.addObject("vo", vo);
 		mv.setViewName("main/disease");
 		return mv;
 	}

@@ -1,7 +1,31 @@
 package mybatis.vo;
 
 public class HomeVO {
-	String b_cd, b_nm, s_cd, s_nm, d_cd, d_nm, m_cd, m_nm;
+	String b_cd, b_nm, s_cd, s_nm, d_cd, d_nm, m_cd, m_nm, ip, mapx, mapy;
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getMapx() {
+		return mapx;
+	}
+
+	public void setMapx(String mapx) {
+		this.mapx = mapx;
+	}
+
+	public String getMapy() {
+		return mapy;
+	}
+
+	public void setMapy(String mapy) {
+		this.mapy = mapy;
+	}
 
 	public String getB_cd() {
 		return b_cd;
