@@ -13,7 +13,21 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="/css/layout.css"/>
 <style>
-
+	
+	#pop{
+		display: none;
+		position:fixed;
+		width:300px;
+		height:200px;
+		top:50%;
+		left:50%;
+		margin-top:-75px;
+		margin-left:-150px;
+		background:#d9e5e9;
+		overflow: auto;
+		
+	}
+	
 	.disTab{
 		margin: 0px auto;
 		width: 100%;
@@ -34,7 +48,15 @@
     	text-align: right;
     	margin-top:5px;
      }   
-
+	
+	.modal{
+		border:1px solid red;
+	}
+	.modal-content{
+		width:800px;
+		height:80%;
+		border:1px solid red;
+	}
 </style>
 </head>
 <body>
@@ -66,7 +88,7 @@
 							<c:set var="dept" value="${fn:split(vo.m_nm,',') }"></c:set>
 							<c:forEach var="m_nm" items="${dept}" varStatus="a">
 								<c:if test="${a.count != 1 }">,&nbsp;</c:if>
-								<a href="#">
+								<a href="#" class="dept">
 								${m_nm }
 								</a>
 							</c:forEach>
@@ -76,8 +98,68 @@
 						
 					</table>
 				</div>
+				
+					
+				
+				
+				</div>
 			</div>
 		</div>
-	</div>
+		
+		<!-- 지도 -->
+		<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="map" style="width:500px;height:400px;"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="map2" style="width:500px;height:400px;"></div>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90f4e8f76323a3fb51ab67576dbabd50"></script>
+	<script>
+	
+	<%-- 모달 레이어 팝업 --%>
+		
+	var container = document.getElementById('map');
+	var options = {
+		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		level: 3
+	};
+	var map = new kakao.maps.Map(container, options);
+		
+	
+    $(document).ready(function(){
+		$(".dept").on("click", function(event) {
+			$("#myModal").modal('show');
+		
+		});
+    });
+    
+    function pop(){
+		var pop = document.getElementById("map");
+		pop.style.display = "block";
+	}
+	
+	function popClose(){
+		document.getElementById("map").style.display = "none";
+	}
+    
+	</script>
 </body>
 </html>
