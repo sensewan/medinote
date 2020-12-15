@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,27 +53,92 @@ public class MainController {
 		return map;
 	}
 	
-	@RequestMapping("/showMore")
+	@RequestMapping("/showMore_ok")
 	public ModelAndView showMore(HomeVO vo) {
 		ModelAndView mv = new ModelAndView();
 		String s_cd = vo.getS_cd();
-		System.out.println(s_cd);
 		String[] s_cdar = s_cd.split(",");
 		
 		List<HomeVO> dList = h_dao.sympDisease(s_cdar);
-		for(HomeVO vo1 : dList) {
-			System.out.println("질병 : " + vo1.getD_nm() + "/ 진료과 : " + vo1.getM_nm());
-		}
 		
 		h_dao.addHist(s_cdar);
 		h_dao.addUserSrch(s_cdar);
-		
+		List<String> s_nm = h_dao.srchS_NM(s_cdar);
 		
 		vo.setIp(request.getRemoteAddr());// ip저장!
 		
+		mv.addObject("s_nm", s_nm);
 		mv.addObject("hvo", dList);
 		mv.addObject("vo", vo);
-		mv.setViewName("main/disease");
+		
+		if(dList.size() > 0)
+			mv.setViewName("main/disease");
+		
+			
+			
 		return mv;
 	}
+	
+	@RequestMapping("/showMore")
+	@ResponseBody
+	public Map<String, Object> showMore(String[] s_cd){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//System.out.println(s_cd.length);
+		List<HomeVO> dList = h_dao.sympDisease(s_cd);
+		
+		h_dao.addHist(s_cd);
+		h_dao.addUserSrch(s_cd);
+		List<String> s_nm = h_dao.srchS_NM(s_cd);
+		
+		String ip = request.getRemoteAddr();// ip저장!
+		
+		map.put("hvo", dList);
+		map.put("ip", ip);
+		map.put("s_nm", s_nm);
+		
+		session.setAttribute("hvo", dList);
+		session.setAttribute("ip", ip);
+		session.setAttribute("s_nm", s_nm);
+		
+			
+		return map;
+	}
+	
+	@RequestMapping("/diseaseTest")
+	public String test() {
+		System.out.println("test");
+		
+		return "main/disease";
+	}
+	
 }
+/*
+@RequestMapping("/showMore")
+	@ResponseBody
+	public Map<String, Object> showMore(String[] s_cd){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//System.out.println(s_cd.length);
+		List<HomeVO> dList = h_dao.sympDisease(s_cd);
+		
+		h_dao.addHist(s_cd);
+		h_dao.addUserSrch(s_cd);
+		List<String> s_nm = h_dao.srchS_NM(s_cd);
+		
+		String ip = request.getRemoteAddr();// ip저장!
+		
+		map.put("hvo", dList);
+		map.put("ip", ip);
+		map.put("s_nm", s_nm);
+		
+		request.setAttribute("hvo", dList);
+		request.setAttribute("ip", ip);
+		request.setAttribute("s_nm", s_nm);
+		
+		if(dList.size() > 0)
+			
+			
+		return map;
+	}
+*/

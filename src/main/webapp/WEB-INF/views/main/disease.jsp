@@ -43,14 +43,34 @@
 		width:800px;
 	}
 	
+	.content_info{
+		width:1200px;
+		margin: 0 auto;
+	}
+	
+	.content_wrap{
+		margin-top: 80px;
+	}
+	
 </style>
 </head>
 <body>
 	<div class="wrap">
 		<%@include file="../header.jsp" %>
 		<div class="content_wrap">
+				<div class="content_info">
+					<p class="text-muted" style="font-size: 20px; margin: 10px auto;">
+						선택한 증상 : 
+						<c:forEach var="vr" items="${s_nm }" varStatus="s">
+							<c:if test="${s.index ne 0}">
+								,&nbsp;
+							</c:if>
+							${vr }
+						</c:forEach>
+					</p><br/>
+					<p class="text-danger" style="font-size: 14px; font-weight:bold; text-align: left; margin-bottom: 3px; margin-right: 5px;">“진료과를 선택하면 내 주변에서 해당 진료과를 진료하는 병원을 지도에 나타내줍니다.” </p>
+					</div>
 			<div class="content">
-					<p class="text-muted">“진료과를 선택하면 내 주변에서 해당 진료과를 진료하는 병원을 지도에 나타내줍니다.” </p>
 				<div class="disTab">
 					<table class="table table-hover" id="table1">
 					<colgroup>

@@ -44,8 +44,17 @@
 		UPDATE USER_SRCH_TAG SET SRCH_TAG = #{srch_tag} WHERE u_id = #{u_id}
 	</update>
 	
-	
-	
+	<select id="srchS_NM" parameterType="java.util.Arrays" resultType="String">
+		SELECT S_NM FROM SYMPTOM_TB WHERE S_CD IN (
+			<trim suffix="" suffixOverrides=",">
+				<foreach collection="array" index='index' item='s_cd'>
+					#{s_cd},
+				</foreach>
+			</trim>
+		)
+		
+		
+	</select>
 </mapper>
 
 
