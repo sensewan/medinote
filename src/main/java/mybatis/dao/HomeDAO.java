@@ -29,21 +29,18 @@ public class HomeDAO {
 	public List<HomeVO> bodySymptom(String b_cd) {
 		StringBuffer sb = new StringBuffer();
 
-		// System.out.println(b_cd);
 		String[] bcd = b_cd.split(",");
-		// System.out.println(bcd);
+		
 		List<String> slist = new ArrayList<String>(Arrays.asList(bcd));
+		
 
-		// System.out.println(b_code);
 		List<HomeVO> list = sst.selectList("home.bodySymptom", slist);
-		// System.out.println(list.size());
 
 		return list;
 	}
 
 	public List<HomeVO> sympDisease(String[] s_cdar) {
 		List<HomeVO> list = sst.selectList("home.sympDisease", s_cdar);
-		System.out.println(list.size());
 		return list;
 	}
 
@@ -97,11 +94,16 @@ public class HomeDAO {
 			map.put("srch_tag", bf.toString());
 
 			sst.update("home.updUserSrch", map);
-		}else
-			System.out.println("cnt : 0");
+		}
 		
 		return res;
 
+	}
+	
+	public List<String> srchS_NM(String[] s_cdar){
+		List<String> s_nm = sst.selectList("home.srchS_NM", s_cdar);
+		System.out.println("s_nm : "+s_nm.size());
+		return s_nm;
 	}
 
 }

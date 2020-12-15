@@ -237,9 +237,8 @@
 				</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="showMore" onclick="showMore()">Show More</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="showMore">Show More</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -268,6 +267,18 @@
 	    	document.frm.submit();
 	    }
 		
+		<%-- 체크된 값 가져오기 --%>
+		function checked(){
+			var check_count = document.getElementsByName("s_cd").length;
+			var arr = [];
+			var cnt = 0;
+	        for (var i=0; i<check_count; i++) {
+	            if (document.getElementsByName("s_cd")[i].checked == true) {
+	                arr[cnt++] = document.getElementsByName("s_cd")[i].value;
+	            }
+	        }
+	        return arr;
+		}
 
 		<%-- 모달 레이어 팝업 --%>
 	    $(document).ready(function(){
@@ -301,6 +312,23 @@
 						tag += "</tr>";
 					}
 					$("#content").append(tag);
+				});
+			});
+			
+			$('#showMore').on("click", function(){
+				var arr = checked();
+				console.log('arr : ' + arr.length);
+				
+				$.ajax({
+					url: "showMore",
+					type: "post",
+					data: "s_cd=" + arr,
+					dataType: "json"
+				}).done(function(data){
+					if(data.hvo.length > 0)
+						self.location = "/disease";
+					else
+						alert("선택한 증상의 검색 결과가 없습니다.");
 				});
 			});
 			
