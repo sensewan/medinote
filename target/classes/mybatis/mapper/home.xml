@@ -24,6 +24,28 @@
 				 )) group by D_CD, D_NM
 	</select>
 	
+	
+	
+	<insert id="addHist" parameterType="java.util.Map">
+		INSERT INTO HISTORY_TB(IDX, U_ID, SRCH_TAG, SRCH_DT)
+		VALUES(HIST_SQ.NEXTVAL, #{u_id}, #{srch_tag}, sysdate)
+	</insert>
+	
+	<select id="getUserSrch" parameterType="String" resultType="String">
+	<![CDATA[
+	SELECT distinct regexp_substr(SRCH_TAG, '[^.]+', 1, LEVEL) AS SRCH_TAG
+	FROM USER_SRCH_TAG WHERE u_id = #{u_id}
+	CONNECT BY LEVEL <= length(regexp_replace(SRCH_TAG, '[^.]+',''))+1
+	   ]]>
+	</select>
+	
+
+	<update id="updUserSrch" parameterType="java.util.Map">
+		UPDATE USER_SRCH_TAG SET SRCH_TAG = #{srch_tag} WHERE u_id = #{u_id}
+	</update>
+	
+	
+	
 </mapper>
 
 

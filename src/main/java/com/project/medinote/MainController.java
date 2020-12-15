@@ -63,6 +63,11 @@ public class MainController {
 		for(HomeVO vo1 : dList) {
 			System.out.println("질병 : " + vo1.getD_nm() + "/ 진료과 : " + vo1.getM_nm());
 		}
+		
+		h_dao.addHist(s_cdar);
+		h_dao.addUserSrch(s_cdar);
+		
+		
 		vo.setIp(request.getRemoteAddr());// ip저장!
 		
 		mv.addObject("hvo", dList);
