@@ -15,5 +15,10 @@ public class TestController {
 	public String modal_main2() {
 		return "test/modal_main2";
 	}
+	
+	@RequestMapping("test1")
+	public String test1() {
+		return "test/test1";
+	}
 
 }
