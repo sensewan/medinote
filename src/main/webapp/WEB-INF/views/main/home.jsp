@@ -205,17 +205,16 @@
 	    right:0;
 	    top:0;
 	    bottom:0;
-	    background: rgba(0,0,0,0.2); /*not in ie */
 	    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');    /* ie */
-	    z-index:3;
+	    z-index:2000;
 	}
 
     .wrap-loading div{ /*로딩 이미지*/
         position: fixed;
         top:50%;
         left:50%;
-        margin-left: -21px;
-        margin-top: -21px;
+        margin-left: -35px;
+        margin-top: -35px;
     }
 
     .display-none{ /*감추기*/
@@ -318,7 +317,7 @@
 		</div>
 	</div>
 	<div class="wrap-loading display-none">
-    	<div><img src="img/ajax_loader4.gif" /></div>
+    	<div><img src="img/ajax_loader4.gif" style="width:70px; height:70px;"/></div>
 	</div>    
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -405,7 +404,13 @@
 					url: "showMore",
 					type: "post",
 					data: "s_cd=" + arr,
-					dataType: "json"
+					dataType: "json",
+					beforeSend:function(){
+				        $('.wrap-loading').removeClass('display-none');
+				    },
+				    complete:function(){
+				        $('.wrap-loading').addClass('display-none');
+				    }
 				}).done(function(data){
 					
 					console.log("loginChk : " + data.loginChk)
@@ -413,7 +418,7 @@
 						alert('로그인이 필요합니다.');
 						$("#loginPopup").modal('show');
 					}else{
-					
+
 					if(data.hvo.length > 0)
 						self.location = "/disease";
 					else
@@ -428,6 +433,7 @@
 			});
 			
 			$('#myModal').on('hidden.bs.modal', function() {
+				$('.wrap-loading').addClass('display-none');
 			});
 		});
 	    
