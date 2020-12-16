@@ -102,7 +102,6 @@ public class HomeDAO {
 	
 	public List<String> srchS_NM(String[] s_cdar){
 		List<String> s_nm = sst.selectList("home.srchS_NM", s_cdar);
-		System.out.println("s_nm : "+s_nm.size());
 		return s_nm;
 	}
 
