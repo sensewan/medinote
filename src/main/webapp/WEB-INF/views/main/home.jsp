@@ -368,7 +368,6 @@
 			
 			$('#showMore').on("click", function(){
 				var arr = checked();
-				console.log('arr : ' + arr.length);
 				
 				$.ajax({
 					url: "showMore",
@@ -376,6 +375,7 @@
 					data: "s_cd=" + arr,
 					dataType: "json"
 				}).done(function(data){
+					
 					console.log("loginChk : " + data.loginChk)
 					if(data.loginChk == false){
 						alert('로그인이 필요합니다.');

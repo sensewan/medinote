@@ -142,6 +142,22 @@
 	<%-- 모달 레이어 팝업 --%>
 	
     $(document).ready(function(){
+			// ip geolocation 시작
+			var lat = 37.566826;
+			var lag = 126.9786567;
+	
+		
+			  if (navigator.geolocation) {
+			    navigator.geolocation.getCurrentPosition(showPosition);
+			  } 
+			
+			
+			function showPosition(position) {
+			  lat = position.coords.latitude;
+			  lag = position.coords.longitude;
+			  
+			}
+			// ip geolocation 끝
 		$(".dept").on("click", function(event) {
 			$("#myModal").modal('show');
 			var id = $(this).text();
@@ -154,10 +170,9 @@
 
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
-			        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			        center: new kakao.maps.LatLng(lat, lag), // 지도의 중심좌표
 			        level: 3, // 지도의 확대 레벨
 			    };  
-
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 
@@ -167,7 +182,7 @@
 			
 			// 키워드로 장소를 검색합니다
 			ps.keywordSearch(id, placesSearchCB, {
-				location : new kakao.maps.LatLng(37.566826, 126.9786567),
+				location : new kakao.maps.LatLng(lat, lag),
 				radius : 2000
 			}); 
 			

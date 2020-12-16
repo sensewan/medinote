@@ -29,6 +29,11 @@ public class TestController {
 		System.out.println(testAttr);
 		return "test/post2";
 	}
+	@RequestMapping("geotest")
+	public String post2() {
+		System.out.println();
+		return "test/GeolocationTest";
+	}
 	
 	
 
