@@ -158,7 +158,7 @@ public class LoginController {
 		
 		//로그아웃 시 세션 삭제
 		session.removeAttribute("loginId");
-		return "main/home";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/find", method=RequestMethod.GET)	

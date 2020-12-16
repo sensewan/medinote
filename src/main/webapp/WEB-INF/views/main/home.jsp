@@ -192,13 +192,20 @@
 	
 	.modal-content{
 		width: 700px;
+		margin : 0 auto;
+	}
+	
+	.modal-dialog{
+		max-width : 1000px;
 	}
 	    
 </style>
 </head>
 <body>
 	<div class="wrap">
+		<div id="header_test">
 		<jsp:include page="../header.jsp"/>
+		</div>
 		<div class="content_wrap">
 			<div class="content">
 				<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
@@ -222,7 +229,7 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"></h5>
+					<h5 class="modal-title symptom-title"></h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -239,6 +246,50 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="showMore">Show More</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <div class="modal" id="loginPopup" tabindex="-1" role="dialog" aria-hidden="true" style="border:1px solid red">
+		<div class="modal-dialog modal-dialog-centered" role="document" >
+			<div class="modal-content" style="width: 500px; height: 250px; border-color: #64ac7d">	
+				<div class="modal-header">
+					<h5 class="modal-title">로그인</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="width: 100%">
+				<form>
+					<table style="width: 100%">
+						<colgroup>
+							<col width="50px">
+							<col width="*">
+						</colgroup>
+						<tr>
+							<td class="staticEmail"><label class="">ID</label>
+							</td>
+							<td><input type="text" id="u_id" maxlength="10"
+								class="form-control" /></td>
+						</tr>
+						<tr>
+							<td class="staticEmail"><label>PW</label></td>
+							<td><input type="password" id="u_pw" maxlength="15"
+								class="form-control" /></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="" align="right" ><input type="button"
+								value="회원가입" class="btn btn-primary login_btn" onclick="javascript:location.href='/join'"/>
+								<input type="button" id="btnLogin"
+								value="로그인" class="btn btn-primary login_btn" /></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="" align="right"><a href="/find"><font
+									size="2">아이디/비밀번호 찾기</font></a></td>
+						</tr>
+					</table>
+				</form>
 				</div>
 			</div>
 		</div>
@@ -286,8 +337,8 @@
 				$("#myModal").modal('show');
 				var id = $(this).attr("id");
 				var title = $(this).attr("title");
-				$(".modal-title").empty();
-				$(".modal-title").append(title);
+				$(".symptom-title").empty();
+				$(".symptom-title").append(title);
 				$.ajax({
 					url: "Body_Symptom",
 					type: "post",
@@ -325,16 +376,23 @@
 					data: "s_cd=" + arr,
 					dataType: "json"
 				}).done(function(data){
+					console.log("loginChk : " + data.loginChk)
+					if(data.loginChk == false){
+						alert('로그인이 필요합니다.');
+						$("#loginPopup").modal('show');
+					}else{
+					
 					if(data.hvo.length > 0)
 						self.location = "/disease";
 					else
 						alert("선택한 증상의 검색 결과가 없습니다.");
+					}
 				});
 			});
 			
 			$('#myModal').on('shown.bs.modal', function () {
 				$("#content").empty();
-				$(".modal-title").empty();
+				$(".symptom-title").empty();
 			});
 			
 			$('#myModal').on('hidden.bs.modal', function() {
@@ -366,5 +424,65 @@
 		    });
 		});
 	</script>
+	<script>
+	$(document).ready(function() {
+
+		//로그인 버튼 클릭 이벤트
+		$("#btnLogin").on("click", function(event) {
+			
+			var isChk = true;
+			
+			var u_id = $("#u_id").val();
+			var u_pw = $("#u_pw").val();
+			
+			//아이디 유효성 검사 - IsNull
+			if(u_id.trim().length < 1){
+				$("#u_id").addClass('is-invalid');
+				isChk = false;
+			}else{
+				$("#u_id").removeClass('is-invalid');
+			}
+			
+			//비밀번호 유효성 검사 - IsNull
+			if(u_pw.trim().length < 1){
+				$("#u_pw").addClass('is-invalid');
+				isChk = false;
+			}else{
+				$("#u_pw").removeClass('is-invalid');
+			}
+			
+			//유효성 검사 후 isChk가 false인 경우 return
+			if(!isChk) return;
+			
+			//로그인 이벤트
+			$.ajax({
+				url:"login",
+				type:"post",
+				data:"u_id="+u_id+"&u_pw="+u_pw,
+				dataType:"json",
+				error:function(request,status,error){
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			    }
+			}).done(function(data){
+				var res = data.loginChk;
+				if(res){
+					alert("로그인에 성공하였습니다.");
+					
+					$("#loginPopup").modal('hide');
+					$('#header_test').load(window.location.href+'#header_test');
+					
+					
+					$("#showMore").click();
+					
+				}else{
+					alert("아이디 또는 비밀번호를 다시 확인 하시길 바랍니다.")
+				}
+		
+			});
+			
+
+		});
+	});
+</script>
 </body>
 </html>

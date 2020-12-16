@@ -20,5 +20,16 @@ public class TestController {
 	public String test1() {
 		return "test/test1";
 	}
+	@RequestMapping("post1")
+	public String post1() {
+		return "test/post1";
+	}
+	@RequestMapping("post2")
+	public String post2(String testAttr) {
+		System.out.println(testAttr);
+		return "test/post2";
+	}
+	
+	
 
 }
