@@ -11,32 +11,6 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="/css/layout.css"/>
 <style>
-	#pop{
-		display: none;
-		position:fixed;
-		width:300px;
-		height:200px;
-		top:50%;
-		left:50%;
-		margin-top:-75px;
-		margin-left:-150px;
-		background:#d9e5e9;
-		overflow: auto;
-		
-	}
-	.symp_table {
-		border: 1px solid black;
-		width: 400px;
-		height: 300px;
-	}
-	.scale:hover {
-		transform: scale(1.1);
-	  -webkit-transform: scale(1.1);
-	  -moz-transform: scale(1.1);
-	  -ms-transform: scale(1.1);
-	  -o-transform: scale(1.1);
-	}
-	
 	.content{
 		padding : 30px;
 	}
@@ -54,6 +28,7 @@
 	 outline: none !important;
 	 border: none !important;
 	}
+	
 	#table1 {
         width: 100%;
         margin-left: auto;
@@ -61,121 +36,6 @@
         background-color: rgba( 255, 255, 255, 1 );
     }
     
-    
-    .box_modal {
-	  position:fixed;
-	  display:block;
-	  width:300px;
-	  height:150px;
-	  top:50%;
-	  left:50%;
-	  margin-top:-75px;
-	  margin-left:-150px;
-	  background:#d9e5e9;
-	  border:1px solid #386980;
-	  overflow:hidden;
-	  /* 아래 부분은 애니메이션 효과를 위한 부분 */
-	  visibility: collapse;
-	  opacity: 0.6;
-	  filter: alpha(opacity=60);
-	  -webkit-transition: all .2s ease;
-	  transition: all .2s ease;
-	  -webkit-transform: scale(0, 0);
-	  -ms-transform: scale(0, 0);
-	  transform: scale(0, 0);
-	}
-	.box_modal:hover {
-	  opacity: 1;
-	  filter: alpha(opacity=100);
-	}
-    
-    .pop-layer .pop-container {
-	  padding: 20px 25px;
-	}
-	
-	.pop-layer p.ctxt {
-	  color: #666;
-	  line-height: 25px;
-	}
-	
-	.pop-layer .btn-r {
-	  width: 100%;
-	  margin: 10px 0 20px;
-	  padding-top: 10px;
-	  border-top: 1px solid #DDD;
-	  text-align: right;
-	}
-	
-	.pop-layer {
-	  display: none;
-	  position: absolute;
-	  top: 50%;
-	  left: 50%;
-	  width: 410px;
-	  height: auto;
-	  background-color: #fff;
-	  border: 5px solid #3571B5;
-	  z-index: 10;
-	}
-	
-	.dim-layer {
-	  display: none;
-	  position: fixed;
-	  _position: absolute;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  z-index: 100;
-	}
-	
-	.dim-layer .dimBg {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  background: #000;
-	  opacity: .5;
-	  filter: alpha(opacity=50);
-	}
-	
-	.dim-layer .pop-layer {
-	  display: block;
-	}
-	
-	a.btn-layerMore {
-	  display: inline-block;
-	  height: 25px;
-	  padding: 0 14px 0;
-	  border: 1px solid #304a8a;
-	  background-color: #3f5a9d;
-	  font-size: 13px;
-	  color: #fff;
-	  line-height: 25px;
-	}
-	a.btn-layerMore:hover {
-	  border: 1px solid #091940;
-	  background-color: #1f326a;
-	  color: #fff;
-	}
-	
-	a.btn-layerClose {
-	  display: inline-block;
-	  height: 25px;
-	  padding: 0 14px 0;
-	  border: 1px solid #304a8a;
-	  background-color: #3f5a9d;
-	  font-size: 13px;
-	  color: #fff;
-	  line-height: 25px;
-	}
-	a.btn-layerClose:hover {
-	  border: 1px solid #091940;
-	  background-color: #1f326a;
-	  color: #fff;
-	}
-	
 	.btnModal{
 		cursor : pointer;
 		-webkit-cursor: pointer;
@@ -322,27 +182,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 	<script>
-		function pop(){
-			var pop = document.getElementById("pop");
-			pop.style.display = "block";
-		}
-		
-		function popClose(){
-			document.getElementById("pop").style.display = "none";
-		}
-		
-		function exe(){
-			location.href="disease"
-		}
-		
-		function more(){
-			location.href="disease"
-		}
-		
-		function showMore(){
-	    	document.frm.submit();
-	    }
-		
 		<%-- 체크된 값 가져오기 --%>
 		function checked(){
 			var check_count = document.getElementsByName("s_cd").length;
@@ -397,6 +236,8 @@
 				});
 			});
 			
+			
+			
 			$('#showMore').on("click", function(){
 				var arr = checked();
 				
@@ -437,34 +278,16 @@
 			});
 		});
 	    
-	  
-	    $(".symp").change(function() {
-	    	 $('input:checkbox[name="s_cd"]').each(function() {
-
-	    	     if( $('input:checkbox[name="s_cd"]:cheked').length <= 3){ //값 비교
-
-	    	    	 $('input:checkbox[name="s_cd"]').attr("checked", true);
-
-	    	            if(this.checked){//checked 처리된 항목의 값
-	    	                alert("선택되었습니다."); 
-	    	          	} else {
-	    	          		alert("너무 많은 증상이 선택되었습니다.");
-	    	          	}
-	    	      }
-	    	 });
-
-
-		    $("#showMore").on("click", function(event) {
-		    	$("input:checkbox[name='s_cd']:checked").each(function(){
-		    		var checkedSymp = $(this).val();
-					console.log(checkedSymp);
-		    	});
-		    });
-		});
-	</script>
-	<script>
+	    
+	  	<%-- 체크박스 제어 --%>
+  		$(document).on('click','input[name=s_cd]', function(){
+  			if($(".symp:checked").length > 3){
+  				alert("증상은 최대 3개까지 선택할 수 있습니다.");
+  				$(this).prop("checked", false);
+  			}
+  		});
+	  	
 	$(document).ready(function() {
-
 		//로그인 버튼 클릭 이벤트
 		$("#btnLogin").on("click", function(event) {
 			
@@ -509,16 +332,12 @@
 					$("#loginPopup").modal('hide');
 					$('#header_test').load(window.location.href+'#header_test');
 					
-					
 					$("#showMore").click();
 					
 				}else{
 					alert("아이디 또는 비밀번호를 다시 확인 하시길 바랍니다.")
 				}
-		
 			});
-			
-
 		});
 	});
 </script>

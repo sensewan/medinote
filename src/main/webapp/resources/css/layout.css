@@ -77,12 +77,13 @@ ul, a, ol, li{
 }
 
 .header .login>li a:hover {
+	
 	color: #b5ff89;
 }
 
 
 .content_wrap {
-  width: 100%;
+  width: 1519px;
   height: 800px;
   margin-top : 100px;
   padding-top: 20px;
@@ -91,7 +92,7 @@ ul, a, ol, li{
 }
 
 .content_wrap::after {
-  width: 100%;
+  width: 1519px;
   height : 800px;
   content: "";
   background: url("../img/background.jpg");
