@@ -33,6 +33,7 @@
     	position: relative;
     	text-align: right;
     	margin-top:5px;
+    	left : 10px
      }   
 	
 	.modal{
@@ -52,15 +53,42 @@
 		margin-top: 80px;
 	}
 	
+	.content::after{
+		opacity : 0.8;
+	}
+	.div_page_title{
+		width:1200px;
+		margin: 0 auto;
+		margin-top : 10px;
+		
+	}
+	
+	.page_title{
+		color: #5a5a5a;
+    	font-weight: bold;
+    	font-size: x-large;
+    	margin-left : 10px;
+	}
+	
+	.div_page_title > hr{
+		background-color: #5a5a5a;
+	    border: 0;
+	    height: 2px;
+	}
+	
 </style>
 </head>
 <body>
 	<div class="wrap">
 		<%@include file="../header.jsp" %>
 		<div class="content_wrap">
+			<div class="div_page_title">
+					<p class="page_title">나의 병명 확인</p>
+					<hr/>
+			</div>
 				<div class="content_info">
-					<p class="text-muted" style="font-size: 20px; margin: 10px auto;">
-						선택한 증상 : 
+					<p class="text-muted" style="font-size: 18px; margin: 10px auto;">
+						* 증상 : 
 						<c:forEach var="vr" items="${s_nm }" varStatus="s">
 							<c:if test="${s.index ne 0}">
 								,&nbsp;
@@ -68,8 +96,9 @@
 							${vr }
 						</c:forEach>
 					</p><br/>
-					<p class="text-danger" style="font-size: 14px; font-weight:bold; text-align: left; margin-bottom: 3px; margin-right: 5px;">“진료과를 선택하면 내 주변에서 해당 진료과를 진료하는 병원을 지도에 나타내줍니다.” </p>
+					<p class="text-danger" style="font-size: 14px; font-weight:bold; text-align: right; margin-bottom: 3px; margin-right: 5px;">진료과를 선택하면 내 주변에서 해당 진료과에 해당하는 병원을 지도에 나타내줍니다.</p>
 					</div>
+			
 			<div class="content">
 				<div class="disTab">
 					<table class="table table-hover" id="table1">
@@ -104,10 +133,7 @@
 						
 					</table>
 				</div>
-				
-					
-				
-				
+
 				</div>
 			</div>
 		</div>
