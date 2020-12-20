@@ -183,191 +183,196 @@ href="/css/bootstrap.min.css"/>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
 
-	var v_idChk = false;
-	$(document).ready(function() {
-		//아이디 유효성 검사
-		$("input[name=u_id]").keyup(function(event) {
-	
-			if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-	
-				var inputVal = $(this).val();
-	
-				$(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));
-			}
-			
-			var res = valid_id();
-			if(!res) return;
-	
-			var id = $("#u_id").val();
-			
-			$.ajax({
-				url:"idChk",
-				type:"post",
-				data:"u_id="+id,
-				dataType:"json",
-				error:function(request,status,error){
-			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			    }
-			}).done(function(data){
-				var f_valid_id = document.getElementById("f_valid_id");
-				var u_id = document.getElementById("u_id");
-			 if(data.idChk){
-					f_valid_id.innerHTML = "중복된 아이디 입니다.";
-					u_id.className = "form-control is-invalid";
-					v_idChk = false;
-				}else{
-					f_valid_id.innerHTML = "";
-					u_id.className = "form-control is-valid";
-					v_idChk = true;
-				} 
-	
-			});
-	
-		});
-	
-	});
-	var v_nkChk = false;
-	$(document).ready(function() {
-		//아이디 유효성 검사
-		$("input[name=u_nk]").keyup(function(event) {
-	
-			var res = valid_nk();
-			if(!res) return;
-	
-			var nk = $("#u_nk").val();
-			
-			$.ajax({
-				url:"nkChk",
-				type:"post",
-				data:"u_nk="+nk,
-				dataType:"json",
-				error:function(request,status,error){
-			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			    }
-			}).done(function(data){
-				var f_valid_nk = document.getElementById("f_valid_nk");
-				var u_nk = document.getElementById("u_nk");
-				
-				console.log(data.nkChk);
-			 if(data.nkChk){
-					f_valid_nk.innerHTML = "중복된 닉네임 입니다.";
-					u_nk.className = "form-control is-invalid";
-					v_nkChk = false;
-				}else{
-					f_valid_nk.innerHTML = "";
-					u_nk.className = "form-control is-valid";
-					v_nkChk = true;
-				} 
-	
-			});
-	
-		});
-	
+	//아이디 입력 했을 때, 유효성 검사
+	$("input[name=u_id]").keyup(function(event) {
+		//한글 입력 방지
+		if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+			var inputVal = $(this).val();
+			$(this).val(inputVal.replace(/[^a-z0-9]/gi, ''));
+		}
+		valid_id(); 
 	});
 
 
-
+	//아이디 유효성 검사
 	function valid_id() {
 		var res = true;
+
 		var u_id = document.getElementById("u_id");
 		var f_valid_id = document.getElementById("f_valid_id");
 
-		//아이디 유효성 검사
-		if (u_id.value.trim().length ==  0) {
+		//NULL체크
+		if (u_id.value.trim().length == 0) {
 			f_valid_id.innerHTML = "아이디를 입력하세요";
 			u_id.className = "form-control is-invalid";
 			return false;
-		} else {
-			f_valid_id.innerHTML = "";
-			u_id.className = "form-control is-valid";
 		}
-		
-		//아이디 길이 검사
-		if(u_id.value.trim().length < 5 || u_id.value.trim().length > 15 ){
+		//길이 검사 (5자 이상 15자 이하)
+		else if (u_id.value.trim().length < 5 || u_id.value.trim().length > 15) {
 			f_valid_id.innerHTML = "아이디는 5자 이상 15자 이하입니다.";
 			u_id.className = "form-control is-invalid";
-			res = false;
+			return false;
 		}
-		
+
+		//중복 검사
+		var id = $("#u_id").val();
+		$.ajax(
+				{
+					url : "idChk",
+					type : "post",
+					data : "u_id=" + id,
+					dataType : "json",
+					async : false,
+					error : function(request, status, error) {
+						alert("code = " + request.status + " message = "
+								+ request.responseText + " error = " + error); // 실패 시 처리
+					}
+				}).done(function(data) {
+			var f_valid_id = document.getElementById("f_valid_id");
+			var u_id = document.getElementById("u_id");
+
+			if (data.idChk) {
+				u_id.className = "form-control is-invalid";
+				f_valid_id.innerHTML = "중복된 아이디 입니다.";
+				res = false;
+			} else {
+				f_valid_id.innerHTML = "";
+				u_id.className = "form-control is-valid";
+				res = true;
+			}
+		});
 		
 		
 		return res;
+	};
 
+	//닉네임 입력 했을 때, 유효성 검사
+	$("input[name=u_nk]").keyup(function(event) {
+		valid_nk();
+	});
+
+	//닉네임 유효성 검사
+	function valid_nk() {
+
+		var res = true;
+		
+		var u_nk = document.getElementById("u_nk");
+		var f_valid_nk = document.getElementById("f_valid_nk");
+
+		//NULL체크
+		if (!(u_nk.value.trim().length > 0)) {
+			f_valid_nk.innerHTML = "닉네임을 입력하세요";
+			u_nk.className = "form-control is-invalid";
+			return false;
+		}
+		
+	
+		var nk = $("#u_nk").val();
+		//중복 검사
+		$.ajax(
+				{
+					url : "nkChk",
+					type : "post",
+					data : "u_nk=" + nk,
+					dataType : "json",
+					async : false,	//동기식?
+					error : function(request, status, error) {
+						alert("code = " + request.status + " message = "
+								+ request.responseText + " error = " + error); // 실패 시 처리
+					}
+				}).done(function(data) {
+			var f_valid_nk = document.getElementById("f_valid_nk");
+			var u_nk = document.getElementById("u_nk");
+
+			console.log(data.nkChk);
+			if (data.nkChk) {
+				f_valid_nk.innerHTML = "중복된 닉네임 입니다.";
+				u_nk.className = "form-control is-invalid";
+				res = false;
+			} else {
+				f_valid_nk.innerHTML = "";
+				u_nk.className = "form-control is-valid";
+				res = true;
+			}
+		});
+		
+		return res;
 	}
 
+
+	//비밀번호 유효성 검사
 	function valid_pw() {
 		var res = true;
 		var u_pw = document.getElementById("u_pw");
 		var f_valid_pw = document.getElementById("f_valid_pw");
-		
-		  var chk_num = u_pw.value.search(/[0-9]/g);
-		  var chk_eng = u_pw.value.search(/[a-z]/ig);
 
-		//비밀번호 유효성 검사
+		var chk_num = u_pw.value.search(/[0-9]/g);
+		var chk_eng = u_pw.value.search(/[a-z]/ig);
+
+		//NULL체크
 		if (u_pw.value.trim().length == 0) {
 			f_valid_pw.innerHTML = "비밀번호를 입력하세요";
 			u_pw.className = "form-control is-invalid";
-			res = false;
-			return res;
-		}else if(u_pw.value.trim().length < 5 || u_pw.value.trim().length > 15 ){
-			f_valid_pw.innerHTML = "아이디는 5자 이상 15자 이하입니다.";
+			return false;
+		//길이 검사(5자 이상 15자 이하)
+		} else if (u_pw.value.trim().length < 5
+				|| u_pw.value.trim().length > 15) {
+			f_valid_pw.innerHTML = "비밀번호는 5자 이상 15자 이하입니다.";
 			u_pw.className = "form-control is-invalid";
-			res = false;
-			return res;
-		}  
-		else if(chk_num < 0 || chk_eng < 0){
+			return false;
+		//숫자 영문자 확인
+		} else if (chk_num < 0 || chk_eng < 0) {
 			f_valid_pw.innerHTML = "비밀번호는 숫자와 영문자를 혼용하여야 합니다.";
 			u_pw.className = "form-control is-invalid";
-			res = false;
-			return res;
-		}else {
+			return false;
+		} else {
 			f_valid_pw.innerHTML = "";
 			u_pw.className = "form-control ";
 		}
-		
 
-		
 		return res;
 	}
 
+	//비밀번호 확인 유효성 검사
 	function valid_chk_pw() {
-		
+
+		var res = true;
+
 		var u_pw = document.getElementById("u_pw")
 		var chk_pw = document.getElementById("chk_pw");
 		var f_valid_chk_pw = document.getElementById("f_valid_chk_pw");
 
-		//비밀번호 확인 유효성 검사
-	if (chk_pw.value.trim().length == 0) {
+		//NULL체크
+		if (chk_pw.value.trim().length == 0) {
 			f_valid_chk_pw.innerHTML = "비밀번호를 입력하세요";
 			chk_pw.className = "form-control is-invalid";
-			res = false;
-			return res;
+			return false;
+		//길이 검사(5자 이상 15자 이하)
 		} else if (chk_pw.value.trim().length < 5
-				|| chk_pw.value.trim().length > 10) { //비밀번호 확인 길이 검사
+				|| chk_pw.value.trim().length > 15) { //비밀번호 확인 길이 검사
 			f_valid_chk_pw.innerHTML = "비밀번호는 5자 이상 15자 이하입니다.";
 			chk_pw.className = "form-control is-invalid";
-			res = false;
-			return res;
+			return false;
+		//비밀번호와 동일한지 확인
 		} else if (u_pw.value != chk_pw.value) {
 			f_valid_chk_pw.innerHTML = "비밀번호가 동일하지 않습니다.";
 			chk_pw.className = "form-control is-invalid";
-			res = false;
-			return res;
+			return false;
 		} else {
 			f_valid_chk_pw.innerHTML = "";
 			chk_pw.className = "form-control ";
 		}
 
-
 		return true;
 	}
 
+	//이름 유효성 검사
 	function valid_nm() {
 		var res = true;
 		var u_nm = document.getElementById("u_nm");
 		var f_valid_nm = document.getElementById("f_valid_nm");
 
-		//이름 유효성 검사
+		//길이 검사
 		if (u_nm.value.trim().length == 0) {
 			f_valid_nm.innerHTML = "이름을 입력하세요";
 			u_nm.className = "form-control is-invalid";
@@ -377,35 +382,17 @@ href="/css/bootstrap.min.css"/>
 			f_valid_nm.innerHTML = "";
 			u_nm.className = "form-control";
 		}
-		
 
 		return res;
 
 	}
 
-	function valid_nk() {
-
-		var res = true;
-		var u_nk = document.getElementById("u_nk");
-		var f_valid_nk = document.getElementById("f_valid_nk");
-
-		//닉네임 유효성 검사
-		if (!(u_nk.value.trim().length > 0)) {
-			f_valid_nk.innerHTML = "닉네임을 입력하세요";
-			u_nk.className = "form-control is-invalid";
-			res = false;
-			return res;
-		}
-
-		return res;
-	}
-
+	//생일 첫번째 input 태그 유효성 검사
 	function valid_birth1() {
-
 		var res = false;
 		var birth1 = document.getElementById("birth1");
 
-		//생일 유효성 검사
+		//길이 검사 (4자  입력)
 		if (birth1.value.trim().length > 0 && birth1.value.trim().length == 4) {
 			birth1.className = "form-control";
 			res = true;
@@ -417,6 +404,7 @@ href="/css/bootstrap.min.css"/>
 
 	}
 
+	//생일 세번째 input 태그 유효성 검사
 	function valid_birth3() {
 		var res = false;
 		var birth3 = document.getElementById("birth3");
@@ -433,6 +421,7 @@ href="/css/bootstrap.min.css"/>
 		return res;
 	}
 
+	//전화번호 두번째 input 태그 유효성 검사
 	function valid_phone2() {
 		var res = false;
 
@@ -448,6 +437,8 @@ href="/css/bootstrap.min.css"/>
 		}
 		return res;
 	}
+	
+	//전화번호 세번째 input 태그 유효성 검사
 	function valid_phone3() {
 		var res = false;
 
@@ -463,28 +454,26 @@ href="/css/bootstrap.min.css"/>
 		return res;
 
 	}
+	
+	//회원가입 버튼 이벤트
 	function join(frm) {
 
 		var res = true;
+		
+		alert(valid_id())
+
+		return;
+		
 		if (!valid_id() || !valid_pw() || !valid_chk_pw() || !valid_nm()
 				|| !valid_nk()) {
 			res = false;
 		} else if (!valid_birth1() || !valid_birth3() || !valid_phone2()
 				|| !valid_phone3()) {
 			res = false;
-		} else if (!v_idChk) {
-			f_valid_id.innerHTML = "중복된 아이디 입니다.";
-			u_id.className = "form-control is-invalid";
-			res = false;
-		}else if(!v_nkChk){
-			f_valid_nk.innerHTML = "중복된 닉네임 입니다.";
-			u_nk.className = "form-control is-invalid";
-			res = false;
 		}
-
+		
+	
 		if (res) {
-			//frm.submit();
-
 			var s_id = $("#u_id").val();
 			var s_pw = $("#u_pw").val();
 			var s_nm = $("#u_nm").val();
