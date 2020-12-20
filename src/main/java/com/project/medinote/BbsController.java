@@ -23,6 +23,7 @@ import mybatis.dao.BbsDAO;
 import mybatis.vo.BbsVO;
 import mybatis.vo.CommVO;
 import mybatis.vo.MemVO;
+import mybatis.vo.SymVO;
 import spring.util.FileUploadUtil;
 
 @Controller
@@ -31,7 +32,7 @@ public class BbsController {
 	@Autowired
 	private BbsDAO b_dao;
 	
-	private int blockList = 4;  // 한페이지에 보여질 게시물 수
+	private int blockList = 6;  // 한페이지에 보여질 게시물 수
 	private int blockPage = 3;   // 한블록당 보여질 페이지 번호
 	
 	@Autowired
@@ -80,8 +81,30 @@ public class BbsController {
 		
 
 		mv.setViewName("bbs/list");			
-
 		return mv;
+	}
+	
+	
+	
+	// ---------- 사용자 증상태그 가져오기 -----------
+	
+	@RequestMapping("/symTag")
+	public void symTag() {
+		
+		String u_id = (String) session.getAttribute("loginId");
+		
+		//System.out.println("아이디확인 "+u_id);
+		
+		
+		SymVO[] sy = b_dao.getSym(u_id);
+		session.setAttribute("sy", sy);
+		
+		
+//		for (SymVO vo : sy) {
+//			System.out.println("태그확인: "+vo.getS_nm());
+//		}
+		
+		
 	}
 	
 	
@@ -191,6 +214,9 @@ public class BbsController {
 
 		return map;	
 	}
+	
+	
+
 	
 	
 	

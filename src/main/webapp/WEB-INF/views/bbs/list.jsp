@@ -28,6 +28,27 @@
             margin-left: auto;
             margin-right: auto;
         }
+        
+	    .div_page_title{
+			width:1200px;
+			margin: 0 auto;
+			margin-top : 10px;
+			
+		}
+		
+		.page_title{
+			color: #5a5a5a;
+	    	font-weight: bold;
+	    	font-size: x-large;
+	    	margin-left : 10px;
+		}
+	
+		.div_page_title > hr{
+			background-color: #5a5a5a;
+		    border: 0;
+		    height: 2px;
+		}
+        
     </style>
 
 </head>
@@ -35,9 +56,12 @@
 
 	<%@include file="../header.jsp" %>
 	<div class="content_wrap">
+		<div class="div_page_title">
+			<p class="page_title">community</p>
+			<hr/>
+		</div>
 		<div class="content">	
 			<div style="position:relative; z-index: 4; ">
-			<p style="border: 2px solid blue;">(${mvo.u_nk })고갱님 환영합니다. (어떠한 이유로 ()괄호안이 비어 있을 경우 글쓰기 안됨) (이박스는 삭제예정)</p>
 					
 				<div id="search" style="text-align:left; padding: 8px 0 0 5px; margin-bottom: 10px;">
 		            <form action="bbsSearch" method="post">
@@ -127,10 +151,22 @@
 
 <script type="text/javascript">
 
+// 사용자가 검색한 태그들을 미리 session에 저장해 놓기
+$(function () {
+	$.ajax({
+		url: "symTag"
+	});
+});
+
+
 $(function () {
 
 	$("#write_btn").bind("click", function () {
 		var cPage = $("#cPage").val();
+		
+		$.ajax({
+			url: "symTag"
+		});
 		
 		$.ajax({
 			url: "write",
@@ -149,6 +185,8 @@ $(function () {
 		
 	});
 });
+
+
 
 
 function search(f){

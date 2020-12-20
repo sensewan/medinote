@@ -158,6 +158,9 @@ public class LoginController {
 		
 		//로그아웃 시 세션 삭제
 		session.removeAttribute("loginId");
+		
+		// 승완 추가 (증상 태그 세션 삭제)
+		session.removeAttribute("sy");
 		return "redirect:/";
 	}
 	

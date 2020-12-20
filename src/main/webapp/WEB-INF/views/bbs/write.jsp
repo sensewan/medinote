@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+    
 <!DOCTYPE html>
 <html>
 
@@ -14,13 +18,30 @@
     <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
     <style type="text/css">
-    img {
-       width: auto;
-       height: 300px;
-   }
-     
-
-    </style>
+		img {
+			width: auto;
+			height: 300px;
+		}
+		
+		.div_page_title {
+			width: 1200px;
+			margin: 0 auto;
+			margin-top: 10px;
+		}
+		
+		.page_title {
+			color: #5a5a5a;
+			font-weight: bold;
+			font-size: x-large;
+			margin-left: 10px;
+		}
+		
+		.div_page_title>hr {
+			background-color: #5a5a5a;
+			border: 0;
+			height: 2px;
+		}
+</style>
 
 
 </head>
@@ -30,24 +51,26 @@
 
    <%@include file="../header.jsp" %>
    <div class="content_wrap">
+	<div class="div_page_title">
+		<p class="page_title">글쓰기</p>
+		<hr/>
+	</div>
+	
       <div class="content">
-      
-          <h3 style="padding-top: 10px;">글쓰기</h3>
-          <hr>
           <div>
-          
              <form action="write_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
                  <div style="margin-left: 17%;  z-index: 9; ">
-                     <input type="text" name="title" placeholder="제목" style="width: 81%; margin-right: 20%; margin-bottom: 5px;"><br/>
+                     <input type="text" name="title" placeholder="제목" style="width: 81%; margin: 5px 20% 5px auto;"><br/>
                      <textarea id="content" name="content" style="margin-top: 10px; "></textarea>
                  </div>
                  
                  <div style="margin-left: 17%;">
+               <c:if test="${sessionScope.sy != null }"> 
                      <select class="custom-select" id="st1" name="st0" style="width: 81%; margin-right: 20%; margin-top: 5px;">
-                         <option value="">증상</option>
-                         <option value="1(증상1)">어깨 통증</option>
-                         <option value="2(증상2)">왼쪽 아랫배 통증</option>
-                         <option value="3(증상3)">오른쪽 머리 두통</option>
+                       	<option value="">증상</option>
+						<c:forEach var="aa" items="${sessionScope.sy }" varStatus="st">
+	                        <option value="${aa.s_nm }">${aa.s_nm }</option>
+	                 	</c:forEach>
                      </select>
                      <div id="symsel" style="border: 1px solid black; width: 67%; height: 35px; position: absolute; z-index: 1;" >
                         
@@ -57,6 +80,13 @@
                         <input type="button" name="bbb2" id="bbb2" value="선택취소" > 
                      </div>
                      <input type="text" name="srch_tag" id="srch_tag" placeholder="히든으로 변경예정">
+                 </c:if>
+                 
+                 <c:if test="${sessionScope.sy == null }">
+                 	<select class="custom-select" id="st1" name="st0" style="width: 81%; margin-right: 20%; margin-top: 5px;">
+                         <option value="">선택할 증상이 없습니다.</option>
+                     </select>
+                 </c:if>
                  </div>
                
                  <div style="margin-left: 59%; padding: 5px;" >
@@ -78,6 +108,43 @@
 
 
 <script>
+
+/* 	$(document).ready(function () {
+		$("#st1").bind("click", function () {
+			console.log("cccccccc");
+			$.ajax({
+				url: "symTag",
+				type: "get",
+			}).done(function () {
+				console.log("bbbb");
+			});
+		});
+		
+	}); */
+	
+	
+/* 	
+	$(document).ready(function () {
+
+		console.log("cccccccc");
+		$.ajax({
+			url: "symTag"
+		}).done(function () {
+			console.log("bbbb");
+		});
+	}); */
+	
+/* 	
+	$(function () {
+		console.log("cccccccc");
+		$.ajax({
+			url: "symTag"
+		}).done(function () {
+			console.log("bbbb");
+		});
+	}); */
+	
+	
 
    $(function () {
       var sss = new Array()  // 선택한 태그들을 배열로 저장함

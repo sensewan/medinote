@@ -108,6 +108,14 @@
 	</update>
 	
 	
+	
+	<!-- 글쓰기에서 사용자 증상태그 가져오기 -->
+	<select id="symTag" parameterType="String" resultType="mybatis.vo.SymVO">
+		select s_cd, s_nm from SYMPTOM_TB where S_CD in (select distinct regexp_substr(a.txt, '[^.]+', 1, LEVEL) txt
+		from (select SRCH_TAG txt from USER_SRCH_TAG where U_ID=#{u_id}) a
+		<![CDATA[connect by LEVEL <= length(regexp_replace(A.TXT, '[^.]+',''))+1)]]>
+	</select>
+	
 </mapper>
 
 
