@@ -17,7 +17,7 @@
 	.disTab{
 		margin: 0px auto;
 		width: 100%;
-		height: 700px;
+		height: 600px;
 		overflow: auto;
 	}
 	
@@ -54,12 +54,12 @@
 	}
 	
 	.content{
-		height:650px;
+		height:600px;
 	}
 	
 	.content::after{
 		opacity : 0.8;
-		height: 650px;
+		height: 600px;
 	}
 	.div_page_title{
 		width:1200px;

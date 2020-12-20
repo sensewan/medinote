@@ -98,7 +98,6 @@ public class MainController {
 		List<String> s_nm = h_dao.srchS_NM(s_cd);
 
 		String ip = request.getRemoteAddr();// ip저장!
-		System.out.println(ip);
 		map.put("hvo", dList);
 		map.put("ip", ip);
 		map.put("s_nm", s_nm);
