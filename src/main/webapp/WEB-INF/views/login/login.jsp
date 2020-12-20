@@ -9,6 +9,7 @@
 href="/css/bootstrap.css"/>
 <link type="text/css" rel="stylesheet" 
 href="/css/bootstrap.min.css"/>
+
 <style type="text/css">
 
 .div_logo{
@@ -57,6 +58,28 @@ href="/css/bootstrap.min.css"/>
 input#s_id{
 	margin-bottom: 10px;
 }
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');    /* ie */
+    z-index:2000;
+}
+
+ .wrap-loading div{ /*로딩 이미지*/
+       position: fixed;
+       top:50%;
+       left:50%;
+       margin-left: -35px;
+       margin-top: -35px;
+   }
+
+ .display-none{ /*감추기*/
+       display:none;
+   }
+
 
 </style>
 	</head>
@@ -105,7 +128,12 @@ input#s_id{
 			</div>
 		</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<div class="wrap-loading display-none">
+	<div>
+		<img src="img/ajax_loader4.gif" style="width: 40px; height: 40px;" />
+	</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	
 <script>
 	$(document).ready(function() {
@@ -143,6 +171,12 @@ input#s_id{
 				type:"post",
 				data:"u_id="+u_id+"&u_pw="+u_pw,
 				dataType:"json",
+				beforeSend:function(){
+			        $('.wrap-loading').removeClass('display-none');
+			    },
+			    complete:function(){
+			        $('.wrap-loading').addClass('display-none');
+			    },
 				error:function(request,status,error){
 			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 			    }
