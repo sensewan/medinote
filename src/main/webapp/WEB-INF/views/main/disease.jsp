@@ -53,8 +53,13 @@
 		margin-top: 80px;
 	}
 	
+	.content{
+		height:650px;
+	}
+	
 	.content::after{
 		opacity : 0.8;
+		height: 650px;
 	}
 	.div_page_title{
 		width:1200px;
@@ -159,7 +164,6 @@
 				</div>
 			</div>
 		</div>
-		<div id="map2" style="width:500px;height:400px;"></div>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90f4e8f76323a3fb51ab67576dbabd50&libraries=services,clusterer,drawing"></script>
