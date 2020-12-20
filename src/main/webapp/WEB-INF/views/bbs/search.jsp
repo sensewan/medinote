@@ -28,6 +28,28 @@
             margin-left: auto;
             margin-right: auto;
         }
+        
+		.div_page_title{
+			width:1200px;
+			margin: 0 auto;
+			margin-top : 10px;
+			
+		}
+		
+		.page_title{
+			color: #5a5a5a;
+	    	font-weight: bold;
+	    	font-size: x-large;
+	    	margin-left : 10px;
+		}
+	
+		.div_page_title > hr{
+			background-color: #5a5a5a;
+		    border: 0;
+		    height: 2px;
+		}
+        
+        
     </style>
 
 </head>
@@ -35,6 +57,10 @@
 
 	<%@include file="../header.jsp" %>
 	<div class="content_wrap">
+		<div class="div_page_title">
+			<p class="page_title">검색 결과</p>
+			<hr/>
+		</div>
 		<div class="content">	
 			<div style="position:relative; z-index: 4; ">
 					
