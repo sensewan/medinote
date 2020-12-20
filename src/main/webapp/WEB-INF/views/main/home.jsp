@@ -142,7 +142,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" style="width: 100%">
+				<div class="modal-body" style="width: 100%;">
 				<form>
 					<table style="width: 100%">
 						<colgroup>
@@ -161,7 +161,7 @@
 								class="form-control" /></td>
 						</tr>
 						<tr>
-							<td colspan="2" class="" align="right" ><input type="button"
+							<td colspan="2" class="" align="right" style="padding-top:5px;"><input type="button"
 								value="회원가입" class="btn btn-primary login_btn" onclick="javascript:location.href='/join'"/>
 								<input type="button" id="btnLogin"
 								value="로그인" class="btn btn-primary login_btn" /></td>
@@ -240,6 +240,11 @@
 			
 			$('#showMore').on("click", function(){
 				var arr = checked();
+				
+				if($(".symp:checked").length < 1){
+					alert("증상을 선택해주세요.");
+					return;
+				}
 				
 				$.ajax({
 					url: "showMore",
