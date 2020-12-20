@@ -17,11 +17,21 @@ public class MypageDAO {
 	private SqlSessionTemplate sst;
 	
 	//회원이 최근에 검색한 증상 내역 뿌려줄 List 준비
-	public List<MypageVO> recent_srch(String u_id){
+	public MypageVO[] recent_srch(int begin, int end, String u_id){
 		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", String.valueOf(begin));
+		map.put("end", String.valueOf(end));
 		map.put("u_id", u_id);
+		
 		List<MypageVO> list = sst.selectList("mypage.recent_srch", map);
-		return list;
+		
+		MypageVO[] ar = null;
+		if(list != null && list.size() > 0) {
+			ar = new MypageVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
 	}
 	
 	//최근 검색 내역 삭제하기
@@ -89,6 +99,23 @@ public class MypageDAO {
 	public int myCommTotalCount(String u_id) {
 		int cnt = sst.selectOne("mypage.myCommTotalCount", u_id);
 		return cnt;
+	}
+	
+	//"내"가 작성한 게시물 중 검색
+	public BbsVO[] myCommsrch(String type, String content) {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("search_type", type);
+		map.put("search_content", content);
+		
+		List<BbsVO> list = sst.selectList("mypage.myCommsrch", map);
+		
+		BbsVO[] ar = null;
+		if(list != null && list.size() > 0) {
+			ar = new BbsVO[list.size()];
+			list.toArray(ar);
+		}
+		return ar;
 	}
 	
 }

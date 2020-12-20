@@ -49,6 +49,8 @@
 				<%@ include file="sideBar.jsp"%>
 			</div>
 			<div class="content_center">
+				<h3>회원정보 변경</h3>
+				</hr>
 				<div class="infoEdit_ok">
 					<table class="info_t">
 						<tr class="infoEdit_box">
@@ -65,6 +67,10 @@
 						</tr>
 						<tr class="infoEdit_box">
 							<td>이름 </td>
+							<td class="s_td"><input type="text"/></td>
+						</tr>
+						<tr class="infoEdit_box">
+							<td>닉네임 </td>
 							<td class="s_td"><input type="text"/></td>
 						</tr>
 						<tr class="infoEdit_box">
@@ -121,7 +127,7 @@
 		
 		//취소버튼 클릭시 비밀번호 확인 페이지로 돌아간다.
 		function go_back(){
-			location.href="infoEdit_ok";
+			location.href="infoEdit";
 		}
 	</script>
 </body>

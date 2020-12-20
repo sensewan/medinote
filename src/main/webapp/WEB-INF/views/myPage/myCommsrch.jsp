@@ -26,18 +26,6 @@
 			</div>
 			<div class="content_center">
 				<h3>내가 작성한 글</h3>
-      			<div style="padding: 0 5px 0 5px;">
-					<form action="myCommsrch" method="post">
-						<input type="hidden" id="cPage" name="cPage" value="${param.cPage }">
-						<select class="search_type" name="search_type">
-							<option value="title">제목</option>
-							<option value="content">증상</option>
-							<option value="date">작성일</option>
-						</select>
-						<input type="text" class="search_content" name="search_content" placeholder="검색하실 제목/증상/작성일을 입력해주세요."/>
-						<button type="button" onclick="search(this.form)">검색</button>	
-					</form>
-				</div>
 				<div>
 					<table class="table table-hover">
 						<thead>
@@ -52,9 +40,9 @@
 						    <c:if test="${ar ne null }">
 						    	<c:forEach var="aa" items="${requestScope.ar}" varStatus="st">
 									<tr class="table-active">
-								    	<th scope="row">${totalCount - st.index - (blockList*(cPage -1)) }</th>
+								    	<th scope="row">${st.index+1 }</th>
 								      	<td>
-								      		<a href="../bbs/view?cPage=${nowPage}&idx=${aa.idx}">${aa.title }</a>
+								      		<a href="../bbs/view?idx=${aa.idx}">${aa.title }</a>
 								      	</td>
 								      	<td>${aa.srch_tag }</td>
 								      	<td>${fn:substring(aa.creat_dt, 0, 10 }</td>
@@ -62,6 +50,13 @@
 						    	</c:forEach>							
 						    </c:if>
 					    </tbody>
+					    <tfoot>
+					    	<tr>
+					    		<td colspan="4" style="text-align: right;">
+					    			<button type="button" class="btn btn-primary btn-sm" onclick="goBack()" style="text-align: center;">뒤로</button>
+					    		</td>
+					    	</tr>
+					    </tfoot>
 					</table>	
 				</div>
 			</div>
@@ -70,7 +65,9 @@
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script>
-	
+		function goBack(){
+			location.href="myComm";
+		}
 	</script>
 
 </body>
