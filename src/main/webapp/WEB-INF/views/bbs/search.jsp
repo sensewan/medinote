@@ -87,7 +87,7 @@
 		                        <td>
 									<a href="view?idx=${aa.idx}"> ${aa.title }</a></td>
 						                               <!-- ↳ 클릭한 게시물을 보여주기 위해 필요 -->
-		                        <td>${aa.writer }</td>
+		                        <td>${aa.u_nk }</td>
 		                        <td>${aa.srch_tag }</td>
 		                        
 		                        <td>
