@@ -108,9 +108,14 @@
 		            ${vo.srch_tag }
 		        </div>
 		        <div style="margin-left:53%; padding: 3px;">
+		        <c:if test="${vo.writer eq sessionScope.loginId}">
 					<input type="button" class="btn btn-primary" value="수정" onclick="editBbs()"/>
-					<input type="button" class="btn btn-primary" value="삭제" onclick="delBbs()"/>
+					<input type="button" class="btn btn-primary" value="삭제" onclick="delBbs()"/>		        	
 		            <input type="button" class="btn btn-primary" value="목록" onclick="goBack()"/>
+	        	</c:if>
+	        	<c:if test="${vo.writer ne sessionScope.loginId}">
+		            <input type="button" class="btn btn-primary" value="목록" onclick="goBack()" style="margin-left: 20%;"/>	        		
+	        	</c:if>
 		        </div>
 		
 			</form>
