@@ -30,13 +30,18 @@
 			                 </tr>
 						</thead>
 						<tbody>
-
+						<c:if test="${ar ne null}">
+							<c:forEach var="aa" items="${requestScope.ar}" varStatus="st">
 								<tr class="table-active">
-							    	<th scope="row">20</th>
-							      	<td>설사</td>
-							      	<td>2020-11-13</td>
-							      	<td><input type="button" id="delete" value="X" onclick=""/></td>
+							    	<th scope="row">${totalRow - st.index - (blockList*(cPage -1)) }</th>
+							      	<td>${aa.srch_tag }</td>
+							      	<td>${fn:substring(aa.srch_dt, 0, 10) }</td>
+							      	<td style="text-align: center;">
+			                        	<button type="button" class="btn btn-primary btn-sm" id="delbtn">삭제</button>
+			                    	</td>
 							    </tr>
+							</c:forEach>
+						</c:if>
 						</tbody>
 					</table>
 				</div>

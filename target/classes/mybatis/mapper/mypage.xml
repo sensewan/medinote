@@ -12,7 +12,10 @@
 	
 	<!-- 최근 검색 내역  리스트 보기 -->
     <select id="recent_srch" parameterType="java.util.Map" resultType="mybatis.vo.MypageVO">
-  		select * from history_tb where u_id = #{u_id} order by srch_dt desc
+  		select * from (
+  			select rownum r_num, a. * from (
+  				select * from history_tb where u_id = #{u_id} order by srch_dt desc) a)
+  					 where r_num between #{begin} and #{end}
     </select>
     
     <!-- 최근 검색 내역 삭제하기 -->
@@ -32,8 +35,9 @@
   
  	<!-- 회원정보 수정 -->
   	<update id="infoEdit" parameterType="mybatis.vo.MemVO">
-  		update user_tb set u_pw = #{u_pw}, u_nm = #{u_nm}, birth = #{birth}, phone = #{phone}, save_fl = #{save_fl}
-  		where u_id= #{u_id}
+  		update user_tb set u_pw = #{u_pw}, u_nm = #{u_nm}, u_nk = #{u_nk}, 
+  		birth = #{birth}, phone = #{phone}, save_fl = #{save_fl}
+  		where u_id= #{u_id} and del_fl=0
   	</update>
   
   	<!-- 마이노트 -->
@@ -51,5 +55,30 @@
 	<select id="myCommTotalCount" parameterType="String" resultType="int" >
 		select count(*) from bbs_tb where u_id = #{u_id} and del_fl = 0
 	</select>
+	
+
+	<!-- 내가 작성한 글에서 검색 -->
+	<select id="myCommsrch" parameterType="java.util.Map" resultType="mybatis.vo.BbsVO">
+		select * from bbs_tb
+		<if test="search_type != null and search_content != null">
+			<choose>
+				<when test="search_content==title">
+					title like '%'||#{search_content}||'%'
+				</when>
+				<when test="search_content==content">
+					content like '%'||#{search_content}||'%'
+				</when>
+				<when test="search_content==date">
+					create_dt like '%'||#{search_content}||'%'
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	
+	
+	
+	
+	
 	
  </mapper>
