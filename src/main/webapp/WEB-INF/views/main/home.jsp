@@ -14,6 +14,7 @@
 	.content{
 		padding : 30px;
 	}
+	
 	.content .img{
 		width : 500px;
 	}
@@ -80,7 +81,11 @@
     .display-none{ /*감추기*/
         display:none;
     }
-
+	
+	.img_tag{
+		margin-top: 80px;
+		transform:scale(1.2, 1.2);
+	}
 </style>
 </head>
 <body>
@@ -90,19 +95,21 @@
 		</div>
 		<div class="content_wrap">
 			<div class="content">
-				<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
-				<map name="bodymap">
-					<area shape="rect" id="B000016,B000019" class="btnModal" alt="전신" title="전신" coords="1,54,165,123" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000006" class="btnModal" alt="등" title="등" coords="3,116,165,234" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000013" class="btnModal" alt="엉덩이" title="엉덩이" coords="3,239,165,417" onmouseover="if(document.images) point.src='img/body_img4.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000003,B000011,B000014" class="btnModal" alt="기타" title="기타" coords="2,419,167,542" onmouseover="if(document.images) point.src='img/body_img5.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000002,B000004,B000007,B000015,B000017" class="btnModal" alt="머리 / 얼굴" title="머리 / 얼굴" coords="167,52,333,111" onmouseover="if(document.images) point.src='img/body_img6.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000008,B000020" class="btnModal" alt="목 / 가슴" title="목 / 가슴" coords="167,113,332,171" onmouseover="if(document.images) point.src='img/body_img7.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000010" class="btnModal" alt="배" title="배" coords="167,175,333,233" onmouseover="if(document.images) point.src='img/body_img8.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000001" class="btnModal" alt="골반" title="골반" coords="167,236,334,293" onmouseover="if(document.images) point.src='img/body_img9.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000005,B000018" class="btnModal" alt="팔 / 다리" title="팔 / 다리" coords="168,297,334,502" onmouseover="if(document.images) point.src='img/body_img10.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-					<area shape="rect" id="B000009,B000012" class="btnModal" alt="손 / 발" title="손 / 발" coords="169,506,334,543" onmouseover="if(document.images) point.src='img/body_img11.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
-				</map>
+				<div class=img_tag>
+					<img src="img/body_img.png" alt="Body" usemap="#bodymap" name="point">
+					<map name="bodymap">
+						<area shape="rect" id="B000016,B000019" class="btnModal" alt="전신" title="전신" coords="1,54,165,123" onmouseover="if(document.images) point.src='img/body_img2.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000006" class="btnModal" alt="등" title="등" coords="3,116,165,234" onmouseover="if(document.images) point.src='img/body_img3.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000013" class="btnModal" alt="엉덩이" title="엉덩이" coords="3,239,165,417" onmouseover="if(document.images) point.src='img/body_img4.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000003,B000011,B000014" class="btnModal" alt="기타" title="기타" coords="2,419,167,542" onmouseover="if(document.images) point.src='img/body_img5.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000002,B000004,B000007,B000015,B000017" class="btnModal" alt="머리 / 얼굴" title="머리 / 얼굴" coords="167,52,333,111" onmouseover="if(document.images) point.src='img/body_img6.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000008,B000020" class="btnModal" alt="목 / 가슴" title="목 / 가슴" coords="167,113,332,171" onmouseover="if(document.images) point.src='img/body_img7.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000010" class="btnModal" alt="배" title="배" coords="167,175,333,233" onmouseover="if(document.images) point.src='img/body_img8.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000001" class="btnModal" alt="골반" title="골반" coords="167,236,334,293" onmouseover="if(document.images) point.src='img/body_img9.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000005,B000018" class="btnModal" alt="팔 / 다리" title="팔 / 다리" coords="168,297,334,502" onmouseover="if(document.images) point.src='img/body_img10.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+						<area shape="rect" id="B000009,B000012" class="btnModal" alt="손 / 발" title="손 / 발" coords="169,506,334,543" onmouseover="if(document.images) point.src='img/body_img11.png'" onmouseout="if(document.images) point.src='img/body_img.png'"/>
+					</map>
+				</div>
 			</div>
 		</div>
 	</div>
