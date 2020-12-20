@@ -52,6 +52,29 @@ href="/css/bootstrap.min.css"/>
 	color: red;
 }
 
+.wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');    /* ie */
+    z-index:2000;
+}
+
+.wrap-loading div{ /*로딩 이미지*/
+       position: fixed;
+       top:50%;
+       left:50%;
+       margin-left: -35px;
+       margin-top: -35px;
+   }
+
+.display-none{ /*감추기*/
+       display:none;
+   }
+
+
 
 </style>
 	</head>
@@ -180,6 +203,11 @@ href="/css/bootstrap.min.css"/>
 		</div>
 
 	</div>
+<div class="wrap-loading display-none">
+	<div>
+		<img src="img/ajax_loader4.gif" style="width: 40px; height: 40px;" />
+	</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
 
@@ -459,10 +487,7 @@ href="/css/bootstrap.min.css"/>
 	function join(frm) {
 
 		var res = true;
-		
-		alert(valid_id())
-
-		return;
+	
 		
 		if (!valid_id() || !valid_pw() || !valid_chk_pw() || !valid_nm()
 				|| !valid_nk()) {
@@ -497,6 +522,12 @@ href="/css/bootstrap.min.css"/>
 								+ s_nm + "&u_nk=" + s_nk + "&arrPhone="
 								+ s_phone + "&arrBirth=" + s_birth,
 						dataType : "json",
+						beforeSend:function(){
+					        $('.wrap-loading').removeClass('display-none');
+					    },
+					    complete:function(){
+					        $('.wrap-loading').addClass('display-none');
+					    },
 						error : function(request, status, error) {
 							alert("code = " + request.status + " message = "
 									+ request.responseText + " error = "
