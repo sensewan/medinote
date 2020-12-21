@@ -39,6 +39,11 @@
 	   ]]>
 	</select>
 	
+	
+	<update id="insUserSrch" parameterType="java.util.Map">
+		INSERT INTO USER_SRCH_TAG (u_id, SRCH_TAG) VALUES(#{u_id}, #{srch_tag})
+	</update>
+	
 
 	<update id="updUserSrch" parameterType="java.util.Map">
 		UPDATE USER_SRCH_TAG SET SRCH_TAG = #{srch_tag} WHERE u_id = #{u_id}
