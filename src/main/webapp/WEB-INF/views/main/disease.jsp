@@ -172,9 +172,10 @@
 	<%-- 모달 레이어 팝업 --%>
 	
     $(document).ready(function(){
+    	
 			// ip geolocation 시작
 			var lat = 37.566826;
-			var lag = 126.9786567;
+			var lon = 126.9786567;
 	
 		
 			  if (navigator.geolocation) {
@@ -184,36 +185,50 @@
 			
 			function showPosition(position) {
 			  lat = position.coords.latitude;
-			  lag = position.coords.longitude;
+			  lon = position.coords.longitude;
 			  
 			}
 			// ip geolocation 끝
+			
 		$(".dept").on("click", function(event) {
 			$("#myModal").modal('show');
 			var id = $(this).text();
 			$(".modal-title").text(id);
 			
 			// 지도 시작
-			
+				
 			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
-			        center: new kakao.maps.LatLng(lat, lag), // 지도의 중심좌표
-			        level: 3, // 지도의 확대 레벨
+			        center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+			        level: 5, // 지도의 확대 레벨
+			        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
 			    };  
+			    
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			// 지도 타입 변경 컨트롤을 생성한다
+			var mapTypeControl = new kakao.maps.MapTypeControl();
+	
+			// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+	
+			// 지도에 확대 축소 컨트롤을 생성한다
+			var zoomControl = new kakao.maps.ZoomControl();
+	
+			// 지도의 우측에 확대 축소 컨트롤을 추가한다
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 			// 장소 검색 객체를 생성합니다
 			var ps = new kakao.maps.services.Places(); 
 			
-			
 			// 키워드로 장소를 검색합니다
 			ps.keywordSearch(id, placesSearchCB, {
-				location : new kakao.maps.LatLng(lat, lag),
-				radius : 2000
+				location : new kakao.maps.LatLng(lat, lon),
+				radius : 3000
 			}); 
 			
 			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
@@ -253,6 +268,8 @@
 			        map: map,
 			        position: new kakao.maps.LatLng(place.y, place.x) ,
 			    });
+			    
+			    
 
 			    // 마커에 클릭이벤트를 등록합니다
 			    kakao.maps.event.addListener(marker, 'click', function() {
@@ -262,17 +279,17 @@
 			    });
 			}
 			
-			kakao.maps.event.addListener(map, 'dragend', function() {
+			
+			kakao.maps.event.addListener(map, 'idle', function() {
 				var latlng = map.getCenter();
 				var lat = latlng.getLat();
 				var lng = latlng.getLng();
 				
 				ps.keywordSearch(id, placesSearchCB, {
 					location : new kakao.maps.LatLng(lat, lng),
-					radius : 2000
+					radius : 3000
 				}); 
 			});
-			
 			
 			// 지도 끝
 		
