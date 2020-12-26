@@ -169,15 +169,7 @@ public class LoginController {
 		return "login/find";
 	}
 
-	@RequestMapping(value="/layout", method=RequestMethod.GET)	
-	public String layout() {
-		return "layout";
-	}
-	@RequestMapping(value="/layout2", method=RequestMethod.GET)	
-	public String layout2() {
-		return "layout2";
-	}
-
+	
 
 
 }

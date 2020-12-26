@@ -2,6 +2,7 @@ package com.project.medinote;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TestController {
@@ -26,14 +27,22 @@ public class TestController {
 	}
 	@RequestMapping("post2")
 	public String post2(String testAttr) {
-		System.out.println(testAttr);
 		return "test/post2";
 	}
 	@RequestMapping("geotest")
 	public String post2() {
-		System.out.println();
 		return "test/GeolocationTest";
 	}
+	
+	@RequestMapping(value="/layout", method=RequestMethod.GET)	
+	public String layout() {
+		return "layout";
+	}
+	@RequestMapping(value="/layout2", method=RequestMethod.GET)	
+	public String layout2() {
+		return "layout2";
+	}
+
 	
 	
 

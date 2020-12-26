@@ -12,7 +12,7 @@
 
 		<ul class="menu">
 			<li><a href="/">Home</a></li>
-			<li><a href="#">About us</a></li>
+			<li><a href="AboutUs">About us</a></li>
 			<li><a href="bbs">Community</a></li>
 			<li><a href="myPage">My page</a></li>
 		</ul>
