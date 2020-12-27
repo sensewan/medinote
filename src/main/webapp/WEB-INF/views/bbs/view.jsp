@@ -146,7 +146,7 @@
 				        					<tr>
 				        						<th>${st.index+1}</th>
 				        						<td>이름: ${cvo.u_nk }</td>
-				        						<td>날짜: ${fn:substring(cvo.create_dt, 0, 19) }</td>
+				        						<td>날짜: ${fn:substring(cvo.update_dt, 0, 19) }</td>
 				        					</tr>
 				        					<tr style="border-top:hidden;">
 				        						<td colspan="3" style="text-align: left;"><p style="position: absolute; z-index: 1;">내용:</p> 
