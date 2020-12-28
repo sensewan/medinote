@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit</title>
+    <title>MediNote</title>
     <link rel="stylesheet" href="css/summernote-lite.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
@@ -15,7 +15,25 @@
 
     <style type="text/css">
   	
-
+	    .div_page_title{
+			width:1200px;
+			margin: 0 auto;
+			margin-top : 10px;
+			
+		}
+		
+		.page_title{
+			color: #5a5a5a;
+	    	font-weight: bold;
+	    	font-size: x-large;
+	    	margin-left : 10px;
+		}
+	
+		.div_page_title > hr{
+			background-color: #5a5a5a;
+		    border: 0;
+		    height: 2px;
+		}
     </style>
 
 
@@ -26,10 +44,12 @@
 
 	<%@include file="../header.jsp" %>
 	<div class="content_wrap">
+		<div class="div_page_title">
+			<p class="page_title">글 수정</p>
+			<hr/>
+		</div>
 		<div class="content">
 		
-		    <h3 style="padding-top: 10px;">수정</h3>
-		    <hr>
 		    <div>
 		    
 			    <form action="edit_ok" method="post" encType="multipart/form-data" name="frm" style="margin: auto; " >
@@ -37,25 +57,33 @@
 			    	<input type="hidden" name="cPage" value="${param.cPage }"> 
 			    	
 			        <div style="margin-left: 17%;  z-index: 9; ">
-			            <input type="text" name="title" style="width: 81%; margin-right: 20%; margin-bottom: 5px;" value="${bvo.title }"><br/>
+			            <input type="text" name="title" style="width: 81%; margin: 5px 20% 5px auto;" value="${bvo.title }"><br/>
 			            <textarea id="content" name="content" style="margin-top: 10px; ">${bvo.content }</textarea>
 			        </div>
 			        
 			        <div style="margin-left: 17%;">
-			            <select class="custom-select" id="st1" name="st0" style="width: 81%; margin-right: 20%; margin-top: 5px;">
-			                <option value="">증상</option>
-			                <option value="1(증상1)">어깨 통증</option>
-			                <option value="2(증상2)">왼쪽 아랫배 통증</option>
-			                <option value="3(증상3)">오른쪽 머리 두통</option>
-			            </select>
-			            <div id="symsel" style="border: 1px solid black; width: 67%; height: 35px; position: absolute; z-index: 1;" >
-			            	
-			            </div>
-			            <div style="margin-top:3px; width:80%; position: relative; z-index: 2; text-align:right; ">
-				            <input type="button" name="bbb1" id="bbb1" value="증상선택" > 
-				            <input type="button" name="bbb2" id="bbb2" value="선택취소" > 
-			            </div>
-			            <input type="text" name="srch_tag" id="srch_tag" placeholder="히든으로 변경예정">
+		               <c:if test="${sessionScope.sy != null }"> 
+		                     <select class="custom-select" id="st1" name="st0" style="width: 81%; margin-right: 20%; margin-top: 5px;">
+		                       	<option value="">증상</option>
+								<c:forEach var="aa" items="${sessionScope.sy }" varStatus="st">
+			                        <option value="${aa.s_nm }">${aa.s_nm }</option>
+			                 	</c:forEach>
+		                     </select>
+		                     <div id="symsel" style="border: 1px solid black; width: 67%; height: 35px; position: absolute; z-index: 1;" >
+		                        
+		                     </div>
+		                     <div style="margin-top:3px; width:80%; position: relative; z-index: 2; text-align:right; ">
+		                        <input type="button" name="bbb1" id="bbb1" value="증상선택" > 
+		                        <input type="button" name="bbb2" id="bbb2" value="선택취소" > 
+		                     </div>
+		                     <input type="text" name="srch_tag" id="srch_tag" placeholder="히든으로 변경예정">
+		                 </c:if>
+		                 
+		                 <c:if test="${sessionScope.sy == null }">
+		                 	<select class="custom-select" id="st1" name="st0" style="width: 81%; margin-right: 20%; margin-top: 5px;">
+		                         <option value="">선택할 증상이 없습니다.</option>
+		                     </select>
+		                 </c:if>
 			        </div>
 					
 			        <div style="margin-left: 59%; padding: 5px;" >

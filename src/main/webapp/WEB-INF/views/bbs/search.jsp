@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 검색 결과</title>
+<title>MediNote</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="css/layout.css"/>
@@ -28,6 +28,28 @@
             margin-left: auto;
             margin-right: auto;
         }
+        
+		.div_page_title{
+			width:1200px;
+			margin: 0 auto;
+			margin-top : 10px;
+			
+		}
+		
+		.page_title{
+			color: #5a5a5a;
+	    	font-weight: bold;
+	    	font-size: x-large;
+	    	margin-left : 10px;
+		}
+	
+		.div_page_title > hr{
+			background-color: #5a5a5a;
+		    border: 0;
+		    height: 2px;
+		}
+        
+        
     </style>
 
 </head>
@@ -35,6 +57,10 @@
 
 	<%@include file="../header.jsp" %>
 	<div class="content_wrap">
+		<div class="div_page_title">
+			<p class="page_title">검색 결과</p>
+			<hr/>
+		</div>
 		<div class="content">	
 			<div style="position:relative; z-index: 4; ">
 					
@@ -61,7 +87,7 @@
 		                        <td>
 									<a href="view?idx=${aa.idx}"> ${aa.title }</a></td>
 						                               <!-- ↳ 클릭한 게시물을 보여주기 위해 필요 -->
-		                        <td>${aa.writer }</td>
+		                        <td>${aa.u_nk }</td>
 		                        <td>${aa.srch_tag }</td>
 		                        
 		                        <td>

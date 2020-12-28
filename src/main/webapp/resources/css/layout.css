@@ -11,9 +11,7 @@ ul, a, ol, li{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	
 }
-
 
 .header_wrap{
 	width: 100%;
@@ -23,7 +21,6 @@ ul, a, ol, li{
 	position: fixed;
 	top : 0;
  	z-index: 9999;
-
 }
 
 .header{
@@ -31,7 +28,6 @@ ul, a, ol, li{
 	margin: 0 auto;
 	text-align: center;
 	padding-top: 20px;
-	
 }
 
 .header h1 {
@@ -42,13 +38,14 @@ ul, a, ol, li{
 	height: 50px;
 	text-indent: -99999px;
 	/* margin-top: 20px; */
-
 }
+
 .header .menu{
 	float: left;
 	margin-top: -25px;
 	margin-left : 230px;
 }
+
 .header .menu>li{
 	float: left;
 	font-weight: bold;
@@ -58,34 +55,35 @@ ul, a, ol, li{
 
 .header .menu>li a {
 	color: #fff;
-	
 }
+
 .header .menu>li a:hover {
 	color: #b5ff89;
-	
 }
 
 .header .login{
 	float: right;
 	margin-top: -25px;
 }
+
 .header .login>li{
 	float: left;
 	margin-left: 20px;
 }
+
 .header .login>li a{
 	color: #fff;
 	font-size: small;
 }
 
 .header .login>li a:hover {
-	color: #b5ff89;
 	
+	color: #b5ff89;
 }
 
 
 .content_wrap {
-  width: 100%;
+  width: 1519px;
   height: 800px;
   margin-top : 100px;
   padding-top: 20px;
@@ -94,7 +92,7 @@ ul, a, ol, li{
 }
 
 .content_wrap::after {
-  width: 100%;
+  width: 1519px;
   height : 800px;
   content: "";
   background: url("../img/background.jpg");
@@ -105,7 +103,6 @@ ul, a, ol, li{
   left: 0;
   z-index: -1;
   opacity: 0.5;
-
 }
 
 .content {
@@ -130,16 +127,12 @@ ul, a, ol, li{
   opacity: 0.5;
 }
 
-
 .content_center{
 	width: 900px;
-	border: 5px solid blue;
 	height: 780px;
-
 	float: right;
 	position: relative;
 	z-index: 1;
-
 }
 
 .content_center::after {
@@ -156,25 +149,17 @@ ul, a, ol, li{
 
 .content_side{
 	width: 250px;
-	border: 3px solid red;
 	height: 780px;
-
 	float: left;
 	position: relative;
 	z-index: 1;
 }
+
 .content_side::after {
 	width: 250px;
 	height: 780px;
 	background-color: #fff;
-
 	float: left;
 	z-index: -1;
 	opacity: 0.5;
 }
-
-
-
-
-
-

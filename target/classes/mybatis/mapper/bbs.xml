@@ -74,9 +74,9 @@
 	
 	<!-- 검색을 위한 select (동적쿼리 사용) -->
 	<select id = "search" resultType="mybatis.vo.BbsVO" parameterType="java.util.Map">
-		select * from BBS_TB
+		select * from BBS_TB b, USER_TB u where b.WRITER = u.U_ID
 		<if test= "searchType != null and searchValue != null">
-			<trim prefix="where" prefixOverrides="">
+			<trim prefix="and" prefixOverrides="">
 				<choose>
 					<when test="searchType==1">
 						TITLE like '%'||#{searchValue}||'%'
@@ -107,6 +107,14 @@
 		update COMMENT_TB set CONTENT=#{content}, UPDATE_DT=sysdate where IDX = #{idx}
 	</update>
 	
+	
+	
+	<!-- 글쓰기에서 사용자 증상태그 가져오기 -->
+	<select id="symTag" parameterType="String" resultType="mybatis.vo.SymVO">
+		select s_cd, s_nm from SYMPTOM_TB where S_CD in (select distinct regexp_substr(a.txt, '[^.]+', 1, LEVEL) txt
+		from (select SRCH_TAG txt from USER_SRCH_TAG where U_ID=#{u_id}) a
+		<![CDATA[connect by LEVEL <= length(regexp_replace(A.TXT, '[^.]+',''))+1)]]>
+	</select>
 	
 </mapper>
 

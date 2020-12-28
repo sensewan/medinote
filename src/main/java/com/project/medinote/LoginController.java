@@ -158,7 +158,10 @@ public class LoginController {
 		
 		//로그아웃 시 세션 삭제
 		session.removeAttribute("loginId");
-		return "main/home";
+		
+		// 승완 추가 (증상 태그 세션 삭제)
+		session.removeAttribute("sy");
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/find", method=RequestMethod.GET)	
@@ -166,15 +169,7 @@ public class LoginController {
 		return "login/find";
 	}
 
-	@RequestMapping(value="/layout", method=RequestMethod.GET)	
-	public String layout() {
-		return "layout";
-	}
-	@RequestMapping(value="/layout2", method=RequestMethod.GET)	
-	public String layout2() {
-		return "layout2";
-	}
-
+	
 
 
 }

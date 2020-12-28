@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home">
+	<select id="bodySymptom" parameterType="java.util.List" resultType="mybatis.vo.HomeVO">
+		select s_cd, s_nm from vw_body_symptom where b_cd in 
+		<foreach collection="list" index='index' item='b_cd' open='(' close=')' separator=','>#{b_cd}</foreach>
+	</select>
+	<select id="sympDisease" parameterType="java.util.Arrays" resultType="mybatis.vo.HomeVO">
+		SELECT D_CD, D_NM, LISTAGG(M_NM, ',') within group (order by M_NM) M_NM
+				FROM(
+					SELECT D_CD, D_NM, M_CD, M_NM FROM VW_DISEASE_MEDI_DEPT WHERE D_CD IN (SELECT D_CD FROM (
+						SELECT
+					    d_cd, LISTAGG(s_cd, ',') within group (order by s_cd) s_cd
+					FROM
+				   		symptom_disease
+				group by d_cd)
+				<trim prefix="where" prefixOverrides="and">
+					<foreach collection="array" index='index' item='s_cd'>
+						AND s_cd LIKE '%'|| #{s_cd} || '%'
+					</foreach>
+				</trim>
+				 )) group by D_CD, D_NM
+	</select>
+	
+	
+	
+	<insert id="addHist" parameterType="java.util.Map">
+		INSERT INTO HISTORY_TB(IDX, U_ID, SRCH_TAG, SRCH_DT)
+		VALUES(HIST_SQ.NEXTVAL, #{u_id}, #{srch_tag}, sysdate)
+	</insert>
+	
+	<select id="getUserSrch" parameterType="String" resultType="String">
+	<![CDATA[
+	SELECT distinct regexp_substr(SRCH_TAG, '[^.]+', 1, LEVEL) AS SRCH_TAG
+	FROM USER_SRCH_TAG WHERE u_id = #{u_id}
+	CONNECT BY LEVEL <= length(regexp_replace(SRCH_TAG, '[^.]+',''))+1
+	   ]]>
+	</select>
+	
+	
+	<update id="insUserSrch" parameterType="java.util.Map">
+		INSERT INTO USER_SRCH_TAG (u_id, SRCH_TAG) VALUES(#{u_id}, #{srch_tag})
+	</update>
+	
+
+	<update id="updUserSrch" parameterType="java.util.Map">
+		UPDATE USER_SRCH_TAG SET SRCH_TAG = #{srch_tag} WHERE u_id = #{u_id}
+	</update>
+	
+	<select id="srchS_NM" parameterType="java.util.Arrays" resultType="String">
+		SELECT S_NM FROM SYMPTOM_TB WHERE S_CD IN (
+			<trim suffix="" suffixOverrides=",">
+				<foreach collection="array" index='index' item='s_cd'>
+					#{s_cd},
+				</foreach>
+			</trim>
+		)
+		
+		
+	</select>
+</mapper>
+
+

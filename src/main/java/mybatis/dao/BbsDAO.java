@@ -1,5 +1,6 @@
 package mybatis.dao;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import mybatis.vo.BbsVO;
 import mybatis.vo.CommVO;
+import mybatis.vo.SymVO;
 
 @Component
 public class BbsDAO {
@@ -47,6 +49,25 @@ public class BbsDAO {
 			int cnt = sst.selectOne("bbs.totalCount");
 			
 			return cnt;
+		}
+		
+
+		// 사용자가 검색한 증상태그 가져오기
+		public SymVO[] getSym(String u_id) {
+			List<SymVO> list = sst.selectList("bbs.symTag", u_id);
+			
+			SymVO[] sy = null;
+			if (list != null && list.size() > 0) {
+				sy = new SymVO[list.size()];
+				
+				list.toArray(sy);
+			}
+			
+//			for (SymVO vo : sy) {
+//				System.out.println(vo.getS_nm());
+//			}
+			
+			return sy;
 		}
 		
 		

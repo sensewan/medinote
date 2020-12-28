@@ -10,39 +10,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>view</title>
+    <title>MediNote</title>
     
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
-    <style type="text/css">
-		#c_btn1 {
-			margin-left: 88%;
-		}
-		
-		.thumbnail {
-			position: relative;
-			padding-top: 100%; /* 1:1 ratio */
-			overflow: auto;
-		}
-		
-		img {
-			position: relative;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			max-width: 80%;
-			height: auto;
-		}
-		
-		td,th {
-			border: 1px solid black;
-			border-left: hidden;
-			border-right: hidden;
-			
-		}
+<style type="text/css">
+	#c_btn1 {
+		margin-left: 88%;
+	}
+	
+	.thumbnail {
+		position: relative;
+		padding-top: 100%; /* 1:1 ratio */
+		overflow: auto;
+	}
+	
+	img {
+		position: relative;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		max-width: 80%;
+		height: auto;
+	}
+	
+	td, th {
+		border: 1px solid black;
+		border-left: hidden;
+		border-right: hidden;
+	}
+	
+	#counter {
+		position: absolute;
+		bottom: 52px;
+		right: 8px;
+		background: rgba(42, 229, 148, 0.5);
+		border-radius: 0.5em;
+		padding: 0 .5em 0 .5em;
+		font-size: 0.75em;
+	}
+	
+	.div_page_title {
+		width: 1200px;
+		margin: 0 auto;
+		margin-top: 10px;
+	}
+	
+	.page_title {
+		color: #5a5a5a;
+		font-weight: bold;
+		font-size: x-large;
+		margin-left: 10px;
+	}
+	
+	.div_page_title>hr {
+		background-color: #5a5a5a;
+		border: 0;
+		height: 2px;
+	}
 </style>
 
 </head>
@@ -50,7 +78,11 @@
 <body>
 	<%@include file="../header.jsp" %>
 	<div class="content_wrap">
-		<div class="content">
+		<div class="div_page_title">
+			<p class="page_title">글 상세 보기</p>
+			<hr/>
+		</div>
+		<div class="content" style="padding-top: 5px;">
 			<form method="post" name="frm">
 			
 				<!-- ↱ action을 통해 이동할 때 값을 갖고 가기 위해 만듦 -->
@@ -60,9 +92,8 @@
 				                                            그러므로 여기에서도 파라미터 사용가능 -->
 
 			
-		        <h3 style="">글 상세 보기</h3>
 		
-		        <div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 800px; margin: auto; margin-bottom: 5px; text-align: left; background-color: rgba( 255, 255, 255, 1 );">
+		        <div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 800px; margin: auto; margin-bottom: 5px;  text-align: left; background-color: rgba( 255, 255, 255, 1 );">
 		            ${vo.title }
 		        </div>
 		
@@ -77,15 +108,20 @@
 		            ${vo.srch_tag }
 		        </div>
 		        <div style="margin-left:53%; padding: 3px;">
+		        <c:if test="${vo.writer eq sessionScope.loginId}">
 					<input type="button" class="btn btn-primary" value="수정" onclick="editBbs()"/>
-					<input type="button" class="btn btn-primary" value="삭제" onclick="delBbs()"/>
+					<input type="button" class="btn btn-primary" value="삭제" onclick="delBbs()"/>		        	
 		            <input type="button" class="btn btn-primary" value="목록" onclick="goBack()"/>
+	        	</c:if>
+	        	<c:if test="${vo.writer ne sessionScope.loginId}">
+		            <input type="button" class="btn btn-primary" value="목록" onclick="goBack()" style="margin-left: 20%;"/>	        		
+	        	</c:if>
 		        </div>
 		
 			</form>
 			
 			
-		        <div style="width: 800px; margin: auto;">
+		        <div style="width: 800px; margin: auto; position:relative;">
 		            comment<br/>
 		            <form name="comm_write" id="comm_write">
 		            	<input type="hidden" name="p_no" value="${vo.idx }">
@@ -93,6 +129,7 @@
 		            	
 		            	<!-- <input type="text" name="content" id="content" placeholder="댓글 입력하시오" style="width: 800px;" > -->
 		            	<textarea rows="2" cols="96" name="content" id="content" placeholder="댓글을 입력하세요"></textarea>
+		            		<span id="counter">0/300</span>
 		            	<input type="button" id="writeComm" class="btn btn-primary" style="margin: 3px 0 3px 93%;" value="등록">
 		            </form>
 		        </div>
@@ -109,7 +146,7 @@
 				        					<tr>
 				        						<th>${st.index+1}</th>
 				        						<td>이름: ${cvo.u_nk }</td>
-				        						<td>날짜: ${fn:substring(cvo.create_dt, 0, 19) }</td>
+				        						<td>날짜: ${fn:substring(cvo.update_dt, 0, 19) }</td>
 				        					</tr>
 				        					<tr style="border-top:hidden;">
 				        						<td colspan="3" style="text-align: left;"><p style="position: absolute; z-index: 1;">내용:</p> 
@@ -223,6 +260,22 @@
 		
 	});
 	
+	$(function() {
+	      $('#content').keyup(function (e){
+	          var content = $(this).val();
+	          $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+	          $('#counter').html(content.length + '/300');
+	          
+	          if (content.length > 300) {
+				alert("댓글은 최대 300자까지 입력 가능합니다.");
+				$(this).val(content.substring(0, 300));
+				$('#counter').html("300 / 300");
+			}
+	      });
+	     
+	});
+	
+	
 	function delComm(c_idx) {
 		var cf = confirm("댓글을 삭제하시겠습니까?");
 		
@@ -254,6 +307,8 @@
 		$("input[name="+"c1_btn"+idx+"]").attr("type", "hidden");
 		$("input[name="+"c2_btn"+idx+"]").attr("type", "hidden");
 	}
+	
+	
 	
 	function exitComm(c_idx) {
 		var idx= c_idx;
