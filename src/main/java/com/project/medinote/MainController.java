@@ -41,7 +41,8 @@ public class MainController {
 	public String disease() {
 		return "main/disease";
 	}
-
+	
+	// 신체부위 증상 받아오기
 	@RequestMapping("/Body_Symptom")
 	@ResponseBody
 	public Map<String, Object> bodySymptom(String B_CD) {
