@@ -26,6 +26,7 @@ public class HomeDAO {
 	@Autowired
 	HttpSession session;
 
+	// 신체선택, 증상 받아오기
 	public List<HomeVO> bodySymptom(String b_cd) {
 		StringBuffer sb = new StringBuffer();
 
@@ -38,11 +39,13 @@ public class HomeDAO {
 		return list;
 	}
 
+	// 증상선택 질병 받아오기
 	public List<HomeVO> sympDisease(String[] s_cdar) {
 		List<HomeVO> list = sst.selectList("home.sympDisease", s_cdar);
 		return list;
 	}
 
+	// 선택한 증상값 저장
 	public boolean addHist(String[] s_cdar) {
 		boolean res = false;
 		String u_id = (String) session.getAttribute("loginId");
@@ -61,6 +64,7 @@ public class HomeDAO {
 		return res;
 	}
 
+	// 
 	public boolean addUserSrch(String[] s_cdar) {
 		boolean res = false;
 		String u_id = (String) session.getAttribute("loginId");

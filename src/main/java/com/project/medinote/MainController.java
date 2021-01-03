@@ -53,7 +53,8 @@ public class MainController {
 
 		return map;
 	}
-
+	
+	// 더보기
 	@RequestMapping("/showMore_ok")
 	public ModelAndView showMore(HomeVO vo) {
 		ModelAndView mv = new ModelAndView();
