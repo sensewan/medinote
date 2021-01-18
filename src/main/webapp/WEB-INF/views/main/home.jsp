@@ -189,7 +189,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 	<script>
-		<%-- 체크된 값 가져오기 --%>
+		//체크된 값 가져오기
 		function checked(){
 			var check_count = document.getElementsByName("s_cd").length;
 			var arr = [];
@@ -202,7 +202,7 @@
 	        return arr;
 		}
 
-		<%-- 모달 레이어 팝업 --%>
+		//모달 레이어 팝업
 	    $(document).ready(function(){
 			$(".btnModal").on("click", function(event) {
 				$("#myModal").modal('show');
@@ -243,8 +243,7 @@
 				});
 			});
 			
-			
-			
+			// 증상 선택하지 않을 때 알림
 			$('#showMore').on("click", function(){
 				var arr = checked();
 				
@@ -291,7 +290,7 @@
 		});
 	    
 	    
-	  	<%-- 체크박스 제어 --%>
+	  	//체크박스 제어
   		$(document).on('click','input[name=s_cd]', function(){
   			if($(".symp:checked").length > 3){
   				alert("증상은 최대 3개까지 선택할 수 있습니다.");
